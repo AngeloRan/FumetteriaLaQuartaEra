@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --dist-dir ./dist"
+
+    "build": "parcel build static/src/parcel-entry.js --out-file main",
+    "start": "parcel static/src/parcel-entry.js --hmr-port 34471 --out-file main"
   },
   "author": "",
   "license": "ISC",
