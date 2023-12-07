@@ -45,10 +45,10 @@ a {
 }
 
 .immaginenegozio {
-  /* background-image: url('INSEGNA.jpg');
+  background-image: url('insegna.png');
   background-position: center;
   background-repeat: no-repeat;
-  background-size: contain; */
+  background-size: contain;
   flex-grow: 10;
 }
 
@@ -67,6 +67,7 @@ a {
 
 .contenitoresocial {
   gap: 1.8rem;
+  align-items: center;
 }
 
 .contenitoreform {

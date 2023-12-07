@@ -3,10 +3,11 @@ import { THRESHOLD } from './config';
 
 const corpoEl = document.querySelector('.corpo');
 const sezioni = [...document.querySelectorAll('.sezione')];
+const barraSuperioreEl = document.querySelector('.barracontatti');
+console.log(barraSuperioreEl);
 
 const sectionReveal = function (entries, observer) {
   const [entry] = entries;
-  console.log(entry);
   const sezioni = [...entry.target.querySelectorAll('.corpo > div')];
   if (entry.isIntersecting) {
     sezioni.forEach((el, i) => {
@@ -36,3 +37,21 @@ corpoEl.addEventListener('mouseout', function (e) {
   e.target.classList.contains('sezione') &&
     e.target.classList.remove('rimuoviafter', 'rimuovibefore');
 });
+
+// hover link top-bar
+
+const hoverFratelli = function (e) {
+  if (e.target.classList.contains('el-top')) {
+    const link = e.target;
+
+    const linkSib = link.closest('.barracontatti').querySelectorAll('.el-top');
+
+    linkSib.forEach(li => {
+      if (li !== link) li.style.opacity = this;
+    });
+  }
+};
+
+barraSuperioreEl.addEventListener('mouseover', hoverFratelli.bind(0.5));
+
+barraSuperioreEl.addEventListener('mouseout', hoverFratelli.bind(1));
