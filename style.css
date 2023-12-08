@@ -19,6 +19,10 @@ a {
   color: inherit;
 }
 
+.container {
+  display: flex;
+}
+
 .a-iconesocial:link,
 .a-iconesocial:visited {
   text-decoration: none;
@@ -27,10 +31,6 @@ a {
 
 .a-iconesocial {
   height: 3rem;
-}
-
-.container {
-  display: flex;
 }
 
 .top-pagina {
@@ -45,11 +45,16 @@ a {
 }
 
 .immaginenegozio {
-  background-image: url('insegna.png');
+  background-image: url('./IMG/insegna.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
   flex-grow: 10;
+  min-height: 15rem;
+}
+
+.ham-menu {
+  display: none;
 }
 
 .nav-bar {
@@ -59,10 +64,93 @@ a {
 .barracontatti {
   height: 5rem;
   width: 100%;
-  background: linear-gradient(120deg, #f6d365 0%, #f5d441 100%);
+  /* background: linear-gradient(120deg, #f6d365 0%, #f5d441 100%); */
   justify-content: space-between;
   align-items: center;
   padding: 1rem 6rem;
+}
+
+@media screen and (max-width: 650px) {
+  .corpo {
+    transition: transform 0.3s;
+  }
+
+  .barracontatti {
+    padding: 1rem;
+    justify-content: space-between;
+  }
+  .contenitoreform {
+    justify-content: center;
+  }
+
+  .contenitoresocial {
+    display: none;
+  }
+
+  .nav-bar {
+    height: auto;
+  }
+
+  .lista {
+    height: auto;
+    flex-direction: column;
+    align-items: center;
+    opacity: 0;
+    transition: transform 0.5s, opacity 0.3s;
+    transform: translateY(-9rem);
+    position: absolute;
+  }
+
+  .tasti {
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 4rem;
+    position: relative;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+
+  .tasti::before {
+    content: '';
+    position: absolute;
+    width: 80%;
+    left: 10%;
+    top: 0;
+    height: 2px;
+    background: linear-gradient(
+      to right,
+      transparent 1%,
+      darkred 50%,
+      transparent 99%
+    );
+  }
+
+  .tasti:active {
+    background: linear-gradient(120deg, #f6d365 0%, #f5d441 100%);
+    color: darkred;
+  }
+
+  .top-pagina {
+    height: auto;
+  }
+
+  .news {
+    display: none;
+  }
+
+  .ham-menu {
+    display: flex;
+    cursor: pointer;
+    font-size: 2.5rem;
+    color: darkred;
+    align-self: baseline;
+  }
+
+  .sezione {
+    flex-basis: 40rem;
+    flex-grow: 0;
+  }
 }
 
 .contenitoresocial {
@@ -99,26 +187,74 @@ a {
   font-size: 1.6rem;
   background-color: transparent;
   color: darkred;
+  cursor: pointer;
 }
+
+#button-ricerca:hover {
+  color: black;
+}
+
+/* menu principale */
 
 .lista {
   color: rgb(0, 0, 0);
   list-style-type: none;
   height: 100%;
-  align-items: stretch;
   justify-content: center;
-  gap: 5rem;
+  gap: 3%;
 }
 
 .lista .tasti {
   font-size: 2rem;
-  /* background-color: yellow; */
   align-items: center;
   justify-content: baseline;
-  padding: 1rem;
+  flex-wrap: nowrap;
+  position: relative;
 }
 
-/* CORPO PRINCIPALE */
+.tasti::after {
+  content: '';
+  position: absolute;
+  bottom: -0.4rem;
+  width: 0;
+  height: 2px;
+  right: 50%;
+  transform: translateX(50%);
+  background: linear-gradient(
+    to right,
+    transparent 1%,
+    darkred 50%,
+    transparent 99%
+  );
+  transition: width 0.3s ease-out;
+}
+
+@media screen and (min-width: 651px) {
+  .tasti:hover::after {
+    width: 100%;
+  }
+
+  .sezione {
+    flex-basis: 60rem;
+  }
+
+  .tasti:hover {
+    color: darkred;
+    cursor: pointer;
+    transform: scale(1.05);
+  }
+}
+
+.scorri-menu {
+  position: relative;
+  transform: none;
+  opacity: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* CORPO PRINCIPALE */ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/ /**/
 
 .corpo {
   flex-wrap: wrap;
@@ -131,7 +267,7 @@ a {
 }
 
 .sezione {
-  flex-basis: 60rem;
+  /* flex-basis: 60rem; */
   flex-grow: 0;
   flex-shrink: 1;
   height: 30rem;
@@ -139,12 +275,13 @@ a {
   position: relative;
   border-radius: 4rem;
   text-align: center;
-  background-image: url('img-2.png');
+  background-image: url('./IMG/img-2.png');
   background-size: 20rem;
   background-repeat: no-repeat;
   background-position: center;
   text-align: center;
   transform: scale(1);
+  cursor: pointer;
 }
 
 .sezione:hover {
@@ -165,7 +302,7 @@ a {
   width: 100%;
   height: 100%;
   border-radius: inherit;
-  background-image: url('img-1.png');
+  background-image: url('./IMG/img-1.png');
   background-size: 20rem;
   background-repeat: no-repeat;
   background-position: center;
@@ -211,10 +348,4 @@ a {
 .hidden-4 {
   opacity: 0;
   transform: translateY(8rem);
-}
-
-.immagine-sezione {
-  width: 100%;
-  height: 100%;
-  border-radius: inherit;
 }
