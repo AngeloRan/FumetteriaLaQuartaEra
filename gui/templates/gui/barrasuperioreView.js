@@ -2,6 +2,12 @@ const funzioneBarra = function () {
   const _parentEl = document.querySelector(".barracontatti");
   const _hamEl = document.querySelector(".ham-menu");
 
+  const _menuApparitore = function () {
+    _hamEl.addEventListener("click", function () {
+      document.querySelector(".nav-bar").classList.toggle("navclass");
+    });
+  };
+
   const funzionalitaBarra = function () {
     _parentEl.addEventListener("mouseover", _hoverFratelli.bind(0.5));
     _parentEl.addEventListener("mouseout", _hoverFratelli.bind(1));
@@ -22,11 +28,9 @@ const funzioneBarra = function () {
     }
   };
 
-  const _menuApparitore = function () {
-    this._hamEl.addEventListener("click", function () {
-      document.querySelector(".nav-bar").classList.toggle("navclass");
-    });
-  };
+  funzionalitaBarra()
+
+
 };
 
 funzioneBarra();

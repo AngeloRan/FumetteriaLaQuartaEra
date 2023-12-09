@@ -128,7 +128,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = []
 
 
-TEMPLATES[0]['DIRS']+=[os.path.join(BASE_DIR, "gui", "templates")]
+TEMPLATES[0]['DIRS']+=[os.path.join(BASE_DIR, "gui", "templates", "gui")]
 STATICFILES_DIRS+=[os.path.join(BASE_DIR, "gui", "static")]
 
 print('templates', TEMPLATES[0]['DIRS'])

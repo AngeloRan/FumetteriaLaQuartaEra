@@ -72,11 +72,11 @@
       </nav>
       {% block header %} {% endblock %}
     </header>
-    <main>{% block main %} {% endblock %}</main>
-    <footer>{% block footer %} {% endblock %}</footer>
+    {% block main %} {% endblock %}
+    {% block footer %} {% endblock %}
     <script type="text/javascript">
       {% include 'barrasuperioreView.js' %}
     </script>
-    {% block postscript %} {% endblock %}
+   <script type="text/javascript"> {% block postscript %} {% endblock %} </script>
   </body>
 </html>
