@@ -3,27 +3,34 @@ import View from './View.js';
 class pulsantoniView extends View {
   _parentEl = document.querySelector('.corpo');
 
-  rivelatoreSezioni(THRESHOLD) {
-    const sectionReveal = function (entries, observer) {
-      const [entry] = entries;
-      const sezioni = [...entry.target.querySelectorAll('.corpo > div')];
-      if (entry.isIntersecting) {
-        sezioni.forEach((el, i) => {
-          setTimeout(function () {
-            el.classList.remove(`hidden-${i + 1}`);
-          }, (i * 1000) / 2);
-        });
-        observer.unobserve(entry.target);
-      }
-    };
+  // rivelatoreSezioni(THRESHOLD) {
+  //   const sectionReveal = function (entries, observer) {
+  //     const [entry] = entries;
+  //     const sezioni = [...entry.target.querySelectorAll('.corpo > div')];
+  //     if (entry.isIntersecting) {
+  //       sezioni.forEach((el, i) => {
+  //         setTimeout(function () {
+  //           el.classList.remove(`hidden-${i + 1}`);
+  //         }, (i * 1000) / 2);
+  //       });
+  //       observer.unobserve(entry.target);
+  //     }
+  //   };
 
-    const osservatore = new IntersectionObserver(sectionReveal, {
-      root: null,
-      threshold: THRESHOLD,
+  //   const osservatore = new IntersectionObserver(sectionReveal, {
+  //     root: null,
+  //     threshold: THRESHOLD,
+  //   });
+
+  //   osservatore.observe(this._parentEl);
+
+  rivelatoreSezioni() {
+    const sezioni = [...this._parentEl.querySelectorAll('.sezione')];
+    sezioni.forEach((el, i) => {
+      setTimeout(function () {
+        el.classList.remove(`hidden-${i + 1}`);
+      }, (i * 1000) / 2);
     });
-
-    osservatore.observe(this._parentEl);
-
     this._giocoPulsanti();
   }
 

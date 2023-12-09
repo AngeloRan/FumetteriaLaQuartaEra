@@ -26,13 +26,7 @@ class barrasuperioreView extends View {
 
   _menuApparitore() {
     this._hamEl.addEventListener('click', function () {
-      const lista = document.querySelector('.lista');
-      if (lista.classList.contains('scorri-menu')) {
-        lista.style.transition = 'opacity 0s';
-      } else {
-        lista.style.transition = '';
-      }
-      lista.classList.toggle('scorri-menu');
+      document.querySelector('.nav-bar').classList.toggle('navclass');
     });
   }
 }

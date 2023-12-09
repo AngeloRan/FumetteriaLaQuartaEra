@@ -7,4 +7,5 @@ const init = function () {
   pulsantoniView.rivelatoreSezioni(THRESHOLD);
   barrasuperioreView.funzionalitaBarra();
 };
+
 init();
