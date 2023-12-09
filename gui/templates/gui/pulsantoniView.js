@@ -1,31 +1,10 @@
-import View from './View.js';
+import View from "./View.js";
 
 class pulsantoniView extends View {
-  _parentEl = document.querySelector('.corpo');
-
-  // rivelatoreSezioni(THRESHOLD) {
-  //   const sectionReveal = function (entries, observer) {
-  //     const [entry] = entries;
-  //     const sezioni = [...entry.target.querySelectorAll('.corpo > div')];
-  //     if (entry.isIntersecting) {
-  //       sezioni.forEach((el, i) => {
-  //         setTimeout(function () {
-  //           el.classList.remove(`hidden-${i + 1}`);
-  //         }, (i * 1000) / 2);
-  //       });
-  //       observer.unobserve(entry.target);
-  //     }
-  //   };
-
-  //   const osservatore = new IntersectionObserver(sectionReveal, {
-  //     root: null,
-  //     threshold: THRESHOLD,
-  //   });
-
-  //   osservatore.observe(this._parentEl);
+  _parentEl = document.querySelector(".corpo");
 
   rivelatoreSezioni() {
-    const sezioni = [...this._parentEl.querySelectorAll('.sezione')];
+    const sezioni = [...this._parentEl.querySelectorAll(".sezione")];
     sezioni.forEach((el, i) => {
       setTimeout(function () {
         el.classList.remove(`hidden-${i + 1}`);
@@ -35,14 +14,14 @@ class pulsantoniView extends View {
   }
 
   _giocoPulsanti = function () {
-    this._parentEl.addEventListener('mouseover', function (e) {
-      e.target.classList.contains('sezione') &&
-        e.target.classList.add('rimuoviafter', 'rimuovibefore');
+    this._parentEl.addEventListener("mouseover", function (e) {
+      e.target.classList.contains("sezione") &&
+        e.target.classList.add("rimuoviafter", "rimuovibefore");
     });
 
-    this._parentEl.addEventListener('mouseout', function (e) {
-      e.target.classList.contains('sezione') &&
-        e.target.classList.remove('rimuoviafter', 'rimuovibefore');
+    this._parentEl.addEventListener("mouseout", function (e) {
+      e.target.classList.contains("sezione") &&
+        e.target.classList.remove("rimuoviafter", "rimuovibefore");
     });
   };
 

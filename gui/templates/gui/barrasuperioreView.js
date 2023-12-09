@@ -1,34 +1,32 @@
-import View from './View.js';
+const funzioneBarra = function () {
+  const _parentEl = document.querySelector(".barracontatti");
+  const _hamEl = document.querySelector(".ham-menu");
 
-class barrasuperioreView extends View {
-  _parentEl = document.querySelector('.barracontatti');
-  _hamEl = document.querySelector('.ham-menu');
+  const funzionalitaBarra = function () {
+    _parentEl.addEventListener("mouseover", _hoverFratelli.bind(0.5));
+    _parentEl.addEventListener("mouseout", _hoverFratelli.bind(1));
+    _menuApparitore();
+  };
 
-  funzionalitaBarra() {
-    this._parentEl.addEventListener('mouseover', this._hoverFratelli.bind(0.5));
-    this._parentEl.addEventListener('mouseout', this._hoverFratelli.bind(1));
-    this._menuApparitore();
-  }
-
-  _hoverFratelli(e) {
-    if (e.target.classList.contains('el-top')) {
+  const _hoverFratelli = function (e) {
+    if (e.target.classList.contains("el-top")) {
       const link = e.target;
 
       const linkSib = link
-        .closest('.barracontatti')
-        .querySelectorAll('.el-top');
+        .closest(".barracontatti")
+        .querySelectorAll(".el-top");
 
-      linkSib.forEach(li => {
+      linkSib.forEach((li) => {
         if (li !== link) li.style.opacity = this;
       });
     }
-  }
+  };
 
-  _menuApparitore() {
-    this._hamEl.addEventListener('click', function () {
-      document.querySelector('.nav-bar').classList.toggle('navclass');
+  const _menuApparitore = function () {
+    this._hamEl.addEventListener("click", function () {
+      document.querySelector(".nav-bar").classList.toggle("navclass");
     });
-  }
-}
+  };
+};
 
-export default new barrasuperioreView();
+funzioneBarra();
