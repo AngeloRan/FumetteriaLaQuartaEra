@@ -4,6 +4,10 @@ from django.views import View
 
 # Create your views here.
 
-def index(request):
-    context = {'context': True}
-    return render(request, "gui/index.html", context)
+def home(request):
+    variabile = {'context': True}
+    return render(request, "gui/index.html", variabile)
+
+def dashboard(request):
+    variabile = {'context': 2}
+    return render(request, "gui/dashboard.html", variabile)
