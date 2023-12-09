@@ -1,16 +1,16 @@
-import View from './JS/View.js';
+import View from './View.js';
 
 class barrasuperioreView extends View {
   _parentEl = document.querySelector('.barracontatti');
   _hamEl = document.querySelector('.ham-menu');
 
   funzionalitaBarra() {
-    this._parentEl.addEventListener('mouseover', this.#hoverFratelli.bind(0.5));
-    this._parentEl.addEventListener('mouseout', this.#hoverFratelli.bind(1));
-    this.#menuApparitore();
+    this._parentEl.addEventListener('mouseover', this._hoverFratelli.bind(0.5));
+    this._parentEl.addEventListener('mouseout', this._hoverFratelli.bind(1));
+    this._menuApparitore();
   }
 
-  #hoverFratelli(e) {
+  _hoverFratelli(e) {
     if (e.target.classList.contains('el-top')) {
       const link = e.target;
 
@@ -24,7 +24,7 @@ class barrasuperioreView extends View {
     }
   }
 
-  #menuApparitore() {
+  _menuApparitore() {
     this._hamEl.addEventListener('click', function () {
       const lista = document.querySelector('.lista');
       if (lista.classList.contains('scorri-menu')) {

@@ -1,4 +1,4 @@
-import View from './JS/View.js';
+import View from './View.js';
 
 class pulsantoniView extends View {
   _parentEl = document.querySelector('.corpo');

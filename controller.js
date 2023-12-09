@@ -1,6 +1,6 @@
-import { THRESHOLD } from './config';
-import pulsantoniView from './pulsantoniView.js';
-import barrasuperioreView from './barrasuperioreView.js';
+import { THRESHOLD } from './JS/config.js';
+import pulsantoniView from './JS/pulsantoniView.js';
+import barrasuperioreView from './JS/barrasuperioreView.js';
 
 const init = function () {
   pulsantoniView.render();

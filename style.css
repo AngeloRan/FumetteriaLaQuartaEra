@@ -127,7 +127,13 @@ a {
   }
 
   .tasti:active {
-    background: linear-gradient(120deg, #f6d365 0%, #f5d441 100%);
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #f6d365 10%,
+      #f5d441 90%,
+      transparent 100%
+    );
     color: darkred;
   }
 
