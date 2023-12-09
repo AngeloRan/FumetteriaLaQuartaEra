@@ -1,11 +1,82 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/4a31c2b27b.js"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="controller.js"></script>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia"
+    />
     <title>Document</title>
-</head>
-<body>
-    {{context}}
-</body>
+  </head>
+  <body>
+    <header class="top-pagina">
+      <div class="titolo container">
+        <div class="barracontatti container">
+          <div class="contenitoresocial container">
+            <a class="a-iconesocial" href=""
+              ><i class="el-top fa-brands fa-instagram"></i
+            ></a>
+            <a class="a-iconesocial" href=""
+              ><i class="el-top fa-brands fa-tiktok"></i
+            ></a>
+            <a class="a-iconesocial" href=""
+              ><i class="el-top fa-brands fa-facebook"></i
+            ></a>
+            <a class="a-iconesocial" href="">
+              <i class="el-top fa-brands fa-whatsapp"></i
+            ></a>
+            <a class="a-iconesocial" href="">
+              <i class="el-top fa-brands fa-telegram"></i
+            ></a>
+          </div>
+          <div class="news&contatti ham-menu">
+            <i class="el-top fa-solid fa-bars"></i>
+          </div>
+          <div class="contenitoreform container">
+            <a class="el-top news&contatti contatti" href="">Contatti</a>
+            <a class="el-top news&contatti news" href="">News</a>
+            <div class="divform">
+              <form class="container" action="/action_page.python">
+                <input
+                  type="text"
+                  name=""
+                  id="text-ricerca"
+                  placeholder="Cerca..."
+                />
+                <button type="submit" id="button-ricerca">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="immaginenegozio"></div>
+      </div>
+
+      <nav class="nav-bar">
+        <ul class="lista container">
+          <li class="tasti container">Lo shop</li>
+          <li class="tasti container">Il gioco!</li>
+          <li class="tasti container">Calendario eventi</li>
+          <li class="tasti container">Le novità</li>
+          <li class="tasti container">le novità</li>
+          <li class="tasti container">le novità</li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container corpo">
+      <!-- <div class="hidden-1 sezione" data-a="1"></div>
+      <div class="hidden-2 sezione" data-a="2"></div>
+      <div class="hidden-3 sezione" data-a="3"></div>
+      <div class="hidden-4 sezione" data-a="4"></div> -->
+    </div>
+  </body>
 </html>

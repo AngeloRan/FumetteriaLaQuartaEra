@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +7,10 @@
     <title>Document</title>
 
     {% block common %}
-        <link rel="stylesheet" href="comune.css">
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
     {% endblock %}
 
     {% block style %}
-        <link rel="stylesheet" href="qualkcoisa.css">
     {% endblock %}
 
 </head>
