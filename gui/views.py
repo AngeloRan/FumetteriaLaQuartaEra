@@ -8,6 +8,15 @@ def home(request):
     variabile = {'context': True}
     return render(request, "gui/index.html", variabile)
 
-def dashboard(request):
+def shop(request):
     variabile = {'context': 2}
-    return render(request, "gui/dashboard.html", variabile)
+    return render(request, "gui/shop.html", variabile)
+
+def events(request):
+    variabile = {'context': 2}
+    return render(request, "gui/events.html", variabile)
+
+def ilgioco(request):
+    variabile = {'context': 2}
+    return render(request, "gui/ilgioco.html", variabile)
+
