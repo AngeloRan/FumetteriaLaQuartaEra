@@ -1,5 +1,8 @@
 
+
+
 const funzioneBarra = function () {
+
   const _parentEl = document.querySelector(".barracontatti");
   const _hamEl = document.querySelector(".ham-menu");
 

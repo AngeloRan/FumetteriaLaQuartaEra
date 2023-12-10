@@ -11,7 +11,9 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"/>
-
+    {% block customStyle %}
+    
+    {% endblock %}
     <title>Document</title>
   </head>
   <body>
@@ -60,19 +62,25 @@
       </div>
       <nav class="nav-bar">
         <ul class="lista container">
-          <li class="tasti container">Lo shop</li>
-          <li class="tasti container">Il gioco!</li>
-          <li class="tasti container">Calendario eventi</li>
-          <li class="tasti container">Le novità</li>
-          <li class="tasti container">le novità</li>
-          <li class="tasti container">le novità</li>
+          <a class="tasti container" href="/shop"><li>Lo shop</li></a>
+          <a class="tasti container" href="/shop"><li>Il gioco</li></a>
+          <a class="tasti container" href="/shop"><li>Gli eventi</li></a>
+          <a class="tasti container" href="/shop"><li>Lo shop</li></a>
+          <a class="tasti container" href="/shop"><li>Lo shop</li></a>
+          <a class="tasti container" href="/shop"><li>Lo shop</li></a>
         </ul>
       </nav>
       {% block header %} {% endblock %}
     </header>
-    {% block main %} {% endblock %}
-    {% block footer %} {% endblock %}
+    {% block main %} 
+    
+    {% endblock %}
+
+    {% block footer %} 
+    
+    {% endblock %}
     <script type="text/javascript">
+      {% include 'gui/config.js' %}
       {% include 'gui/barrasuperioreView.js' %}
     </script>
    <script type="text/javascript"> {% block postscript %} {% endblock %} </script>

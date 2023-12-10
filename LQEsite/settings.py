@@ -131,5 +131,9 @@ STATICFILES_DIRS = []
 TEMPLATES[0]['DIRS']+=[os.path.join(BASE_DIR, "gui", "templates")]
 STATICFILES_DIRS+=[os.path.join(BASE_DIR, "gui", "static")]
 
+STATICFILES_DIRS+=[os.path.join(BASE_DIR, "node_modules")]
+
+
 print('templates', TEMPLATES[0]['DIRS'])
 print('STATICFILES_DIRS', STATICFILES_DIRS)
+

@@ -1,0 +1,35 @@
+
+.corpoShop {
+  padding: 2.5rem 2rem;
+}
+
+.shopdiv {
+  height: 55rem;
+  background: linear-gradient(120deg, #f7df92 0%, #fae275 100%);
+  cursor: auto;
+}
+.shopdiv::after {
+  content: none;
+}
+.shopdiv::before {
+  content: none;
+}
+.shopdiv:active {
+  transform: none;
+}
+
+@media screen and (min-width: 651px) {
+  
+  .shopsinistra { 
+    flex-grow: 2;
+  }
+  .shopdestra {
+    flex-grow: 8;
+  }
+  .shopdiv {
+    flex-basis: 20rem;
+  }
+
+}
+
+
