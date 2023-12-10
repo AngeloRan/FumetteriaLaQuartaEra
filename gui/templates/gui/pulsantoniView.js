@@ -6,7 +6,7 @@ const funzioneTasti = function () {
     const sezioni = [..._parentEl.querySelectorAll(".sezione")];
     sezioni.forEach((el, i) => {
       setTimeout(function () {
-        el.classList.remove(`hidden-${i + 1}`);
+        el.classList.remove(`hidden-${el.dataset.a}`);
       }, (i * 1000) / 2);
     });
  

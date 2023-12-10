@@ -1,8 +1,31 @@
-{% extends 'gui/base.html' %} {% load static %} {% block main %}
-<div class="container corpo">
+{% extends 'gui/base.html' %} {% load static %}
+
+
+{% block main %}
+
+<!-- HTML CORRETTO -->
+<!-- <div class="container corpo">
   <div class="hidden-1 sezione" data-a="1"></div>
   <div class="hidden-2 sezione" data-a="2"></div>
   <div class="hidden-3 sezione" data-a="3"></div>
   <div class="hidden-4 sezione" data-a="4"></div>
+</div> -->
+
+<!-- HTML DASH -->
+
+<div class="container corpo">
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
+  <div class="hidden-1 sezione" data-a="1"></div>
 </div>
-{% endblock main %} {% block postscript %} {% include 'gui/pulsantoniView.js' %} {% endblock postscript %}
+
+
+{% endblock main %} 
+
+{% block postscript %} {% include 'pulsantoniView.js' %} {% endblock postscript %}
