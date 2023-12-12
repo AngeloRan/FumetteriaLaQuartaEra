@@ -1,5 +1,4 @@
 
-
 {% include 'gui/config.js' %}
 
 const funzioneBarra = function () {
