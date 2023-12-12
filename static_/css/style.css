@@ -266,7 +266,7 @@ a {
 
 .corpo {
   flex-wrap: wrap;
-  overflow: hidden;
+  /* overflow: hidden; */
   gap: 2rem;
   row-gap: 1.5rem;
   /* justify-content: space-around; */

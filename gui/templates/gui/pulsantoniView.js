@@ -1,7 +1,9 @@
 
+
+
 const funzioneTasti = function () {
   const _parentEl = document.querySelector(".corpo");
-  rivelatoreSezioni()
+  config.rivelatoreSezioni()
 
   const _giocoPulsanti = function () {
   _parentEl.addEventListener("mouseover", function (e) {

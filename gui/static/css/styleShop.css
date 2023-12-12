@@ -4,9 +4,11 @@
 }
 
 .shopdiv {
-  height: 55rem;
+  height: 85rem;
   background: linear-gradient(120deg, #f7df92 0%, #fae275 100%);
   cursor: auto;
+  border-radius: 1rem ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .shopdiv::after {
   content: none;
@@ -17,6 +19,86 @@
 .shopdiv:active {
   transform: none;
 }
+
+.shopsinistra {
+  flex-direction: column;
+  background: none;
+  /* overflow: hidden; */
+}
+
+.shopsinistra:hover {
+  background: none;
+}
+
+.div-menuarticoli {
+  background: linear-gradient(120deg, #f7df92 0%, #fae275 100%);
+  transition: transform 0.5s, opacity 1s, box-shadow 0.3s, background-color 0.3s;
+  position: relative;
+  /* border-radius: 4rem; */
+  text-align: center;
+  text-align: center;
+  transform: scale(1);
+  cursor: pointer;
+  width: 100%;
+  height: 5rem;
+  border-radius: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+
+
+.cnt-vocimenu {
+  color: rgb(0, 0, 0);
+  list-style-type: none;
+  /* height: 100%; */
+  height: 5rem;
+  width: 100%;
+  justify-content: space-around;
+  cursor: auto;
+}
+
+.vocimenu {
+  font-size: 2rem;
+  align-items: center;
+  justify-content: baseline;
+  /* flex-wrap: nowrap; */
+  position: relative;
+  transition: all 0.2s ;
+}
+
+.vocimenu:hover {
+  color: darkred;
+  transform: scale(1.15);
+}
+
+.articoli {
+  padding: 0.5rem 1rem;
+}
+
+.figure-img {
+  height: 10rem;
+  flex: 0 0 10rem;
+  border-radius: 50%;
+  overflow: hidden;
+  transition: all 0.2s;
+}
+
+.figure-img:hover {
+  transform: scale(1.5);
+  opacity: 0.8;
+}
+
+.img_art{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.articoli_label {
+  flex-grow: 7;
+}
+
 
 @media screen and (min-width: 651px) {
   
@@ -31,5 +113,6 @@
   }
 
 }
+
 
 

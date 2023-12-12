@@ -11,8 +11,40 @@
 
 {% block main %}
 
+
+
+
 <div class="container corpo corpoShop">
-  <div class="container hidden-1 sezione shopdiv shopsinistra" data-a="1" data-b="3"></div>
+  <div class="container hidden-1 div-menuarticoli" data-a="1">
+
+    <ul class="cnt-vocimenu container">
+      <a class="vocimenu container" href=""><li>Fumetti</li></a>
+      <a class="vocimenu container" href=""><li>Manga</li></a>
+      <a class="vocimenu container" href=""><li>Giochi da tavolo</li></a>
+      <a class="vocimenu container" href=""><li>Giochi di ruolo</li></a>
+      <a class="vocimenu container" href=""><li>Action figures</li></a>
+      <a class="vocimenu container" href=""><li>Gadgets</li></a>
+    </ul>
+
+  </div>
+  <div class="container hidden-1 sezione shopdiv shopsinistra" data-a="1" >
+    <!-- {% for articolo in articoli %}
+
+    <div class="articoli">{{articolo.id}}</div>
+  
+      {% endfor %} -->
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"><h4>Il fumetto di Capitan America</h4></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/84/c1/e3/84c1e380e7232869194c8f21e0da70b2.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://m.media-amazon.com/images/I/81QBa8jYBVL._AC_UF894,1000_QL80_.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>  
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
+    <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>  
+  </div>
   <div class="container hidden-2 sezione shopdiv shopdestra" data-a="2"></div>
 </div>
 
@@ -22,7 +54,6 @@
 {% block postscript %} 
 
 
-{% include 'gui/pulsantoniView.js' %}
 {% include 'gui/shopJs.js' %}
 
 {% endblock postscript %}

@@ -1,6 +1,8 @@
 
 
-const rivelatoreSezioni = function () {
+class Config {
+
+ rivelatoreSezioni = function () {
   const _parentEl = document.querySelector(".corpo");
   const sezioni = [..._parentEl.querySelectorAll(".corpo > div")];
   sezioni.forEach((el, i, arr) => {
@@ -9,4 +11,6 @@ const rivelatoreSezioni = function () {
     }, arr.length <= 4 ? (i * 1000) / 2 : 0);
   });
 
-}
+}}
+
+const config = new Config()
