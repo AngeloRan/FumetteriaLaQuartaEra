@@ -81,6 +81,19 @@
     {% block footer %} 
     
     {% endblock %}
+    <script src="{% static 'js-image-zoom/js-image-zoom.js' %}" type="application/javascript"></script>
+    <!-- <script type="module">
+    
+    import zoom from "{% static 'js-image-zoom/js-image-zoom.js' %}"
+    
+    var options = {
+      width: 400,
+      zoomWidth: 500,
+      offset: {vertical: 0, horizontal: 10}
+    };
+    new ImageZoom(document.getElementById("img-container"), {"width":400,"height":250,"zoomWidth":500,"img":"1.jpg","offset":{"vertical":0,"horizontal":10}});
+    
+    </script> -->
     <script type="text/javascript">
       {% include 'gui/barrasuperioreView.js' %}
     </script>

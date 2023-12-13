@@ -32,7 +32,7 @@
 .shopsinistra {
   flex-direction: column;
   background: none;
-  /* overflow: hidden; */
+  overflow: hidden;
 }
 
 .shopsinistra:hover {
@@ -59,6 +59,7 @@
   height: 5rem;
   border-radius: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  overflow: hidden;
 }
 
 
@@ -71,6 +72,7 @@
   width: 100%;
   justify-content: space-around;
   cursor: auto;
+  overflow: hidden;
 }
 
 .vocimenu {
@@ -79,16 +81,26 @@
   justify-content: baseline;
   /* flex-wrap: nowrap; */
   position: relative;
-  transition: all 0.2s ;
+  transition: all 0.3s ;
+  flex-grow: 1;
+  justify-content: center;
 }
 
 .vocimenu:hover {
-  color: darkred;
+  text-decoration: dotted;
   transform: scale(1.15);
+  background: linear-gradient(120deg, #f6d365 0%, #f5d441 100%);
 }
 
 .articoli {
   padding: 0.5rem 1rem;
+  transition: all 0.2s;
+}
+
+.articoli:hover {
+  background-color: rgba(119, 136, 153, 0.356);
+  transform: translateY(-2px);
+  cursor: pointer;
 }
 
 .figure-img {
@@ -97,7 +109,7 @@
   border-radius: 50%;
   overflow: hidden;
   transition: all 0.2s;
-  cursor: pointer;
+  
 }
 
 
@@ -109,42 +121,57 @@
 
 
 .articoli_label {
+  
   flex-grow: 7;
+  padding-top: 1rem;
+  padding-left: 3rem;
+  text-align: start;
 }
+.nomearticolo {
+  text-align: start;
+  margin-bottom: 2rem;
+}
+
+.categoriaarticolo {
+  color: gray;
+  text-align: start;
+}
+
 
 .articolodettaglio {
   height: 100%;
   width: 100%;
   flex-direction: column;
+  padding: 5rem 8rem 5rem 8rem;
+
 }
 
-.contenitoreimmagine {
+
+.dettagliorigaSup {
+flex-basis: 100%;
+/* background-color: red; */
+justify-content: space-between;
+overflow: hidden;
+border-radius: 4px;
+height: 50rem;
+}
+
+
+.caratteristicheProd {
+  width: 50px;
+  height: 50px;
+  background-color: bisque;
+}
+
+/* #img-container > img {
+  width: 300px;
+  height: 200px;
+} */
+
+.dettagliorigaInf {
   flex-basis: 100%;
 }
 
-.immaginedettaglio {
-  flex-basis: 70%;
-  height: 50rem;
-  padding: 2rem;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-.fotodettaglio{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
-.infodettaglio{
-  flex-basis: 30%;
-  height: 50rem;
-  background-color: blue;
-}
-.descrizionedettaglio {
-  flex-basis: 100%;
-  background-color: green;
-}
 
 
 @media screen and (min-width: 651px) {
@@ -161,5 +188,14 @@
 
 }
 
+/* #img-container {
+  width: 400px;
+  height: 400px;
+} */
 
-
+/* 
+.prova {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+} */

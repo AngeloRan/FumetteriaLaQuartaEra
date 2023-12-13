@@ -12,6 +12,9 @@
     "parcel": "^2.10.3"
   },
   "dependencies": {
-    "lodash-es": "^4.17.21"
+    "js-image-zoom": "^0.7.0",
+    "lodash-es": "^4.17.21",
+    "metro4": "^4.5.10",
+    "zoomist": "^2.0.11"
   }
 }
