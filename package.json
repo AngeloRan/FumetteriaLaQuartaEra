@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "js-image-zoom": "^0.7.0",
+    "js-img-magnify": "^0.0.8",
     "lodash-es": "^4.17.21",
     "metro4": "^4.5.10",
     "zoomist": "^2.0.11"

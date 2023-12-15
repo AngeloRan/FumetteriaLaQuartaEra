@@ -2,7 +2,7 @@
 
 class Config {
 
- rivelatoreSezioni = function () {
+ rivelatoreSezioni () {
   const _parentEl = document.querySelector(".corpo");
   const sezioni = [..._parentEl.querySelectorAll(".corpo > div")];
   sezioni.forEach((el, i, arr) => {
@@ -10,7 +10,19 @@ class Config {
       el.classList.remove(`hidden-${el.dataset.a}`);
     }, arr.length <= 4 ? (i * 1000) / 2 : 0);
   });
+}
 
-}}
+  async AJAX (url) {
+    try{
+     const res = await fetch(url)
+     const data = res.json()
+     if (!res.ok) throw new Error();
+     return data
+    } catch (err) {
+      console.log('ERRORE');
+    }
+  }
+
+}
 
 const config = new Config()
