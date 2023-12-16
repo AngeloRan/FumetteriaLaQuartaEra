@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'MyWebFont';
+  src: url('Middleearth-ao6m.ttf')  format('truetype'), /* Safari, Android, iOS */
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,7 +15,7 @@ html {
 }
 body {
   font-size: 1.8rem;
-  font-family: 'Sofia', sans-serif;
+  font-family: 'MyWebFont', sans-serif;
   color: rgb(0, 0, 0);
 }
 
@@ -52,7 +57,10 @@ a {
   background-size: contain;
   flex-grow: 10;
   min-height: 15rem;
+  position: relative;
 }
+
+
 
 .ham-menu {
   display: none;
@@ -62,6 +70,9 @@ a {
   height: 15%;
 }
 
+.el-top {
+  transition: all 0.5s;
+}
 .barracontatti {
   height: 5rem;
   width: 100%;

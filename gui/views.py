@@ -37,5 +37,7 @@ def ilgioco(request):
 
 def detail(request):
     return 0
+from django.http import JsonResponse
 
-
+def test(request):
+    return JsonResponse({"test":"ok"}, status=200)

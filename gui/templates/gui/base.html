@@ -13,6 +13,8 @@
 
     <link rel="stylesheet" href="{% static 'css/style.css' %}" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia"/>
+
+    
     {% block customStyle %}
     
     {% endblock %}
@@ -60,7 +62,7 @@
             </div>
           </div>
         </div>
-        <div class="immaginenegozio"></div>
+        <div class="immaginenegozio">{% block header %} {% endblock %}</div>
       </div>
       <nav class="nav-bar">
         <ul class="lista container">
@@ -72,7 +74,7 @@
           <a class="tasti container" href="/shop"><li>Lo shop</li></a>
         </ul>
       </nav>
-      {% block header %} {% endblock %}
+      
     </header>
     {% block main %} 
     

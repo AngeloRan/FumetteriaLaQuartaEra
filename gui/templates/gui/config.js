@@ -15,11 +15,13 @@ class Config {
   async AJAX (url) {
     try{
      const res = await fetch(url)
+     console.log(res);
      const data = res.json()
-     if (!res.ok) throw new Error();
+     if (!res.ok) {throw new Error()};
      return data
     } catch (err) {
-      console.log('ERRORE');
+      console.error(err)
+      throw err
     }
   }
 
