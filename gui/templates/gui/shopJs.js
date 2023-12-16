@@ -6,15 +6,97 @@ const ALLIN_ART_VETRINA = -50;
 // VETRINA
 
 const fnVetrina = function () {
-  const curArt = 1
-  const artVetrinaEl = [...document.querySelectorAll('.articoloInVetrina')]
-  artVetrinaEl.forEach((el,i, arr) => {
-   el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * i)}%) ${+el.dataset.n !== curArt ? 'scale(0.5)' : ''}`;
-    })
+  let curArt = 6;
+  let articoliVetrinaArr = [...document.querySelectorAll('.articoloInVetrina')]
+  const maxArt = articoliVetrinaArr.length-1
+
+  articoliVetrinaArr.forEach((el,i, arr) => {
+   el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+   arr[6].classList.remove('sfocArtVet')
+    });
+    
+
+  document.querySelector('.next-pg').addEventListener('click', function () {
+    curArt++
+    if (curArt === 16) {
+      curArt -= 10;
+      articoliVetrinaArr.forEach((el, i) => {
+      el.classList.remove('transitionclass');})
+      let curEl;
+      let translate;
+      articoliVetrinaArr.forEach((el, i, arr) => {
+      el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + 1))}%) scale(0.5)`;
+      if(i === curArt - 1) {
+        translate = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + 1))}%) scale(1)`;
+        curEl = el;}
+     }); 
+
+     curEl.style.transform = translate;
+     curEl.classList.remove('sfocArtVet');
+     setTimeout(function () {
+      articoliVetrinaArr.forEach(el=> el.classList.add('transitionclass'));
+      articoliVetrinaArr.forEach((el,i, arr) => {
+        if(i === curArt) {el.classList.remove('sfocArtVet')} else {el.classList.add('sfocArtVet')}
+        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+         });
+     }, 100)
+    
+    } else{
+    articoliVetrinaArr.forEach((el,i, arr) => {
+      console.log('riga trentanove', i);
+      if(i === curArt) {el.classList.remove('sfocArtVet')} else {el.classList.add('sfocArtVet')}
+      el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+       });
+      }
+  })
+
+
+  document.querySelector('.prev-pg').addEventListener('click', function () {
+    curArt--
+    if (curArt === 5) {
+      curArt += 10;
+      articoliVetrinaArr.forEach((el, i) => {
+      el.classList.remove('transitionclass');})
+      let curEl;
+      let translate;
+      articoliVetrinaArr.forEach((el, i, arr) => {
+      el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt - 1))}%) scale(0.5)`;
+      if(i === curArt + 1) {
+        translate = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt - 1))}%) scale(1)`;
+        curEl = el;}
+     }); 
+
+     curEl.style.transform = translate;
+     curEl.classList.remove('sfocArtVet');
+     setTimeout(function () {
+      articoliVetrinaArr.forEach(el=> el.classList.add('transitionclass'));
+      articoliVetrinaArr.forEach((el,i, arr) => {
+        if(i === curArt) {el.classList.remove('sfocArtVet')} else {el.classList.add('sfocArtVet')}
+        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+         });
+     }, 100)
+    
+    } else{
+    articoliVetrinaArr.forEach((el,i, arr) => {
+      console.log('riga trentanove', i);
+      if(i === curArt) {el.classList.remove('sfocArtVet')} else {el.classList.add('sfocArtVet')}
+      el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+       });
+      }
+  })
+
+  // document.querySelector('.prev-pg').addEventListener('click', function () {
+  //   if(curArt === 0) {
+  //     curArt = maxArt
+  //   } else {
+  //     curArt--}
+
+  //   articoliVetrinaArr.forEach((el,i, arr) => {
+  //     if(i === curArt) {el.classList.remove('sfocArtVet')} else {el.classList.add('sfocArtVet')}
+  //     el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+  //      });
+  // })
 }
-
-
-
 fnVetrina()
 
 
@@ -60,3 +142,4 @@ listaEl.addEventListener('click', function (e) {
 })
 
 
+// {header:[art1, art2, art3]}

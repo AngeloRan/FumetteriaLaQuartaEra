@@ -21,7 +21,11 @@
   height: 90%;
   position: absolute;
   left: 50%;
-  background-color: red;
+  /* background-color: red; */
+  
+}
+
+.transitionclass {
   transition: all 1s;
 }
 
@@ -30,6 +34,23 @@
   height: 100%;
   object-fit: contain;
 }
+
+.sfocArtVet {
+  opacity: 0.7;
+}
+
+.btn_vet {
+  position: absolute;
+}
+.next-pg{
+  right: 30%;
+  top: 50%
+}
+.prev-pg{
+  left: 30%;
+  top: 50%;
+}
+
 
 .nav-bar {
   display: none;
