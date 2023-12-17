@@ -1,11 +1,16 @@
 {% load static %}
 
 config.rivelatoreSezioni()
+
 const ALLIN_ART_VETRINA = -50;
 
 // VETRINA
 
+
+
 const fnVetrina = function () {
+
+
   let curArt = 6;
   let articoliVetrinaArr = [...document.querySelectorAll('.articoloInVetrina')]
   const maxArt = articoliVetrinaArr.length-1
@@ -17,22 +22,26 @@ const fnVetrina = function () {
     
 
   document.querySelector('.next-pg').addEventListener('click', function () {
+    const LIMITE = this === document.querySelector('.next-pg') ? 16 : 5;
+    const INCREMENTO = this === document.querySelector('.next-pg') ? 10 : -10;
+    const RESIZE_EL = this === document.querySelector('.next-pg') ? 1 : -1;
+    const ULT_EL = this === document.querySelector('.next-pg') ? -1 : 1;
+    // console.log(this);
+    // console.log(LIMITE, INCREMENTO);
     curArt++
     if (curArt === 16) {
-      curArt -= 10;
+      curArt = curArt - 10;
       articoliVetrinaArr.forEach((el, i) => {
       el.classList.remove('transitionclass');})
-      let curEl;
-      let translate;
+
       articoliVetrinaArr.forEach((el, i, arr) => {
       el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + 1))}%) scale(0.5)`;
       if(i === curArt - 1) {
-        translate = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + 1))}%) scale(1)`;
-        curEl = el;}
+        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + 1))}%) scale(1)`;
+        el.classList.remove('sfocArtVet')
+     }
      }); 
 
-     curEl.style.transform = translate;
-     curEl.classList.remove('sfocArtVet');
      setTimeout(function () {
       articoliVetrinaArr.forEach(el=> el.classList.add('transitionclass'));
       articoliVetrinaArr.forEach((el,i, arr) => {
@@ -54,20 +63,19 @@ const fnVetrina = function () {
   document.querySelector('.prev-pg').addEventListener('click', function () {
     curArt--
     if (curArt === 5) {
-      curArt += 10;
+      curArt = curArt + 10;
       articoliVetrinaArr.forEach((el, i) => {
       el.classList.remove('transitionclass');})
-      let curEl;
-      let translate;
+
       articoliVetrinaArr.forEach((el, i, arr) => {
       el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt - 1))}%) scale(0.5)`;
       if(i === curArt + 1) {
-        translate = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt - 1))}%) scale(1)`;
-        curEl = el;}
+         el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt - 1))}%) scale(1)`;
+         el.classList.remove('sfocArtVet')
+
+      }
      }); 
 
-     curEl.style.transform = translate;
-     curEl.classList.remove('sfocArtVet');
      setTimeout(function () {
       articoliVetrinaArr.forEach(el=> el.classList.add('transitionclass'));
       articoliVetrinaArr.forEach((el,i, arr) => {
@@ -85,17 +93,6 @@ const fnVetrina = function () {
       }
   })
 
-  // document.querySelector('.prev-pg').addEventListener('click', function () {
-  //   if(curArt === 0) {
-  //     curArt = maxArt
-  //   } else {
-  //     curArt--}
-
-  //   articoliVetrinaArr.forEach((el,i, arr) => {
-  //     if(i === curArt) {el.classList.remove('sfocArtVet')} else {el.classList.add('sfocArtVet')}
-  //     el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
-  //      });
-  // })
 }
 fnVetrina()
 
