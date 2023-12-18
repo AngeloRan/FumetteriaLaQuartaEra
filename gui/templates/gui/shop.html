@@ -36,8 +36,8 @@
   
 
 
-  <button class="btn_vet next-pg">AVANTI</button>
-  <button class="btn_vet prev-pg">INDIETRO</button>
+  <button class="btn_vet next-pg hidden-4"><i class="fa-solid fa-arrow-right"></i></button>
+  <button class="btn_vet prev-pg hidden-4"><i class="fa-solid fa-arrow-left"></i></button>
 </div>
 
 {% endblock header %}
@@ -46,7 +46,7 @@
 
 
 
-<div class="container corpo corpoShop">
+<div class="container corpo corpoShop overflowHidden">
   <div class="container  div-menuarticoli" data-a="1">
 
     <ul class="cnt-vocimenu container">
@@ -56,6 +56,7 @@
       <a class="vocimenu container" href=""><li>GIOCHI DI RUOLO</li></a>
       <a class="vocimenu container" href=""><li>ACTION FIGURES</li></a>
       <a class="vocimenu container" href=""><li>GADGETS</li></a>
+      <form id="ricercaShopForm" class="vocimenu container" action=""><input id="shopRicerca" type="text"><input id="shopSubmit"  type="submit"></form>
     </ul>
 
   </div>

@@ -372,3 +372,6 @@ a {
   transform: translateY(8rem);
 }
 
+.overflowHidden {
+  overflow: hidden;
+}
