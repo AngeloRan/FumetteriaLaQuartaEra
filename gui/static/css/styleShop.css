@@ -1,8 +1,12 @@
-
+/* :root {
+  --angle: 0deg;
+  --angle1: 0deg;
+} */
 
 /* VETRINA */
 body {
-  overflow-x: hidden;
+  overflow: hidden;
+  overflow-y: visible;
 }
 
 /* header {
@@ -20,7 +24,6 @@ body {
   background-color: hsla(0, 0%, 100%, 0.900);
   position: relative;
   transition: all 1s;
-  /* overflow: hidden; */
 }
 
 .articoloInVetrina {
@@ -39,7 +42,7 @@ body {
 }
 
 .transitionclass {
-  transition: all 0.9s;
+  transition: all 0.8s;
 }
 
 .immagineInVetrina {
@@ -55,6 +58,7 @@ body {
 }
 
 .btn_vet {
+  
   text-align: center;
   font-size: 2.5rem;
   width: 5rem;
@@ -66,24 +70,47 @@ body {
   cursor: pointer;
   /* opacity: 0.8; */
   transition: transform 0.3s, opacity 0.3s;
-  /* border-radius: 100%; */
+  outline: none;
 }
 
 .btn_vet-active:hover {
-  /* transform: scale(1.2); */
+
   border: double 1px transparent;
   border-radius: 100%;
-  background-image: 
-  linear-gradient(white, white), 
-                    linear-gradient(to right, #f5d441 , darkred);
+  --angle1: 0deg;
+  background-image: linear-gradient(white, white),linear-gradient(var(--angle1), #f5d441 , darkred);
   background-origin: border-box;
   background-clip: padding-box, border-box;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   opacity: 0.9;
+  animation: 3s rotatec linear infinite;
 }
+
+@keyframes rotatec {
+	to {
+		--angle1: 360deg;
+	}
+}
+
+@property --angle1 {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+
 
 .btn_vet:active {
   transform: scale(0.9);
+}
+
+.btn:focus {
+  border: none;
+  outline: none;
+}
+
+.btn:focus-visible {
+  outline: none;
 }
 
 
@@ -110,8 +137,7 @@ body {
   padding-top: 0;
   font-family: 'MyWebFont', Helvetica, sans-serif;
   font-size: 1.5rem;
-  /* overflow: hidden; */
-  overflow-y: visible;
+  overflow: visible;
 }
 
 .shopdiv {
@@ -168,7 +194,7 @@ body {
   height: 5rem;
   border-radius: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  /* overflow: hidden; */
+
 }
 
 
@@ -176,58 +202,93 @@ body {
 .cnt-vocimenu {
   color: rgb(0, 0, 0);
   list-style-type: none;
-  /* height: 100%; */
+ 
   height: 5rem;
   width: 100%;
   justify-content: space-around;
   cursor: auto;
-  /* overflow: hidden; */
+
 }
 
 .vocimenu {
-  /* color: darkred; */
-  /* font-weight: 600; */
-  font-size: 1.4rem;
   align-items: center;
   justify-content: baseline;
-  /* flex-wrap: nowrap; */
   position: relative;
   transition: transform 0.3s, text-decoration 0.3s, opacity 0.3s ;
-  /* transition-property: all;
-  transition-duration: 0.3s; */
+  transition: all 0.2s;
   flex-grow: 1;
   justify-content: center;
   opacity: 0.9;
 }
 
+.vocimenu:hover {
+  opacity: 1;
+}
 
+.vocimenu::after {
+  content: '';
+  position: absolute;
+  bottom: -0.1rem;
+  width: 0;
+  height: 2px;
+  right: 50%;
+  transform: translateX(50%);
+  background: linear-gradient(
+    to right,
+    transparent 1%,
+    darkred 50%,
+    transparent 99%
+  );
+  opacity: 1;
+  transition: width 0.2s ease-out;
+}
+
+.vocimenu::before {
+  content: '';
+  position: absolute;
+  top: -0.1rem;
+  width: 0;
+  height: 2px;
+  right: 50%;
+  transform: translateX(50%);
+  background: linear-gradient(
+    to right,
+    transparent 1%,
+    darkred 50%,
+    transparent 99%
+  );
+  opacity: 1;
+  transition: width 0.2s ease-out;
+}
+
+.vocimenu:hover::after, .vocimenu:hover::before {
+  width: 100%;
+}
+.selVociMenu {
+  opacity: 1;
+  color: darkred;
+}
+.selVociMenu::after, .selVociMenu::before {
+  width: 100%;
+}
 
 
 .vocimenu:hover {
   color: darkred;
-  text-decoration: dotted;
-  transform: scale(1.15);
-  background: linear-gradient(
-    to right,
-    #f6d365 50%,
-    #f5d441 100%
-  );
-  opacity: 1;
   border-radius: 3rem;
-
-  outline: 2px solid darkred; 
-  box-shadow: 5px 5px 5px black;
 }
 
-.vocimenu:active {
-  transform: scale(1.05);
-  /* box-shadow: none; */
-}
+
 #ricercaShopForm {
   justify-content: center;
+  gap: 1rem;
   flex-grow: 1.5;
   background: none;
   outline: none
+}
+
+#ricercaShopForm::after, #ricercaShopForm::before {
+  content: none
 }
 
 #ricercaShopForm:hover {
@@ -237,14 +298,57 @@ body {
 }
 
 #shopRicerca {
+  color: rgb(51, 51, 51);
+  text-decoration: dotted;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 1.5rem;
   border: none;
   outline: none;
-  background-color: none;
+  background: linear-gradient(120deg, #f6d46580 0%, #f5d44163 100%);
   text-align: center;
+  border-radius: 3rem;
+  height: 3.7rem;
+ 
 }
 
+
+
+#shopSubmit {
+  color: darkred;
+  border: double 1px transparent;
+  border-radius: 9px;
+  height: 3.7rem;
+  width: 8rem;
+  font-family: 'MyWebFont';
+  font-size: 1.6rem;
+  cursor: pointer;
+  --angle: 0deg;
+  background-image:linear-gradient(white, white),linear-gradient(var(--angle), #f5d441 , darkred) ;
+  background-origin: border-box;
+  background-clip: content-box, border-box;
+	animation: 5s rotate linear infinite;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 1;
+  transition: all 0.1s;
+}
+
+
+#shopSubmit:active {
+  box-shadow: none;
+  transform: scale(0.95);
+}
+
+@keyframes rotate {
+	to {
+		--angle: 360deg;
+	}
+}
+
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
 
 .articoli {
   padding: 0.5rem 1rem;
@@ -257,6 +361,11 @@ body {
   background: linear-gradient(120deg, #f6d46580 0%, #f5d44163 100%);
   transform: translateY(-2px);
   cursor: pointer;
+}
+
+.articoloselezionato {
+  background: linear-gradient(120deg, #f6d46580 0%, #f5d44163 100%);
+  transform: translateY(-2px);
 }
 
 .figure-img {
@@ -371,3 +480,9 @@ height: 50rem;
   transform: translateX(-50%) scale(1.5);
  }
  
+
+ @media screen and (max-width: 650px) {
+  header {
+    overflow: hidden;
+  }
+}

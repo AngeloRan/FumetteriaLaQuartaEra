@@ -14,6 +14,8 @@ const fnVetrina = function () {
   let curArt = 6;
   let articoliVetrinaArr = [...document.querySelectorAll('.articoloInVetrina')]
   let elCentrale;
+  let ultimoClick = 0;
+  const intervalloClick = 500;
 
  // PREPARAZIONE VETRINA
   articoliVetrinaArr.forEach((el,i, arr) => {;
@@ -29,42 +31,55 @@ const fnVetrina = function () {
 
 // FUNZIONE VETRINA LOOP
     const vetLoop = function () {
-    const LIMITE = this === document.querySelector('.next-pg') ? 16 : 5;
-    const SELETTORE_NEXT_PREV = this === document.querySelector('.next-pg') ? 1 : -1
-    const TOT_ART = this === document.querySelector('.next-pg') ? -10 : 10;
-    
-    curArt = curArt + SELETTORE_NEXT_PREV;
-    if (curArt === LIMITE) {
-      curArt = curArt + TOT_ART;
-      articoliVetrinaArr.forEach((el, i) => {
-      el.classList.remove('transitionclass');})
+      const LIMITE = this === document.querySelector('.next-pg') ? 16 : 5;
+      const SELETTORE_NEXT_PREV = this === document.querySelector('.next-pg') ? 1 : -1
+      const TOT_ART = this === document.querySelector('.next-pg') ? -10 : 10;
+      const ora = Date.now()
+      if (ora - ultimoClick >= intervalloClick) {
+      
+      curArt = curArt + SELETTORE_NEXT_PREV;
+      if (curArt === LIMITE) {
+        curArt = curArt + TOT_ART;
+        articoliVetrinaArr.forEach((el, i) => {
+        el.classList.remove('transitionclass');})
 
-      articoliVetrinaArr.forEach((el, i, arr) => {
-      el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + SELETTORE_NEXT_PREV))}%) scale(0.5)`;
-      if(i === curArt - SELETTORE_NEXT_PREV) {
-        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + SELETTORE_NEXT_PREV))}%) scale(1)`;
-        el.classList.remove('sfocArtVet')
-     }
-     }); 
+        articoliVetrinaArr.forEach((el, i, arr) => {
+        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + SELETTORE_NEXT_PREV))}%) scale(0.5)`;
+        if(i === curArt - SELETTORE_NEXT_PREV) {
+          el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + SELETTORE_NEXT_PREV))}%) scale(1)`;
+          el.classList.remove('sfocArtVet')
+      }
+      }); 
 
-     setTimeout(function () {
-      articoliVetrinaArr.forEach(el=> el.classList.add('transitionclass'));
+      setTimeout(function () {
+        articoliVetrinaArr.forEach(el=> el.classList.add('transitionclass'));
+        articoliVetrinaArr.forEach((el,i, arr) => {
+          if(i === curArt) {el.classList.remove('sfocArtVet');        elCentrale = el;
+        } else {el.classList.add('sfocArtVet')}
+          el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+          });
+      }, 100)
+      
+      } else{
       articoliVetrinaArr.forEach((el,i, arr) => {
-        if(i === curArt) {el.classList.remove('sfocArtVet');        elCentrale = el;
-       } else {el.classList.add('sfocArtVet')}
+        if(i === curArt) {el.classList.remove('sfocArtVet'); elCentrale = el;} else {el.classList.add('sfocArtVet')}
         el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
-         });
-     }, 100)
+        }); ultimoClick = ora;
+    }}}
     
-    } else{
-    articoliVetrinaArr.forEach((el,i, arr) => {
-      if(i === curArt) {el.classList.remove('sfocArtVet'); elCentrale = el;} else {el.classList.add('sfocArtVet')}
-      el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
-       });
-      }}
 
  
+
+
+
+
+
   pulsanti.forEach(el => el.addEventListener('click', vetLoop ))
+
+  document.addEventListener('keydown', function (e) {
+    e.key === 'ArrowRight' && vetLoop.call(document.querySelector('.next-pg'));
+    e.key === 'ArrowLeft' && vetLoop.call(document.querySelector('.prev-pg'));
+  });
 
   let vetrinaAuto = setInterval(vetLoop.bind(document.querySelector('.next-pg')), 6000)
 
@@ -90,7 +105,8 @@ const fnVetrina = function () {
 
   
 // INGRANDIMENTO ELEMENTO CORRENTE
- const arra = ['mousedown','mouseup'];
+
+    const arra = ['mousedown','mouseup'];
 
       arra.forEach((el) => 
       {const callback = function(e) {
@@ -99,13 +115,13 @@ const fnVetrina = function () {
       String(this) === 'mousedown' ? elCentrale.classList.add('transitionclassVel') : elCentrale.classList.remove('transitionclassVel');
       elCentrale.style.zIndex = `${String(this) === 'mousedown' ? 1 : ''}`
       // elCentrale.style.transition = `all${String(this) === 'mousedown' ? '0.3' : '0.9'}s`
-      elCentrale.style.transform = `translateX(-50%) ${String(this) === 'mousedown' ? 'scale(1.5)' : '' }`;}};
+      // elCentrale.style.transform = `translateX(-50%) ${String(this) === 'mousedown' ? 'scale(1.5)' : '' }`;
+      elCentrale.querySelector('.immagineInVetrina').style.transform = `${String(this) === 'mousedown' ? 'scale(1.5)' : '' }`}};
+
       vetrinaEl.addEventListener(el, callback.bind(el))})
 
 }
 fnVetrina()
-
-
 
 
 
@@ -136,11 +152,29 @@ const mostraDetProdotto = function (data, e) {
 
 // eventlistener click lista
 const listaEl = document.querySelector('.shopsinistra')
+
 listaEl.addEventListener('click', function (e) {
   if(e.target.closest('.articoli')) {
     config.AJAX('test').then(data => mostraDetProdotto(data, e)).catch(err => console.log(`${err}`))
+    const selezionato = e.target.closest('.articoli');
+    const Allarticoli = listaEl.querySelectorAll('.articoli')
+    Allarticoli.forEach((el) => el === selezionato ? el.classList.add('articoloselezionato') : el.classList.remove('articoloselezionato'))
   }
+
 })
 
+
+const selettoreCategoriaArt = function () {
+  const menu = document.querySelector('.div-menuarticoli');
+  menu.addEventListener('click', function (e) {
+    e.preventDefault();
+    if(!e.target.closest('.vocimenu')) return;
+    const selezionato = e.target.closest('.vocimenu');
+    const categorie = menu.querySelectorAll('.vocimenu')
+    categorie.forEach((el) => el === selezionato ? el.classList.add('selVociMenu') : el.classList.remove('selVociMenu'))
+  })
+}
+
+selettoreCategoriaArt()
 
 // {header:[art1, art2, art3]}
