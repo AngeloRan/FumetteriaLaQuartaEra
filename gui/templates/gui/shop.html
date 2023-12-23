@@ -46,7 +46,7 @@
 
 
 
-<div class="container corpo corpoShop">
+<div class="container corpo corpoShop overflowHidden">
   <div class="container  div-menuarticoli" data-a="1">
 
     <ul class="cnt-vocimenu container">
@@ -56,16 +56,32 @@
       <a class="vocimenu container" href=""><li>GIOCHI DI RUOLO</li></a>
       <a class="vocimenu container" href=""><li>ACTION FIGURES</li></a>
       <a class="vocimenu container" href=""><li>GADGETS</li></a>
-      <form id="ricercaShopForm" class="vocimenu container" action=""><input id="shopRicerca" type="text" placeholder="Cerca..."><button id="shopSubmit" type="submit" value="">Cerca</button></form>
+      <form id="ricercaShopForm" class="container" action=""><input id="shopRicerca" type="text" placeholder="Cerca..."><button id="shopSubmit" type="submit" value="">Cerca</button></form>
     </ul>
 
   </div>
   <div class="container hidden-1 sezione shopdiv shopsinistra" data-a="1" >
+
+    <div id="hamMenuLista" class="container hidden-1">
+      <div class="hoverabile">
+        <span class="iconaMenuLista">
+          <i class="fa-solid fa-list"></i>
+        </span>
+        <div class="menuNascosto container">
+          <div id="sortAl">A - z</div>
+          <div id="sortRevAl">Z - a</div>
+          <div id="sortNum">Ultimo aggiornamento</div>
+          <div id="sortRevNum">Primo aggiornamento</div>
+        </div>
+      </div>
+    </div>
+
     <!-- {% for articolo in articoli %}
 
     <div class="articoli">{{articolo.id}}</div>
   
       {% endfor %} -->
+      <div class="container contenitoreArticoli">
     <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
     <p class="categoriaarticolo">fumetti</p></div></div>
     <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/84/c1/e3/84c1e380e7232869194c8f21e0da70b2.jpg" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
@@ -92,7 +108,7 @@
       <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
       <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
       <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>  
-  </div>
+  </div></div>
   
 
   <div class="container hidden-2 sezione shopdiv shopdestra" data-a="2">
@@ -102,10 +118,13 @@
         <div id="img-container">
         <img src="https://i.pinimg.com/564x/01/e7/ef/01e7efdbc2598757ea6686d7fdfde45d.jpg" style="object-fit: contain;"/>
         </div>
-      <div class="caratteristicheProd"></div></div>
+      <div class="caratteristicheProd">
+        <h4 class="titoloArticolo">Le Case della Follia AHAH ahahhd fiwekd</h4>
+      </div></div>
 
       <div class="dettagliorigaInf">
-        <h4>Le Case della Follia</h4>
+        <h4>Le Case della Follia 
+        </h4>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, autem tenetur commodi nam sunt necessitatibus, doloribus placeat, eius pariatur odit minus obcaecati asperiores iure consequuntur animi quod quis fugiat! Voluptatibus.</p>
       </div>
     </div>

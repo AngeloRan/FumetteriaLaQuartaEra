@@ -1,7 +1,18 @@
-/* :root {
-  --angle: 0deg;
-  --angle1: 0deg;
-} */
+html::-webkit-scrollbar {
+  width: 8px;
+}
+html::-webkit-scrollbar-track {
+  background: linear-gradient(120deg, #f6d46580 0%, #f5d44163 100%);
+  /* box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); */
+}
+
+html::-webkit-scrollbar-thumb {
+background: linear-gradient(rgba(204, 63, 63, 0.774), rgb(175, 25, 25));
+box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+border-radius: 10px;
+}
+
+
 
 /* VETRINA */
 body {
@@ -9,9 +20,9 @@ body {
   overflow-y: visible;
 }
 
-/* header {
+header {
   overflow: hidden;
-} */
+}
 
 
 .immaginenegozio {
@@ -137,7 +148,6 @@ body {
   padding-top: 0;
   font-family: 'MyWebFont', Helvetica, sans-serif;
   font-size: 1.5rem;
-  overflow: visible;
 }
 
 .shopdiv {
@@ -163,18 +173,47 @@ body {
 }
 
 .shopsinistra {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Urbanist',sans-serif;
   flex-direction: column;
   background: none;
   overflow: auto;
+  position: relative;
 }
+
+.contenitoreArticoli {
+  font-family: 'Urbanist',sans-serif;
+  flex-direction: column;
+  background: none;
+  overflow: auto;
+  position: relative;
+}
+
+.contenitoreArticoli::-webkit-scrollbar {
+  display: none;
+  width: 7px;
+}
+.contenitoreArticoli::-webkit-scrollbar-track {
+  background: linear-gradient(120deg,#f5d44163  0%, #f6d46580 100%);
+  /* box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5); */
+}
+
+.contenitoreArticoli::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.5);
+  background: linear-gradient(rgba(204, 63, 63, 0.774), darkred);
+border-radius: 10px;
+}
+
+.contenitoreArticoli:hover::-webkit-scrollbar {
+  display: block;
+}
+
 
 .shopsinistra:hover {
   background: none;
 }
 
 .shopdestra {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Urbanist', Helvetica, sans-serif;
   overflow: hidden;
 }
 
@@ -215,7 +254,7 @@ body {
   justify-content: baseline;
   position: relative;
   transition: transform 0.3s, text-decoration 0.3s, opacity 0.3s ;
-  transition: all 0.3s;
+  transition: all 0.2s;
   flex-grow: 1;
   justify-content: center;
   opacity: 0.9;
@@ -240,7 +279,7 @@ body {
     transparent 99%
   );
   opacity: 1;
-  transition: width 0.2s ease-out,  height 0.2s ;
+  transition: width 0.2s ease-out ;
 }
 
 .vocimenu::before {
@@ -258,7 +297,7 @@ body {
     transparent 99%
   );
   opacity: 1;
-  transition: width 0.2s ease-out,  height 0.2s ;
+  transition: width 0.2s ease-out   ;
  
 }
 
@@ -268,10 +307,13 @@ body {
 .selVociMenu {
   opacity: 1;
   color: darkred;
+  font-size: 2rem;
+  text-shadow: 1px 1px 1px rgba(139, 0, 0, 0.301);
+ 
 }
 .selVociMenu::after, .selVociMenu::before {
   width: 100%;
-  height: 5px;
+  height: 2px;
   background: linear-gradient(
     to right,
     transparent 1%,
@@ -286,10 +328,18 @@ body {
 }
 
 
+
 #ricercaShopForm {
+  align-items: center;
+  justify-content: baseline;
+  position: relative;
+  transition: transform 0.3s, text-decoration 0.3s, opacity 0.3s ;
+  transition: all 0.2s;
+  flex-grow: 1;
+  justify-content: center;
+  opacity: 0.9;
   justify-content: center;
   gap: 1rem;
-  flex-grow: 1.5;
   background: none;
   outline: none
 }
@@ -307,15 +357,20 @@ body {
 #shopRicerca {
   color: rgb(51, 51, 51);
   text-decoration: dotted;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Urbanist', Helvetica, sans-serif;
   font-size: 1.5rem;
   border: none;
   outline: none;
   background: linear-gradient(120deg, #f6d46580 0%, #f5d44163 100%);
   text-align: center;
   border-radius: 3rem;
-  height: 3.7rem;
- 
+  height: 3rem;
+}
+
+#shopRicerca::placeholder {
+  color: rgb(158, 157, 157);
+  text-align: left;
+  padding-left: 1rem;
 }
 
 
@@ -355,6 +410,70 @@ body {
   syntax: '<angle>';
   initial-value: 0deg;
   inherits: false;
+}
+
+#hamMenuLista {
+  background: linear-gradient(120deg,#ffe881  0%, #fae899da 50%, #f6d46580 80%, #f5d44163 100%);
+  color: darkred;
+  opacity: 1;
+  padding-top: 1rem;
+  padding-left: 1.5rem;
+  font-size: 2.5rem;
+  position: sticky ;
+  top: 0;
+  z-index: 1;
+  transition: all 0.7s;
+  position: relative;
+}
+
+.hoverabile {
+  position: relative;
+  height: 100%;
+  align-items: stretch;
+  margin-bottom: 1rem;
+}
+
+
+
+.hoverabile:hover .menuNascosto {
+  display: flex;
+  height: 12rem;
+  overflow: visible;
+  opacity: 1;
+}
+
+.hoverabile:hover .iconaMenuLista {
+  color: black;
+}
+
+.menuNascosto {
+  height: 0;
+  flex-direction: column;
+  justify-content: space-around;
+  color: black;
+  font-size: 1.5rem;
+  position: absolute;
+  left: -1.5rem;
+  top: 100%;
+  /* display: none; */
+  width: 18rem;
+  background-color: #ffe881;
+  text-align: start;
+  padding-left: 1.5rem;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  transition: all 0.3s;
+  opacity: 0;
+  overflow: hidden;
+  opacity: 1;
+  
+}
+
+.menuNascosto div:hover {
+  color: darkred;
+  font-size: 1.6rem;
+  cursor: pointer;
+
 }
 
 .articoli {
@@ -435,9 +554,8 @@ body {
 
 .dettagliorigaSup {
 flex-basis: 100%;
-/* background-color: red; */
-justify-content: space-between;
-/* overflow: hidden; */
+justify-content: flex-start;
+gap:4rem;
 border-radius: 4px;
 height: 50rem;
 }
@@ -445,11 +563,38 @@ height: 50rem;
 
 
 .caratteristicheProd {
-  width: 50px;
-  height: 50px;
-  background-color: bisque;
+  text-align: center;
+  flex-grow: 8;
 }
 
+.titoloArticolo {
+  opacity: 0.9;
+  color: darkred;
+  text-shadow:  1px 1px 2px rgba(139, 0, 0, 0.301);
+  font-size: 3rem;
+ font-family: 'Urbanist', sans-serif;
+ font-weight: 500;
+ text-transform: uppercase;
+ position: relative;
+}
+
+.titoloArticolo::after {
+  content: '';
+  position: absolute;
+  bottom: -0.3rem;
+  width: 100%;
+  height: 3px;
+  right: 50%;
+  transform: translateX(50%);
+  background: linear-gradient(
+    to right,
+    transparent 1%,
+    #f6d365 50%,
+    transparent 99%
+  );
+  opacity: 1;
+  transition: width 0.2s ease-out ;
+}
 
 .dettagliorigaInf {
   flex-basis: 100%;

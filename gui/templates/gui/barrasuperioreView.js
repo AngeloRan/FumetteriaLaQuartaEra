@@ -32,6 +32,10 @@ const funzioneBarra = function () {
     }
   };
 
+  document.getElementById('button-ricerca').addEventListener('click', function (e) {
+    document.getElementById('text-ricerca').value = ''
+  })
+
   funzionalitaBarra()
 
 

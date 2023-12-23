@@ -2,6 +2,45 @@
 
 config.rivelatoreSezioni()
 
+
+// ORDINA PER ORDINE ALFABETICO
+
+
+const articoliArr = [{titolo: 'naruto', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg' }, {titolo: 'harry Potter', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg'}, {titolo: 'Giangiukan', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg'}, {titolo: 'dragonball', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg'}, {titolo: 'ilsignoredeglianelli', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg'}];
+
+
+const funzioneSort = function (nonrev = true) {
+
+  const markup = articoliArr.toSorted((a, b) => {
+
+    if(!nonrev) {
+      if (a.titolo.toUpperCase() > b.titolo.toUpperCase()) return -1;
+      if (a.titolo.toUpperCase() < b.titolo.toUpperCase()) return 1
+    } else{
+      if (a.titolo.toUpperCase() > b.titolo.toUpperCase()) return 1;
+      if (a.titolo.toUpperCase() < b.titolo.toUpperCase()) return -1
+    }}).map(el => `    
+      <div class="articoli container">
+        <figure class="figure-img">
+          <img class="img_art" src=${el.img} alt="">
+        </figure>
+        <div class="articoli_label">
+        <h4 class="nomearticolo">${el.titolo}</h4>
+        <p class="categoriaarticolo">${el.tipo}</p>
+        </div>
+      </div>`).join('')
+
+    document.querySelector('.contenitoreArticoli').innerHTML = '';
+    document.querySelector('.contenitoreArticoli').insertAdjacentHTML('afterbegin', markup)
+}
+
+document.getElementById('sortAl').addEventListener('click', funzioneSort)
+document.getElementById('sortRevAl').addEventListener('click', function() {
+  funzioneSort(false)
+})
+
+
+
 const ALLIN_ART_VETRINA = -50;
 const vetrinaEl = document.querySelector('.vetrina');
 const pulsanti = [...document.querySelectorAll('.btn_vet')];
@@ -27,7 +66,7 @@ const fnVetrina = function () {
 
   setTimeout(function () {
     articoliVetrinaArr.forEach(el=> el.classList.add('transitionclass'))
-  }, 500)
+  }, 1000)
 
 // FUNZIONE VETRINA LOOP
     const vetLoop = function () {
@@ -106,24 +145,27 @@ const fnVetrina = function () {
   
 // INGRANDIMENTO ELEMENTO CORRENTE
 
-    const arra = ['mousedown','mouseup'];
+    // const arra = ['mousedown','mouseup'];
 
-      arra.forEach((el) => 
-      {const callback = function(e) {
-      if(e.target.parentElement === elCentrale) { 
-      String(this) === 'mousedown' ? elCentrale.classList.remove('transitionclass') : elCentrale.classList.add('transitionclass');
-      String(this) === 'mousedown' ? elCentrale.classList.add('transitionclassVel') : elCentrale.classList.remove('transitionclassVel');
-      elCentrale.style.zIndex = `${String(this) === 'mousedown' ? 1 : ''}`
-      // elCentrale.style.transition = `all${String(this) === 'mousedown' ? '0.3' : '0.9'}s`
-      // elCentrale.style.transform = `translateX(-50%) ${String(this) === 'mousedown' ? 'scale(1.5)' : '' }`;
-      elCentrale.querySelector('.immagineInVetrina').style.transform = `${String(this) === 'mousedown' ? 'scale(1.5)' : '' }`}};
+    //   arra.forEach((el) => 
+    //   {const callback = function(e) {
+    //   if(e.target.parentElement === elCentrale) { 
+    //   String(this) === 'mousedown' ? elCentrale.classList.remove('transitionclass') : elCentrale.classList.add('transitionclass');
+    //   String(this) === 'mousedown' ? elCentrale.classList.add('transitionclassVel') : elCentrale.classList.remove('transitionclassVel');
+    //   elCentrale.style.zIndex = `${String(this) === 'mousedown' ? 1 : ''}`
+    //   // elCentrale.style.transition = `all${String(this) === 'mousedown' ? '0.3' : '0.9'}s`
+    //   // elCentrale.style.transform = `translateX(-50%) ${String(this) === 'mousedown' ? 'scale(1.5)' : '' }`;
+    //   elCentrale.querySelector('.immagineInVetrina').style.transform = `${String(this) === 'mousedown' ? 'scale(1.5)' : '' }`}};
 
-      vetrinaEl.addEventListener(el, callback.bind(el))})
+    //   vetrinaEl.addEventListener(el, callback.bind(el))})
 
 }
 fnVetrina()
 
-
+// RICERCA
+document.getElementById('shopSubmit').addEventListener('click', function (e) {
+  document.getElementById('shopRicerca').value = ''
+})
 
 // settare Uppercase lista
 const categorie = [...document.querySelectorAll('.categoriaarticolo')]
@@ -148,6 +190,11 @@ const mostraDetProdotto = function (data, e) {
     const img = `<img src="${e.target.closest('.articoli').querySelector('.img_art').src}" style="object-fit: contain;"/>`
     container.insertAdjacentHTML('afterbegin', img)
    new ImageZoom(document.getElementById("img-container"), options);
+
+   const contenitoreTit = document.querySelector('.caratteristicheProd');
+   contenitoreTit.innerHTML = '';
+   const markupTit = `<h4 class="titoloArticolo">${e.target.closest('.articoli').querySelector('.nomearticolo').textContent}</h4>`
+   contenitoreTit.insertAdjacentHTML('afterbegin', markupTit)
 }
 
 // eventlistener click lista
@@ -177,4 +224,12 @@ const selettoreCategoriaArt = function () {
 
 selettoreCategoriaArt()
 
-// {header:[art1, art2, art3]}
+// RIVELATORE MENU LISTA
+document.querySelector('.shopsinistra').addEventListener('mouseover' , function (e) {
+  document.getElementById('hamMenuLista').classList.remove('hidden-1')
+})
+
+document.querySelector('.shopsinistra').addEventListener('mouseleave' , function (e) {
+  document.getElementById('hamMenuLista').classList.add('hidden-1')
+})
+

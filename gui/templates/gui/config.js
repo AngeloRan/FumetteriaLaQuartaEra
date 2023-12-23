@@ -8,7 +8,7 @@ class Config {
  sezioni.forEach((el, i, arr) => {
     setTimeout(function () {
       el.classList.remove(`hidden-${el.dataset.a}`);
-      // i === arr.length-1 && _parentEl.classList.remove('overflowHidden')
+      i === arr.length-1 && _parentEl.classList.remove('overflowHidden')
     }, arr.length <= 4 ? (i * 1000) / 2 : 0);
   });
 

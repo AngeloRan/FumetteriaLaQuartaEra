@@ -5,6 +5,11 @@
   src: url('Middleearth-ao6m.ttf')  format('truetype'), /* Safari, Android, iOS */
 }
 
+@font-face {
+  font-family: 'Urbanist';
+  src: url('Urbanist-VariableFont_wght.ttf') format('truetype');
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -18,7 +23,7 @@ html {
 body {
   font-size: 1.8rem;
   font-family: 'MyWebFont', sans-serif;
-  color: rgb(0, 0, 0);
+  color: rgb(51, 51, 51);
 }
 
 a {
@@ -190,7 +195,7 @@ a {
 }
 
 #text-ricerca {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Urbanist', Helvetica, sans-serif;
   color: rgb(51, 51, 51);
   border-radius: 5rem;
   height: 2.8rem;
@@ -285,7 +290,7 @@ a {
 
 .corpo {
   flex-wrap: wrap;
-  overflow: hidden;
+  /* overflow: hidden; */
   gap: 2rem;
   row-gap: 1.5rem;
   justify-content: center;
