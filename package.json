@@ -16,6 +16,7 @@
     "js-img-magnify": "^0.0.8",
     "lodash-es": "^4.17.21",
     "metro4": "^4.5.10",
+    "openseadragon": "^4.1.0",
     "zoomist": "^2.0.11"
   }
 }

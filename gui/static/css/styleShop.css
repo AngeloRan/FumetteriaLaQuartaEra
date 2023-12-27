@@ -24,6 +24,19 @@ header {
   overflow: hidden;
 }
 
+.sezioneshopdiv {
+  flex-grow: 0;
+  flex-shrink: 1;
+  height: 30rem;
+  transition: transform 0.5s, opacity 1s, box-shadow 0.3s, background-color 0.3s;
+  border-radius: 4rem;
+  text-align: center;
+  background-size: 20rem;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align: center;
+  cursor: pointer;
+}
 
 .immaginenegozio {
   min-height: 25rem;
@@ -227,7 +240,6 @@ border-radius: 10px;
   position: relative;
   text-align: center;
   text-align: center;
-  transform: scale(1);
   cursor: pointer;
   width: 100%;
   height: 5rem;
@@ -426,6 +438,10 @@ border-radius: 10px;
   position: relative;
 }
 
+.iconaMenuLista{
+  opacity: 0.9;
+}
+
 .hoverabile {
   position: relative;
   height: 100%;
@@ -433,14 +449,13 @@ border-radius: 10px;
   margin-bottom: 1rem;
 }
 
-
-
 .hoverabile:hover .menuNascosto {
   display: flex;
-  height: 12rem;
+  height: 13rem;
   overflow: visible;
   opacity: 1;
 }
+
 
 .hoverabile:hover .iconaMenuLista {
   color: black;
@@ -466,7 +481,7 @@ border-radius: 10px;
   opacity: 0;
   overflow: hidden;
   opacity: 1;
-  
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .menuNascosto div:hover {
@@ -632,3 +647,39 @@ height: 50rem;
   }
 
 }
+
+
+
+ .magnify-wrapper {
+  position: relative;
+  height: 350px;
+  width: 350px;
+}
+.magnify-wrapper img {
+height: 350px;
+width: 350px;
+  object-fit: contain;
+}
+
+
+.magnify-wrapper #large-img {
+  background: url('https://images.unsplash.com/photo-1542856204-00101eb6def4?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=975&q=80')
+    no-repeat #fff;
+  width: 600px;
+  height: 500px;
+  box-shadow: 0 5px 10px -2px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
+  position: absolute;
+  border: 4px solid transparent;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+  z-index: 99;
+  /* border-radius: 100%; */
+  display: block;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.magnify-wrapper:hover #large-img,
+.magnify-wrapper:active #large-img {
+  opacity: 1;
+}
+
