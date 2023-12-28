@@ -24,6 +24,7 @@ body {
   font-size: 1.8rem;
   font-family: 'MyWebFont', sans-serif;
   color: rgb(51, 51, 51);
+  /* overflow: hidden; */
 }
 
 a {

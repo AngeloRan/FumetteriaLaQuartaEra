@@ -4,7 +4,12 @@ config.rivelatoreSezioni()
 
 // settare Uppercase lista
 
-const articoliArr = [{titolo: 'naruto', tipo: 'statuina', numero: 4, img: '../../static/images/Grut.png', inserimento: Date.now() - 500 }, {titolo: 'harry Potter', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 1000}, {titolo: ' giangiukan', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 2000}, {titolo: 'dragonball', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 700}, {titolo: 'ilsignoredeglianelli', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 8000}];
+const articoliArr = [
+
+  {titolo: 'naruto', tipo: 'statuina', numero: 4, img: '../../static/images/Grut.png', inserimento: Date.now() - 500,}, 
+  {titolo: 'harry Potter', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 1000}, {titolo: ' giangiukan', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 2000}, {titolo: 'dragonball', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 700}, {titolo: 'ilsignoredeglianelli', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 8000}];
+
+
 
 const upperLista = function () {
 const categorie = document.querySelectorAll('.categoriaarticolo');
@@ -15,9 +20,11 @@ upperLista()
 const ALLIN_ART_VETRINA = -50;
 const vetrinaEl = document.querySelector('.vetrina');
 let pulsanti = [...document.querySelectorAll('.btn_vet')];
+let vetrinaAuto;
 const listaEl = document.querySelector('.contenitoreArticoli');
-const headerEl = document.querySelector('header')
-const menuArticoliEl = document.querySelector('.div-menuarticoli')
+const headerEl = document.querySelector('header');
+const menuArticoliEl = document.querySelector('.div-menuarticoli');
+let funzioneTasti;
 
 console.log(Number.parseFloat(getComputedStyle(document.querySelector('.shopsinistra')).width, 10));
 
@@ -49,7 +56,7 @@ window.addEventListener('resize', function () {
 
 
 const fnVetrina = function (totale) {
-  let curArt = 2;
+  let curArt = 3;
   let articoliVetrinaArr = [...document.querySelectorAll('.articoloInVetrina')]
   let elCentrale;
   let ultimoClick = 0;
@@ -69,7 +76,8 @@ const fnVetrina = function (totale) {
 
 // FUNZIONE VETRINA LOOP
     const vetLoop = function () {
-      const LIMITE = this === document.querySelector('.next-pg') ? (totale + 2) : 1;
+      console.log('LOOP');
+      const LIMITE = this === document.querySelector('.next-pg') ? (totale + 3) : 2;
       const SELETTORE_NEXT_PREV = this === document.querySelector('.next-pg') ? 1 : -1
       const TOT_ART = this === document.querySelector('.next-pg') ? -totale : totale;
       const ora = Date.now()
@@ -107,14 +115,17 @@ const fnVetrina = function (totale) {
   
   
   
-  pulsanti.forEach(el => el.addEventListener('click', vetLoop ))
+  pulsanti.forEach(el => el.addEventListener('click', vetLoop ));
 
-  document.addEventListener('keydown', function (e) {
+   funzioneTasti = function (e) {
+    if(e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return;
     e.key === 'ArrowRight' && vetLoop.call(document.querySelector('.next-pg'));
     e.key === 'ArrowLeft' && vetLoop.call(document.querySelector('.prev-pg'));
-  });
+  };
 
-  let vetrinaAuto = setInterval(vetLoop.bind(document.querySelector('.next-pg')), 6000)
+  document.addEventListener('keydown', funzioneTasti );
+
+  vetrinaAuto = setInterval(vetLoop.bind(document.querySelector('.next-pg')), 6000)
 
   vetrinaEl.addEventListener('mouseover', function (e) {
     if(!e.target.closest('.vetrina')) return
@@ -131,11 +142,36 @@ const fnVetrina = function (totale) {
     pul.classList.add('hidden-4');
     pul.classList.remove('btn_vet-active')
     })
+    clearInterval(vetrinaAuto);
     vetrinaAuto = setInterval(vetLoop.bind(document.querySelector('.next-pg')), 6000)
   })
 
+  // vetrinaEl.addEventListener('click' , function (e) {
+  //   const mostraDetProdotto = function (data, e) {
+  //     const container = document.querySelector('.magnify-wrapper');
+  //       container.innerHTML= '';
+  //       const img = `<div id="lenteIngrandimento"><i class="fa-solid fa-magnifying-glass-plus"></i></div><img
+  //       src="${e.target.closest('.articoli').querySelector('.img_art').src}"
+  //       id="main-img" />
+  //       <div id="large-img" class="largeImg" style = "background: url(${e.target.closest('.articoli').querySelector('.img_art').src}) no-repeat #fff"></div>`;
+  //       container.insertAdjacentHTML('afterbegin', img);
+  //       menuArticoliEl.scrollIntoView({ behavior: 'smooth' })
+  //       document.getElementById('lenteIngrandimento').addEventListener('click', function (e) {
+  //         if(e.target.closest('#lenteIngrandimento')) {
+  //          document.getElementById('large-img').classList.add('largeImg')
+  //         }
+  //        })
+    
+  //      const contenitoreTit = document.querySelector('.caratteristicheProd');
+  //      contenitoreTit.innerHTML = '';
+  //      const markupTit = `<h4 class="titoloArticolo">${e.target.closest('.articoli').querySelector('.nomearticolo').textContent}</h4>`
+  //      contenitoreTit.insertAdjacentHTML('afterbegin', markupTit);
+    
+  //   }
+  // } )
+
 }
-fnVetrina(10)
+fnVetrina(12)
 
 // ORDINA PER ORDINE ALFABETICO
 
@@ -181,6 +217,8 @@ document.getElementById('sortRevNum').addEventListener('click', function () {
 })
 
 document.getElementById('mettiInVet').addEventListener('click', function (e) {
+  document.removeEventListener('keydown', funzioneTasti);
+  clearInterval(vetrinaAuto);
   vetrinaEl.classList.add('hidden-1');
   document.body.scrollIntoView({ behavior: 'smooth' })
   new Promise (function (fulfill, reject) {
@@ -196,18 +234,10 @@ document.getElementById('mettiInVet').addEventListener('click', function (e) {
   vetrinaEl.innerHTML = '';
   vetrinaEl.insertAdjacentHTML('afterbegin', markup)
   pulsanti = [...document.querySelectorAll('.btn_vet')];
-  fnVetrina(articoliArr.length)
+  fnVetrina(articoliArr.length);
   vetrinaEl.classList.remove('hidden-1')
   }) 
 })
-
-
-
-
-
-// VETRINA
-
-
 
 
 
@@ -220,23 +250,25 @@ document.getElementById('shopSubmit').addEventListener('click', function (e) {
 
 
 
-const mostraDetProdotto = function (data, e) {
+const mostraDetProdotto = function (e) {
   const container = document.querySelector('.magnify-wrapper');
     container.innerHTML= '';
-    const img = `<img
+    const img = `<div id="lenteIngrandimento"><i class="fa-solid fa-magnifying-glass-plus"></i></div><img
     src="${e.target.closest('.articoli').querySelector('.img_art').src}"
     id="main-img" />
-    <div id="large-img" style = "background: url(${e.target.closest('.articoli').querySelector('.img_art').src}) no-repeat #fff"></div>`;
+    <div id="large-img" class="largeImg" style = "background: url(${e.target.closest('.articoli').querySelector('.img_art').src}) no-repeat #fff"></div>`;
     container.insertAdjacentHTML('afterbegin', img);
     menuArticoliEl.scrollIntoView({ behavior: 'smooth' })
-
+    document.getElementById('lenteIngrandimento').addEventListener('click', function (e) {
+      if(e.target.closest('#lenteIngrandimento')) {
+       document.getElementById('large-img').classList.add('largeImg')
+      }
+     })
 
    const contenitoreTit = document.querySelector('.caratteristicheProd');
    contenitoreTit.innerHTML = '';
    const markupTit = `<h4 class="titoloArticolo">${e.target.closest('.articoli').querySelector('.nomearticolo').textContent}</h4>`
    contenitoreTit.insertAdjacentHTML('afterbegin', markupTit);
-  
-  
 
 }
 
@@ -244,7 +276,7 @@ const mostraDetProdotto = function (data, e) {
 
 listaEl.addEventListener('click', function (e) {
   if(e.target.closest('.articoli')) {
-    config.AJAX('test').then(data => mostraDetProdotto(data, e)).catch(err => console.log(`${err}`))
+    mostraDetProdotto(e);
     const selezionato = e.target.closest('.articoli');
     const Allarticoli = listaEl.querySelectorAll('.articoli')
     Allarticoli.forEach((el) => el === selezionato ? el.classList.add('articoloselezionato') : el.classList.remove('articoloselezionato'))
@@ -281,42 +313,66 @@ document.querySelector('.shopsinistra').addEventListener('mouseleave' , function
 
 
 // MAGNIFIER
+const zoomImmagine = function (e) {
+
+  let original = document.getElementById('main-img'),
+    magnified = document.getElementById('large-img'),
+    style = magnified.style,
+    x = e.pageX - this.offsetLeft,
+    y = e.pageY - this.offsetTop,
+    imgWidth = original.width,
+    imgHeight = original.height,
+    xperc = (x / imgWidth) * 200,
+    yperc = (y / imgHeight) * 150;
+    // original.style.opacity = '0'
+  // Add some margin for right edge
+  if (x > 0.01 * imgWidth) {
+    xperc += 0.15 * xperc;
+  }
+
+  // Add some margin for bottom edge
+  if (y >= 0.01 * imgHeight) {
+    yperc += 0.15 * yperc;
+  }
+
+  // Set the background of the magnified image horizontal
+  style.backgroundPositionX = xperc - 40 + '%';
+  // Set the background of the magnified image vertical
+  style.backgroundPositionY = yperc - 40 + '%';
+
+  // Move the magnifying glass with the mouse movement.
+  style.left =  -100 + 'px';
+  style.top =  -100 + 'px';
+}
+
+document.getElementById('zoom').addEventListener('click', function (e) {
+ if(e.target.closest('#lenteIngrandimento')) {
+  // document.getElementById('large-img').classList.add('largeImg')
+  document.getElementById('large-img').style.opacity = '1'
+ }
+})
 
 document.getElementById('zoom').addEventListener(
-  'mousemove',
-  function (e) {
-    let original = document.getElementById('main-img'),
-      magnified = document.getElementById('large-img'),
-      style = magnified.style,
-      x = e.pageX - this.offsetLeft,
-      y = e.pageY - this.offsetTop,
-      imgWidth = original.width,
-      imgHeight = original.height,
-      xperc = (x / imgWidth) * 200,
-      yperc = (y / imgHeight) * 200;
-      original.style.opacity = '0'
-    // Add some margin for right edge
-    if (x > 0.01 * imgWidth) {
-      xperc += 0.15 * xperc;
-    }
+  'mousemove', zoomImmagine,false);
 
-    // Add some margin for bottom edge
-    if (y >= 0.01 * imgHeight) {
-      yperc += 0.15 * yperc;
-    }
 
-    // Set the background of the magnified image horizontal
-    style.backgroundPositionX = xperc - 40 + '%';
-    // Set the background of the magnified image vertical
-    style.backgroundPositionY = yperc - 40 + '%';
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape' && document.getElementById('large-img').classList.contains('largeImg')) {
+    // document.getElementById('large-img').classList.remove('largeImg');
+    document.getElementById('large-img').style.opacity = '0'
+  }
+});
 
-    // Move the magnifying glass with the mouse movement.
-    style.left =  -100 + 'px';
-    style.top =  -100 + 'px';
-  },
-  false
-);
+document.addEventListener('click', function (e) {
+  if(!e.target.closest('#zoom') && document.getElementById('large-img').classList.contains('largeImg')) {
+    // document.getElementById('large-img').classList.remove('largeImg');
+    document.getElementById('large-img').style.opacity = '0'
+  }
+})
 
-document.getElementById('zoom').addEventListener(
-  'mouseout',
-  function (e) { e.target.style.opacity = '1'})
+// document.getElementById('zoom').addEventListener(
+//   'mouseleave',
+//   function (e) { 
+//   document.getElementById('large-img').classList.remove('largeImg')
+//   })
+
