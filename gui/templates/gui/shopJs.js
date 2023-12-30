@@ -153,7 +153,7 @@ const fnVetrina = function (totale) {
   } )
 
 }
-fnVetrina(12)
+fnVetrina(10)
 
 // ORDINA PER ORDINE ALFABETICO
 
