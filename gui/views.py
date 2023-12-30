@@ -60,7 +60,7 @@ def shop(request):
                         }
             rendered_product.append(product)
 
-        showcase = Showcase.objects.last()
+        showcase = list(Showcase.objects.last().products)
 
         context = {
             'articoli': rendered_product,
