@@ -60,6 +60,7 @@ def shop(request):
                         }
             rendered_product.append(product)
 
+        showcase_prods = []
         showcase = Showcase.objects.last()
         if showcase:
             showcase_prods = list(showcase.products)
