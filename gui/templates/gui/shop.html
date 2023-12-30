@@ -76,15 +76,28 @@
       </div>
     </div>
 
-    <!-- {% for articolo in articoli %}
+    
 
-    <div class="articoli">{{articolo.id}}</div>
-  
-      {% endfor %} -->
     <div class="container contenitoreArticoli">
+
+      {% for articolo in articoli %}
+      <div class="articoli container" data-id="{{articolo.id}}" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}">
+      QUI: {% get_media_prefix %}{{articolo.url_img}}
+        
+
+        <figure class="figure-img">
+          <img class="img_art" src="{% get_media_prefix %}{{articolo.url_img}}"alt="{{articolo.titolo}}">
+        </figure>
+        <div class="articoli_label">
+          <h4 class="nomearticolo">{{articolo.titolo}}</h4>
+          <p class="categoriaarticolo">{{articolo.descrizione_breve}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    <!-- <div class="container contenitoreArticoli">
       <div class="articoli container"><figure class="figure-img"><img class="img_art" src="../../static/images/Grut.png" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
-      <p class="categoriaarticolo">fumetti</p></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/84/c1/e3/84c1e380e7232869194c8f21e0da70b2.jpg" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
+      <p class="categoriaarticolo">fumetti</p></div></div> -->
+      <!-- <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/84/c1/e3/84c1e380e7232869194c8f21e0da70b2.jpg" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
         <p class="categoriaarticolo">fumetti</p></div></div>
       <div class="articoli container"><figure class=" figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
       <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://m.media-amazon.com/images/I/81QBa8jYBVL._AC_UF894,1000_QL80_.jpg" alt=""></figure><div class="articoli_label"></div></div>
@@ -107,7 +120,7 @@
         <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
         <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
         <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>  
+        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>   -->
     </div>
 
   </div>

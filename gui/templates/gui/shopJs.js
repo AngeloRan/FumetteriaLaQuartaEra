@@ -4,10 +4,30 @@ config.rivelatoreSezioni()
 
 // settare Uppercase lista
 
-const articoliArr = [
 
-  {titolo: 'naruto', tipo: 'statuina', numero: 4, img: '../../static/images/Grut.png', inserimento: Date.now() - 500,}, 
-  {titolo: 'harry Potter', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 1000}, {titolo: ' giangiukan', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 2000}, {titolo: 'dragonball', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 700}, {titolo: 'ilsignoredeglianelli', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 8000}];
+// console.log('{{articoli}}');
+
+const articoliArr = [...document.querySelectorAll('.articoli')].map(function (el) {
+  // console.log(el.dataset.Id);
+  return {
+    titolo: el.querySelector('.nomearticolo').textContent,
+    tipo: el.querySelector('.categoriaarticolo').textContent,
+    inserimento: el.dataset.inserimento,
+    img: el.querySelector('.img_art').src,
+    id: el.dataset.id
+  }
+})
+
+console.log(articoliArr);
+
+
+
+// const articoliArr = [
+
+//   {titolo: 'naruto', tipo: 'statuina', numero: 4, img: '../../static/images/Grut.png', inserimento: Date.now() - 500,}, 
+//   {titolo: 'harry Potter', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 1000}, {titolo: ' giangiukan', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 2000}, {titolo: 'dragonball', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 700}, {titolo: 'ilsignoredeglianelli', tipo: 'statuina', numero: 4, img: 'https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg', inserimento: Date.now() - 8000}
+
+// ];
 
 
 
