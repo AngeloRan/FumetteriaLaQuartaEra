@@ -86,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': os.environ.get('NAME', 'lqe'),
-        'USER': os.environ.get('USERNAME', 'lqe'), 
-        'PASSWORD': os.environ.get('PASSWORD', 'lqe'), 
+        'USER': os.environ.get('marco', 'marco'), 
+        'PASSWORD': os.environ.get('PASSWORD', 'bahsb7341Hahjiul'), 
         'HOST': os.environ.get('HOST', 'localhost'), 
         'PORT': os.environ.get('PORT', ''),
     }
@@ -150,3 +150,4 @@ STATICFILES_DIRS+=[os.path.join(BASE_DIR, "node_modules")]
 print('templates', TEMPLATES[0]['DIRS'])
 print('STATICFILES_DIRS', STATICFILES_DIRS)
 
+print(DATABASES)
