@@ -13,4 +13,4 @@ class EventAdmin(admin.ModelAdmin):
 
 @admin.register(Comic, Manga, TableGame, RoleGame, ActionFigure, Gadget)
 class ProductAdmin(admin.ModelAdmin):
-    pass
+    exclude = ["creation", 'last_update']
