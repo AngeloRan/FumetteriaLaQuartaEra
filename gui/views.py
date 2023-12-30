@@ -63,7 +63,7 @@ def shop(request):
         showcase_prods = []
         showcase = Showcase.objects.last()
         if showcase:
-            showcase_prods = list(showcase.products)
+            showcase_prods = list(showcase.products.all())
 
         context = {
             'articoli': rendered_product,
