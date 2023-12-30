@@ -16,6 +16,12 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DBNAME = os.environ.get('DBNAME', None)
+DBUSER = os.environ.get('DBUSER', None)
+DBPASSWORD = os.environ.get('DBPASSWORD', None)
+DBHOST = os.environ.get('DBHOST', None)
+DBPORT = os.environ.get('DBPORT', None)
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -78,10 +84,15 @@ WSGI_APPLICATION = 'LQEsite.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.environ.get('NAME', 'lqe'),
+        'USER': os.environ.get('USERNAME', 'lqe'), 
+        'PASSWORD': os.environ.get('PASSWORD', 'lqe'), 
+        'HOST': os.environ.get('HOST', 'localhost'), 
+        'PORT': os.environ.get('PORT', ''),
     }
 }
+
 
 
 # Password validation
@@ -131,6 +142,7 @@ STATICFILES_DIRS = []
 
 TEMPLATES[0]['DIRS']+=[os.path.join(BASE_DIR, "gui", "templates")]
 STATICFILES_DIRS+=[os.path.join(BASE_DIR, "gui", "static")]
+STATICFILES_DIRS+=[os.path.join(BASE_DIR, "node_modules")]
 
 STATICFILES_DIRS+=[os.path.join(BASE_DIR, "node_modules")]
 
