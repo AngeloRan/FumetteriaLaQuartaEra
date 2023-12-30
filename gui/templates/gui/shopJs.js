@@ -56,6 +56,7 @@ window.addEventListener('resize', function () {
 
 
 const fnVetrina = function (totale) {
+  vetrinaEl.classList.remove('hidden-1')
   let curArt = 3;
   let articoliVetrinaArr = [...document.querySelectorAll('.articoloInVetrina')]
   let elCentrale;
@@ -65,7 +66,7 @@ const fnVetrina = function (totale) {
  // PREPARAZIONE VETRINA
   articoliVetrinaArr.forEach((el,i, arr) => {;
    el.classList.remove('transitionclass');
-   el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+   el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.45)' : ''}`;
     });
   articoliVetrinaArr[curArt].classList.remove('sfocArtVet');
   elCentrale = articoliVetrinaArr[curArt];
@@ -90,7 +91,7 @@ const fnVetrina = function (totale) {
         el.classList.remove('transitionclass');})
 
         articoliVetrinaArr.forEach((el, i, arr) => {
-        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + SELETTORE_NEXT_PREV))}%) scale(0.5)`;
+        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + SELETTORE_NEXT_PREV))}%) scale(0.45)`;
         if(i === curArt - SELETTORE_NEXT_PREV) {
           el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt + SELETTORE_NEXT_PREV))}%) scale(1)`;
           el.classList.remove('sfocArtVet')
@@ -102,14 +103,14 @@ const fnVetrina = function (totale) {
         articoliVetrinaArr.forEach((el,i, arr) => {
           if(i === curArt) {el.classList.remove('sfocArtVet');        elCentrale = el;
         } else {el.classList.add('sfocArtVet')}
-          el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+          el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.45)' : ''}`;
           });
       }, 100)
       
       } else{
       articoliVetrinaArr.forEach((el,i, arr) => {
         if(i === curArt) {el.classList.remove('sfocArtVet'); elCentrale = el;} else {el.classList.add('sfocArtVet')}
-        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.5)' : ''}`;
+        el.style.transform = `translateX(${ALLIN_ART_VETRINA + (100 * (i - curArt))}%) ${ i !== curArt ? 'scale(0.45)' : ''}`;
         }); ultimoClick = ora;
     }}}
   
@@ -146,29 +147,10 @@ const fnVetrina = function (totale) {
     vetrinaAuto = setInterval(vetLoop.bind(document.querySelector('.next-pg')), 6000)
   })
 
-  // vetrinaEl.addEventListener('click' , function (e) {
-  //   const mostraDetProdotto = function (data, e) {
-  //     const container = document.querySelector('.magnify-wrapper');
-  //       container.innerHTML= '';
-  //       const img = `<div id="lenteIngrandimento"><i class="fa-solid fa-magnifying-glass-plus"></i></div><img
-  //       src="${e.target.closest('.articoli').querySelector('.img_art').src}"
-  //       id="main-img" />
-  //       <div id="large-img" class="largeImg" style = "background: url(${e.target.closest('.articoli').querySelector('.img_art').src}) no-repeat #fff"></div>`;
-  //       container.insertAdjacentHTML('afterbegin', img);
-  //       menuArticoliEl.scrollIntoView({ behavior: 'smooth' })
-  //       document.getElementById('lenteIngrandimento').addEventListener('click', function (e) {
-  //         if(e.target.closest('#lenteIngrandimento')) {
-  //          document.getElementById('large-img').classList.add('largeImg')
-  //         }
-  //        })
-    
-  //      const contenitoreTit = document.querySelector('.caratteristicheProd');
-  //      contenitoreTit.innerHTML = '';
-  //      const markupTit = `<h4 class="titoloArticolo">${e.target.closest('.articoli').querySelector('.nomearticolo').textContent}</h4>`
-  //      contenitoreTit.insertAdjacentHTML('afterbegin', markupTit);
-    
-  //   }
-  // } )
+  vetrinaEl.addEventListener('click' , function (e) {
+    if(!e.target.closest('.articoloInVetrina')) {return};
+    mostraDetProdotto(e, true);
+  } )
 
 }
 fnVetrina(12)
@@ -250,13 +232,13 @@ document.getElementById('shopSubmit').addEventListener('click', function (e) {
 
 
 
-const mostraDetProdotto = function (e) {
+const mostraDetProdotto = function (e, vet = false) {
   const container = document.querySelector('.magnify-wrapper');
     container.innerHTML= '';
     const img = `<div id="lenteIngrandimento"><i class="fa-solid fa-magnifying-glass-plus"></i></div><img
-    src="${e.target.closest('.articoli').querySelector('.img_art').src}"
+    src="${vet ? e.target.closest('.articoloInVetrina').querySelector('.immagineInVetrina').src : e.target.closest('.articoli').querySelector('.img_art').src}"
     id="main-img" />
-    <div id="large-img" class="largeImg" style = "background: url(${e.target.closest('.articoli').querySelector('.img_art').src}) no-repeat #fff"></div>`;
+    <div id="large-img" class="largeImg" style = "background: url(${vet ? e.target.closest('.articoloInVetrina').querySelector('.immagineInVetrina').src : e.target.closest('.articoli').querySelector('.img_art').src}) no-repeat #fff"></div>`;
     container.insertAdjacentHTML('afterbegin', img);
     menuArticoliEl.scrollIntoView({ behavior: 'smooth' })
     document.getElementById('lenteIngrandimento').addEventListener('click', function (e) {
@@ -267,7 +249,7 @@ const mostraDetProdotto = function (e) {
 
    const contenitoreTit = document.querySelector('.caratteristicheProd');
    contenitoreTit.innerHTML = '';
-   const markupTit = `<h4 class="titoloArticolo">${e.target.closest('.articoli').querySelector('.nomearticolo').textContent}</h4>`
+   const markupTit = `<h4 class="titoloArticolo">${vet ? e.target.closest('.articoloInVetrina').querySelector('.immagineInVetrina').alt: e.target.closest('.articoli').querySelector('.nomearticolo').textContent}</h4>`
    contenitoreTit.insertAdjacentHTML('afterbegin', markupTit);
 
 }
@@ -306,9 +288,6 @@ document.querySelector('.shopsinistra').addEventListener('mouseover' , function 
 document.querySelector('.shopsinistra').addEventListener('mouseleave' , function (e) {
   document.getElementById('hamMenuLista').classList.add('hidden-1')
 })
-
-
-
 
 
 
