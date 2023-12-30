@@ -5,30 +5,39 @@ from django.db import models
 class Product(models.Model):
     
     title = models.CharField(max_length=100, null=True, blank=True)
-    image = models.ImageField(null=True, blank=True)
     short_description = models.CharField(max_length=200, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     
 class Article(models.Model):
-    pass
+    image = models.ImageField(upload_to="article/", null=True, blank=True)
+
 
 class Event(models.Model):
-    pass
+    image = models.ImageField(upload_to="event/", null=True, blank=True)
+
 
 class Comic(Product):
-    pass
+    image = models.ImageField(upload_to="comic/", null=True, blank=True)
+
 
 class Manga(Product):
-    pass
+    image = models.ImageField(upload_to="manga/", null=True, blank=True)
+
 
 class TableGame(Product):
-    pass
+    image = models.ImageField(upload_to="tablegame/", null=True, blank=True)
+
 
 class RoleGame(Product):
-    pass
+    image = models.ImageField(upload_to="rolegame/", null=True, blank=True)
+
 
 class ActionFigure(Product):
-    pass
+    image = models.ImageField(upload_to="actionfigure/", null=True, blank=True)
+
 
 class Gadget(Product):
-    pass
+    image = models.ImageField(upload_to="gadget/", null=True, blank=True)
+
+
+

@@ -151,3 +151,6 @@ print('templates', TEMPLATES[0]['DIRS'])
 print('STATICFILES_DIRS', STATICFILES_DIRS)
 
 print(DATABASES)
+
+MEDIA_URL='/media/'
+MEDIA_ROOT=os.path.join(BASE_DIR,'media')
