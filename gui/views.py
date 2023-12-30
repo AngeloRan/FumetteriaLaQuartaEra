@@ -55,7 +55,7 @@ def shop(request):
                         'titolo' : prod.title,
                         'descrizione_breve' : prod.short_description,
                         'descrizione' : prod.description,
-                        'creation' : prod.description,
+                        'creation' : prod.creation,
                         'last_update' : prod.last_update,
                         }
             rendered_product.append(product)
