@@ -54,7 +54,9 @@ def shop(request):
                         'url_img': prod.image,
                         'titolo' : prod.title,
                         'descrizione_breve' : prod.short_description,
-                        'descrizione' : prod.description
+                        'descrizione' : prod.description,
+                        'creation' : prod.description,
+                        'last_update' : prod.last_update,
                         }
             rendered_product.append(product)
 
