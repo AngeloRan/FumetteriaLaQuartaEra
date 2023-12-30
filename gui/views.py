@@ -58,8 +58,11 @@ def shop(request):
                         }
             rendered_product.append(product)
 
+        showcase = Showcase.objects.last()
+
         context = {
-            'articoli': rendered_product
+            'articoli': rendered_product,
+            'vetrina': showcase
         }
 
         if data_only:
