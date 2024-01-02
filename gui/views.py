@@ -92,7 +92,9 @@ def shop(request):
 
         context = {
             'articoli': rendered_product,
-            'vetrina': showcase_prods
+            'vetrina': showcase_prods,
+            'pagina': page_number,
+            'pagine_totali': paginator.num_pages
         }
 
         if data_only:
