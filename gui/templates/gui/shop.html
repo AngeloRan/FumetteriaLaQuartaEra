@@ -10,9 +10,29 @@
 {% endblock customStyle %}
 
 {% block header %}
-
 <div class="container vetrina hidden-1">
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="../../static/images/Grut.png" alt="Grut"></div>
+
+{% for articolo in articoli %}
+
+  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{articolo.id}}" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}" data-descrizioneBreve = "{{articolo.descrizione_breve}}">
+
+  <img class="immagineInVetrina" src="{% get_media_prefix %}{{articolo.url_img}}" alt="{{articolo.titolo}}">
+
+  </div>
+
+{% endfor %}
+{% for articolo in articoli %}
+
+  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{articolo.id}}" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}" data-descrizioneBreve = "{{articolo.descrizione_breve}}">
+
+  <img class="immagineInVetrina" src="{% get_media_prefix %}{{articolo.url_img}}" alt="{{articolo.titolo}}">
+
+  </div>
+
+{% endfor %}
+
+
+  <!-- <div class="articoloInVetrina transitionclass sfocArtVet" data-id="52456324" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}"><img class="immagineInVetrina" src="../../static/images/Grut.png" alt="Grut"></div>
   <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
   <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
   <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt="Il fumetto di Capitan America"></div>
@@ -32,7 +52,7 @@
   <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
   <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
   <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
+  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div> -->
 
 
   <button class="btn_vet next-pg hidden-4"><i class="fa-solid fa-arrow-right"></i></button>
@@ -82,9 +102,6 @@
 
       {% for articolo in articoli %}
       <div class="articoli container" data-id="{{articolo.id}}" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}">
-      QUI: {% get_media_prefix %}{{articolo.url_img}}
-        
-
         <figure class="figure-img">
           <img class="img_art" src="{% get_media_prefix %}{{articolo.url_img}}"alt="{{articolo.titolo}}">
         </figure>
@@ -94,33 +111,7 @@
         </div>
       </div>
       {% endfor %}
-    <!-- <div class="container contenitoreArticoli">
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="../../static/images/Grut.png" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
-      <p class="categoriaarticolo">fumetti</p></div></div> -->
-      <!-- <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/84/c1/e3/84c1e380e7232869194c8f21e0da70b2.jpg" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
-        <p class="categoriaarticolo">fumetti</p></div></div>
-      <div class="articoli container"><figure class=" figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://m.media-amazon.com/images/I/81QBa8jYBVL._AC_UF894,1000_QL80_.jpg" alt=""></figure><div class="articoli_label"></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>  
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://funko.com/dw/image/v2/BGTS_PRD/on/demandware.static/-/Sites-funko-master-catalog/default/dwe806c0b6/images/funko/63211-2.png?sw=800&sh=800" alt=""></figure><div class="articoli_label"></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>  
-      <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
-        <p class="categoriaarticolo">fumetti</p></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/84/c1/e3/84c1e380e7232869194c8f21e0da70b2.jpg" alt=""></figure><div class="articoli_label"><h4 class="nomearticolo">Il fumetto di Capitan America</h4>
-          <p class="categoriaarticolo">fumetti</p></div></div>
-        <div class="articoli container"><figure class=" figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://m.media-amazon.com/images/I/81QBa8jYBVL._AC_UF894,1000_QL80_.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>  
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>
-        <div class="articoli container"><figure class="figure-img"><img class="img_art" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt=""></figure><div class="articoli_label"></div></div>   -->
+    
     </div>
 
   </div>
@@ -130,16 +121,14 @@
 
     <div class="container articolodettaglio">
       <div class="container dettagliorigaSup">
-        <div class="containerz">
-          <div id="zoom" class="magnify-wrapper">
+        
+          <div id="zoomDaZoom" class="magnify-wrapper2">
             <div id="lenteIngrandimento"><i class="fa-solid fa-magnifying-glass-plus"></i></div>
             <img
               src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg"
-              id="main-img" />
-            <div id="large-img" class="largeImg" style="background: url('https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg')
-            no-repeat #fff;"></div>
+              id="main-img2" />
           </div>
-        </div>
+      
       <div class="caratteristicheProd">
         <h4 class="titoloArticolo">Le Case della Follia AHAH ahahhd fiwekd</h4>
 
@@ -149,9 +138,8 @@
       </div></div>
 
       <div class="dettagliorigaInf">
-        <h4>Le Case della Follia 
-        </h4>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, autem tenetur commodi nam sunt necessitatibus, doloribus placeat, eius pariatur odit minus obcaecati asperiores iure consequuntur animi quod quis fugiat! Voluptatibus.</p>
+        <h4 class="titoloPiccolo">Le Case della Follia </h4>
+        <p class="descrizioneLunga">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Non, autem tenetur commodi nam sunt necessitatibus, doloribus placeat, eius pariatur odit minus obcaecati asperiores iure consequuntur animi quod quis fugiat! Voluptatibus.</p>
       </div>
     </div>
 
@@ -159,7 +147,18 @@
 
 
 </div>
+<div class="overlay">
 
+  <div id="zoom" class="magnify-wrapper">
+    <img
+      src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg"
+      id="main-img" />
+    <div id="large-img" class="largeImg" style="background: url('https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg')
+    no-repeat #fff;">
+    </div>
+  </div>
+
+</div>
 
 {% endblock main %} 
 
