@@ -247,7 +247,8 @@ document.getElementById('sortRevNum').addEventListener('click', function () {
   funzioneSort(false, false)
 })
 
-document.getElementById('mettiInVet').addEventListener('click', function (e) {
+const cambiaVetrina = function (e, iniziale = false) {
+
   document.removeEventListener('keydown', funzioneTasti);
   clearInterval(vetrinaAuto);
   vetrinaEl.classList.add('hidden-1');
@@ -257,16 +258,16 @@ document.getElementById('mettiInVet').addEventListener('click', function (e) {
       fulfill()
     }, 800)
   }).then(function () {
-    const markup = articoliArr.map(el => `<div class="articoloInVetrina transitionclass sfocArtVet" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}" data-descrizioneBreve = "${el.tipo}">
+    const markup = (iniziale ? vetrinaIniziale : articoliArr).map(el => `<div class="articoloInVetrina transitionclass sfocArtVet" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}" data-descrizioneBreve = "${el.tipo}">
 
     <img class="immagineInVetrina" src="${el.img}" alt="${el.titolo}">
-  
+
     </div>`)
     .join('') 
     + articoliArr.map(el => `<div class="articoloInVetrina transitionclass sfocArtVet" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}" data-descrizioneBreve = "${el.tipo}">
 
     <img class="immagineInVetrina" src="${el.img}" alt="${el.titolo}">
-  
+
     </div>`)
     .join('') 
     + `<button class="btn_vet next-pg hidden-4"><i class="fa-solid fa-arrow-right"></i></button><button class="btn_vet prev-pg hidden-4"><i class="fa-solid fa-arrow-left"></i></button>`
@@ -278,7 +279,9 @@ document.getElementById('mettiInVet').addEventListener('click', function (e) {
   fnVetrina(articoliInVetrinaArr.length);
   vetrinaEl.classList.remove('hidden-1')
   }) 
-})
+};
+
+document.getElementById('mettiInVet').addEventListener('click', cambiaVetrina)
 
 
 
@@ -325,7 +328,7 @@ const mostraDetProdotto = function (e, vet = false) {
    const containerRigaInf = document.querySelector('.dettagliorigaInf')
    const markup3 = `        
    <h4 class="titoloPiccolo">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).titolo}</h4>
-   <p class="descrizioneLunga"><pre>${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).descrizioneLunga}</pre></p>`
+   <p class="descrizioneLunga">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).descrizioneLunga}</p>`
    containerRigaInf.innerHTML = '';
    containerRigaInf.insertAdjacentHTML("afterbegin", markup3)
 
@@ -382,7 +385,10 @@ const zoomImmagine = function (e) {
     // yperc = (y / imgHeight) * 150;
     xperc = (x / imgWidth) * 100,
     yperc = (y / imgHeight) * 100;
-    original.style.opacity = '0'
+
+    original.style.opacity = '1'
+    original.style.width ="800px";
+    original.style.height="500px"
     magnified.style.opacity = '1'
   // Add some margin for right edge
   if (x > 0.01 * imgWidth) {
@@ -406,13 +412,14 @@ const zoomImmagine = function (e) {
 
 
 document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
- if(e.target.closest('#lenteIngrandimento')) {
  
   if(!document.querySelector('.overlay').classList.contains('overlayClass')) {document.querySelector('.overlay').classList.add('overlayClass')}
   document.querySelector('.overlay').scrollIntoView({behavior: 'instant'})
   // document.querySelector('.magnify-wrapper').scrollIntoView({behavior: 'smooth'});
   document.body.style.overflow = 'hidden'
- }
+  document.getElementById('zoom').addEventListener(
+    'mouseenter', zoomImmagine, false);
+ 
 })
 
 document.getElementById('zoom').addEventListener(
@@ -423,6 +430,7 @@ document.getElementById('zoom').addEventListener(
  document.addEventListener('keydown', function (e) {
     if(e.key === 'Escape' && document.querySelector('.overlay').classList.contains('overlayClass')) {document.querySelector('.overlay').classList.remove('overlayClass')};
     document.body.style.overflow = 'auto';
+    
  });
 
   document.querySelector('.overlay').addEventListener('click', function (e) {
