@@ -10,6 +10,19 @@ from LQEsite.models import *
 
 # Create your views here.
 
+def get_prods(showcase_prods):
+
+    prods = []
+
+    prods += list(Comic.objects.filter(product_ptr_id__in=showcase_prods))
+    prods += list(Manga.objects.filter(product_ptr_id__in=showcase_prods))
+    prods += list(TableGame.objects.filter(product_ptr_id__in=showcase_prods))
+    prods += list(RoleGame.objects.filter(product_ptr_id__in=showcase_prods))
+    prods += list(ActionFigure.objects.filter(product_ptr_id__in=showcase_prods))
+    prods += list(Gadget.objects.filter(product_ptr_id__in=showcase_prods))
+
+    return prods
+
 def home(request):
     variabile = {'context': True}
     return render(request, "gui/index.html", variabile)
@@ -63,16 +76,20 @@ def shop(request):
         showcase_prods = []
         showcase = Showcase.objects.last()
         if showcase:
-            showcase_prods = list(showcase.products.all())
+            showcase_prods = [x.id for x in showcase.products.all()]
+
+            showcase_prods = get_prods(showcase_prods)
+
             showcase_prods =  [{
-            'id': prod.id,
-            'url_img': prod.image,
-            'titolo' : prod.title,
-            'descrizione_breve' : prod.short_description,
-            'descrizione' : prod.description,
-            'creation' : prod.creation,
-            'last_update' : prod.last_update,
+                'id': prod.id,
+                'url_img': prod.image,
+                'titolo' : prod.title,
+                'descrizione_breve' : prod.short_description,
+                'descrizione' : prod.description,
+                'creation' : prod.creation,
+                'last_update' : prod.last_update,
             } for prod in showcase_prods]
+
         context = {
             'articoli': rendered_product,
             'vetrina': showcase_prods
