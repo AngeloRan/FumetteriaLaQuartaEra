@@ -12,20 +12,20 @@
 {% block header %}
 <div class="container vetrina hidden-1">
 
-{% for articolo in articoli %}
+{% for prodotto in vetrina %}
 
-  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{articolo.id}}" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}" data-descrizioneBreve = "{{articolo.descrizione_breve}}">
+  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{prodotto.id}}" data-descrizione="{{prodotto.descrizione}}" data-inserimento="{{prodotto.creation}}" data-descrizioneBreve = "{{prodotto.descrizione_breve}}">
 
-  <img class="immagineInVetrina" src="{% get_media_prefix %}{{articolo.url_img}}" alt="{{articolo.titolo}}">
+  <img class="immagineInVetrina" src="{% get_media_prefix %}{{prodotto.url_img}}" alt="{{prodotto.titolo}}">
 
   </div>
 
 {% endfor %}
-{% for articolo in articoli %}
+{% for prodotto in vetrina %}
 
-  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{articolo.id}}" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}" data-descrizioneBreve = "{{articolo.descrizione_breve}}">
+  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{prodotto.id}}" data-descrizione="{{prodotto.descrizione}}" data-inserimento="{{prodotto.creation}}" data-descrizioneBreve = "{{prodotto.descrizione_breve}}">
 
-  <img class="immagineInVetrina" src="{% get_media_prefix %}{{articolo.url_img}}" alt="{{articolo.titolo}}">
+  <img class="immagineInVetrina" src="{% get_media_prefix %}{{prodotto.url_img}}" alt="{{prodotto.titolo}}">
 
   </div>
 

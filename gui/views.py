@@ -64,7 +64,15 @@ def shop(request):
         showcase = Showcase.objects.last()
         if showcase:
             showcase_prods = list(showcase.products.all())
-
+            showcase_prods =  [{
+            'id': prod.id,
+            'url_img': prod.image,
+            'titolo' : prod.title,
+            'descrizione_breve' : prod.short_description,
+            'descrizione' : prod.description,
+            'creation' : prod.creation,
+            'last_update' : prod.last_update,
+            } for prod in showcase_prods]
         context = {
             'articoli': rendered_product,
             'vetrina': showcase_prods
