@@ -33,7 +33,7 @@ def shop(request):
     if request.method == 'GET':
 
         #@TODO set it in settings
-        pagination_count = 15
+        pagination_count = 5
 
         data_only = request.GET.get('data_only', False)
         page = request.GET.get('page', 1)
