@@ -194,7 +194,7 @@ header {
 .shopsinistra {
   font-family: 'Urbanist',sans-serif;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   background: none;
   overflow: auto;
   position: relative;
