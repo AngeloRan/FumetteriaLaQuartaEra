@@ -266,7 +266,7 @@ const cambiaVetrina = function (e, iniziale = false) {
 
     </div>`)
     .join('') 
-    + articoliArr.map(el => `<div class="articoloInVetrina transitionclass sfocArtVet" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}" data-descrizioneBreve = "${el.tipo}">
+    + (iniziale ? vetrinaIniziale : articoliArr).map(el => `<div class="articoloInVetrina transitionclass sfocArtVet" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}" data-descrizioneBreve = "${el.tipo}">
 
     <img class="immagineInVetrina" src="${el.img}" alt="${el.titolo}">
 
@@ -416,6 +416,7 @@ const zoomImmagine = function (e) {
 
 
 document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
+  zoomImmagine(e);
   document.querySelectorAll('.overlay').forEach(el => {
     if(!el.classList.contains('overlayClass')) {el.classList.add('overlayClass')}
   })
@@ -439,17 +440,11 @@ document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
 
  document.addEventListener('keydown', function (e) {
     if(e.key === 'Escape') {
-      // document.querySelector('.magnify-wrapper').innerHTML = '';
       document.querySelectorAll('.overlay').forEach(el => el.classList.remove('overlayClass'));
-      // document.querySelector('.sinistra').classList.add('clipsinistra');
       document.getElementById('zoom').removeEventListener(
         'mouseenter', zoomImmagine, false);
         document.getElementById('zoom').removeEventListener(
         'mousemove', zoomImmagine, false);
-        // document.getElementById('main-img').style.opacity = '0';
-        // document.getElementById('large-img').style.opacity = '0';
-        // document.getElementById('main-img').style.opacity = '';
-        // document.getElementById('large-img').style.opacity = '';
   menuArticoliEl.scrollIntoView({behavior: 'instant'})
 
    
@@ -458,15 +453,11 @@ document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
 
   document.querySelector('.overlay').addEventListener('click', function (e) {
     if(!e.target.closest('.magnify-wrapper') && !e.target.closest('.contenitoreLateraleImg')) {
-      // document.querySelector('.magnify-wrapper').innerHTML = '';
       document.querySelectorAll('.overlay').forEach(el => el.classList.remove('overlayClass'));
-      // document.querySelector('.sinistra').classList.add('clipsinistra');
       document.getElementById('zoom').removeEventListener(
         'mouseenter', zoomImmagine, false);
         document.getElementById('zoom').removeEventListener(
         'mousemove', zoomImmagine, false);
-        // document.getElementById('main-img').style.opacity = '';
-        // document.getElementById('large-img').style.opacity = '';
   menuArticoliEl.scrollIntoView({behavior: 'instant'})
       document.body.style.overflow = 'auto';  }
       })
@@ -482,3 +473,5 @@ document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
 chiudiOverlay()
 
 
+console.log([...document.querySelectorAll('.articoloInVetrina')]);
+console.log(vetrinaIniziale);
