@@ -31,30 +31,6 @@
 
 {% endfor %}
 
-
-  <!-- <div class="articoloInVetrina transitionclass sfocArtVet" data-id="52456324" data-descrizione="{{articolo.descrizione}}" data-inserimento="{{articolo.creation}}"><img class="immagineInVetrina" src="../../static/images/Grut.png" alt="Grut"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://m.media-amazon.com/images/I/81QBa8jYBVL._AC_UF894,1000_QL80_.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="../../static/images/Grut.png" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://m.media-amazon.com/images/I/81QBa8jYBVL._AC_UF894,1000_QL80_.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div>
-  <div class="articoloInVetrina transitionclass sfocArtVet"><img class="immagineInVetrina" src="https://i.pinimg.com/564x/ab/51/f2/ab51f2dd6f1bbd2c8c435e4e8d403d93.jpg" alt="Il fumetto di Capitan America"></div> -->
-
-
   <button class="btn_vet next-pg hidden-4"><i class="fa-solid fa-arrow-right"></i></button>
   <button class="btn_vet prev-pg hidden-4"><i class="fa-solid fa-arrow-left"></i></button>
 </div>
@@ -111,7 +87,8 @@
         </div>
       </div>
       {% endfor %}
-    
+      {{pagina}}
+      {{pagine_totali}}
     </div>
 
   </div>
@@ -148,8 +125,28 @@
 
 </div>
 <div class="overlay">
+
   <div class="xOverlay"><i class="fa-regular fa-circle-xmark"></i></div>
+  <div class="contenitoreLateraleImg container">
+
+    <button class="btnListaLat buttonSu"><i class="fa-solid fa-chevron-up"></i></button>
+
+    <div class="listaImmagini">
+
+      <figure class="figImmaginiListaLat"><img class="imgAlt" src="https://static-it.gamestop.it/images/products/263252/3max.jpg" alt=""></figure>
+      <figure class="figImmaginiListaLat"><img class="imgAlt" src="https://static-it.gamestop.it/images/products/263252/3max.jpg" alt=""></figure> 
+      <figure class="figImmaginiListaLat"><img class="imgAlt" src="https://static-it.gamestop.it/images/products/263252/3max.jpg" alt=""></figure>
+      <figure class="figImmaginiListaLat"><img class="imgAlt" src="https://static-it.gamestop.it/images/products/263252/3max.jpg" alt=""></figure> 
+      <figure class="figImmaginiListaLat"><img class="imgAlt" src="https://static-it.gamestop.it/images/products/263252/3max.jpg" alt=""></figure>
+    
+
+    </div>
+
+    <button class="btnListaLat buttonGiu"><i class="fa-solid fa-chevron-down"></i></button>
+
+  </div>
   <div id="zoom" class="magnify-wrapper">
+
     <img
       src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg"
       id="main-img" />
@@ -157,8 +154,24 @@
     no-repeat #fff;">
     </div>
   </div>
+  
 
 </div>
+
+<!-- <div class="overlay destra">
+
+  <div class="xOverlay"><i class="fa-regular fa-circle-xmark"></i></div>
+  <div id="zoom" class="magnify-wrapper3 ">
+    <img
+      src="https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg"
+      id="main-img" />
+    <div id="large-img" class="largeImg" style="background: url('https://i.pinimg.com/564x/b4/93/ac/b493ac4a6492225d5728f179c5854233.jpg')
+    no-repeat #fff;">
+    </div>
+  </div>
+  
+
+</div> -->
 
 {% endblock main %} 
 

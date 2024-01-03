@@ -59,11 +59,14 @@ console.log('TOTALI', articoliTotali);
 
 
 const upperLista = function () {
-const categorie = document.querySelectorAll('.categoriaarticolo');
-categorie.forEach(c => c.textContent = c.textContent.trim()[0].toUpperCase() + c.textContent.trim().slice(1));
-const titoli = document.querySelectorAll('.nomearticolo');
-titoli.forEach(c => c.textContent = c.textContent.trim()[0].toUpperCase() + c.textContent.trim().slice(1))}
+  const categorie = document.querySelectorAll('.categoriaarticolo');
+  categorie.forEach(c => c.textContent = c.textContent.trim()[0].toUpperCase() + c.textContent.trim().slice(1));
+  const titoli = document.querySelectorAll('.nomearticolo');
+  titoli.forEach(c => c.textContent = c.textContent.trim()[0].toUpperCase() + c.textContent.trim().slice(1))
+}
+
 upperLista()
+
 const ALLIN_ART_VETRINA = -50;
 const vetrinaEl = document.querySelector('.vetrina');
 let pulsanti = [...document.querySelectorAll('.btn_vet')];
@@ -73,7 +76,7 @@ const headerEl = document.querySelector('header');
 const menuArticoliEl = document.querySelector('.div-menuarticoli');
 let funzioneTasti;
 
-console.log(Number.parseFloat(getComputedStyle(document.querySelector('.shopsinistra')).width, 10));
+
 
 const headerObserver = new IntersectionObserver(function (entries) {
   const[entry] = entries
@@ -201,7 +204,6 @@ const fnVetrina = function (totale) {
 
 }
 
-console.log('NUMERO', articoliInVetrinaArr.length);
 fnVetrina(articoliInVetrinaArr.length)
 
 // ORDINA PER ORDINE ALFABETICO
@@ -248,11 +250,11 @@ document.getElementById('sortRevNum').addEventListener('click', function () {
 })
 
 const cambiaVetrina = function (e, iniziale = false) {
-
   document.removeEventListener('keydown', funzioneTasti);
   clearInterval(vetrinaAuto);
   vetrinaEl.classList.add('hidden-1');
-  document.body.scrollIntoView({ behavior: 'smooth' })
+  document.body.scrollIntoView({ behavior: 'smooth' });
+
   new Promise (function (fulfill, reject) {
     setTimeout(function () {
       fulfill()
@@ -270,7 +272,8 @@ const cambiaVetrina = function (e, iniziale = false) {
 
     </div>`)
     .join('') 
-    + `<button class="btn_vet next-pg hidden-4"><i class="fa-solid fa-arrow-right"></i></button><button class="btn_vet prev-pg hidden-4"><i class="fa-solid fa-arrow-left"></i></button>`
+    + `<button class="btn_vet next-pg hidden-4"><i class="fa-solid fa-arrow-right"></i></button><button class="btn_vet prev-pg hidden-4"><i class="fa-solid fa-arrow-left"></i></button>`;
+
   vetrinaEl.innerHTML = '';
   vetrinaEl.insertAdjacentHTML('afterbegin', markup)
   articoliInVetrinaArr = createVetArr()
@@ -291,9 +294,6 @@ document.getElementById('shopSubmit').addEventListener('click', function (e) {
 })
 
 
-
-console.log(articoliTotali.find(el=>el.id === 5));
-
 const mostraDetProdotto = function (e, vet = false) {
 
   const cont = document.querySelector('.magnify-wrapper2');
@@ -305,32 +305,34 @@ const mostraDetProdotto = function (e, vet = false) {
   cont.insertAdjacentHTML('afterbegin', markup2);
 
 
-
   const container = document.querySelector('.magnify-wrapper');
-    container.innerHTML= '';
-    const img = `<div id="lenteIngrandimento"><i class="fa-solid fa-magnifying-glass-plus"></i></div><img
-    src="${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).img}"
-    id="main-img" />
-    <div id="large-img" class="largeImg" style = "background: url(${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).img}) no-repeat #fff"></div>`;
-    container.insertAdjacentHTML('afterbegin', img);
-    menuArticoliEl.scrollIntoView({ behavior: 'smooth' })
-    document.getElementById('lenteIngrandimento').addEventListener('click', function (e) {
-      if(e.target.closest('#lenteIngrandimento')) {
-       document.getElementById('large-img').classList.add('largeImg')
-      }
-     })
+  container.innerHTML= '';
+  const img = `
+  <img
+  src="${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).img}"
+  id="main-img" />
+  <div id="large-img" class="largeImg" style = "background: url(${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).img}) no-repeat #fff"></div>`;
+  container.insertAdjacentHTML('afterbegin', img);
 
-   const contenitoreTit = document.querySelector('.caratteristicheProd');
-   contenitoreTit.innerHTML = '';
-   const markupTit = `<h4 class="titoloArticolo">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).titolo}</h4>`
-   contenitoreTit.insertAdjacentHTML('afterbegin', markupTit);
+  menuArticoliEl.scrollIntoView({ behavior: 'smooth' })
 
-   const containerRigaInf = document.querySelector('.dettagliorigaInf')
-   const markup3 = `        
-   <h4 class="titoloPiccolo">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).titolo}</h4>
-   <p class="descrizioneLunga">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).descrizioneLunga}</p>`
-   containerRigaInf.innerHTML = '';
-   containerRigaInf.insertAdjacentHTML("afterbegin", markup3)
+  document.getElementById('lenteIngrandimento').addEventListener('click', function (e) {
+    if(e.target.closest('#lenteIngrandimento')) {
+      document.getElementById('large-img').classList.add('largeImg')
+    }
+    })
+
+  const contenitoreTit = document.querySelector('.caratteristicheProd');
+  contenitoreTit.innerHTML = '';
+  const markupTit = `<h4 class="titoloArticolo">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).titolo}</h4>`
+  contenitoreTit.insertAdjacentHTML('afterbegin', markupTit);
+
+  const containerRigaInf = document.querySelector('.dettagliorigaInf')
+  const markup3 = `        
+  <h4 class="titoloPiccolo">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).titolo}</h4>
+  <p class="descrizioneLunga">${articoliTotali.find(el => el.id === (vet ? +e.target.closest('.articoloInVetrina').dataset.id : +e.target.closest('.articoli').dataset.id)).descrizioneLunga}</p>`
+  containerRigaInf.innerHTML = '';
+  containerRigaInf.insertAdjacentHTML("afterbegin", markup3)
 
 }
 
@@ -390,6 +392,8 @@ const zoomImmagine = function (e) {
     original.style.width ="800px";
     original.style.height="500px"
     magnified.style.opacity = '1'
+    // document.querySelector('.magnify-wrapper3').querySelector('img').style.width = "800px";
+    // document.querySelector('.magnify-wrapper3').querySelector('img').style.height = "500px";
   // Add some margin for right edge
   if (x > 0.01 * imgWidth) {
     xperc += 0.15 * xperc;
@@ -412,32 +416,66 @@ const zoomImmagine = function (e) {
 
 
 document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
- 
-  if(!document.querySelector('.overlay').classList.contains('overlayClass')) {document.querySelector('.overlay').classList.add('overlayClass')}
+  document.querySelectorAll('.overlay').forEach(el => {
+    if(!el.classList.contains('overlayClass')) {el.classList.add('overlayClass')}
+  })
+  document.getElementById('large-img').style.background = `url(${e.target.closest('#zoomDaZoom').querySelector('img').src}) no-repeat #fff`
   document.querySelector('.overlay').scrollIntoView({behavior: 'instant'})
   // document.querySelector('.magnify-wrapper').scrollIntoView({behavior: 'smooth'});
   document.body.style.overflow = 'hidden'
-  document.getElementById('zoom').addEventListener(
+  setTimeout(function () {
+    // document.querySelector('.sinistra').classList.remove('clipsinistra');
+    document.getElementById('zoom').addEventListener(
     'mouseenter', zoomImmagine, false);
+    document.getElementById('zoom').addEventListener(
+    'mousemove', zoomImmagine, false);
+  }, 0)
  
 })
 
-document.getElementById('zoom').addEventListener(
-  'mousemove', zoomImmagine, false);
+
 
  const chiudiOverlay = function () {
 
  document.addEventListener('keydown', function (e) {
-    if(e.key === 'Escape' && document.querySelector('.overlay').classList.contains('overlayClass')) {document.querySelector('.overlay').classList.remove('overlayClass')};
-    document.body.style.overflow = 'auto';
-    
+    if(e.key === 'Escape') {
+      // document.querySelector('.magnify-wrapper').innerHTML = '';
+      document.querySelectorAll('.overlay').forEach(el => el.classList.remove('overlayClass'));
+      // document.querySelector('.sinistra').classList.add('clipsinistra');
+      document.getElementById('zoom').removeEventListener(
+        'mouseenter', zoomImmagine, false);
+        document.getElementById('zoom').removeEventListener(
+        'mousemove', zoomImmagine, false);
+        // document.getElementById('main-img').style.opacity = '0';
+        // document.getElementById('large-img').style.opacity = '0';
+        // document.getElementById('main-img').style.opacity = '';
+        // document.getElementById('large-img').style.opacity = '';
+  menuArticoliEl.scrollIntoView({behavior: 'instant'})
+
+   
+    document.body.style.overflow = 'auto'; }
  });
 
   document.querySelector('.overlay').addEventListener('click', function (e) {
-    if(!e.target.closest('.magnify-wrapper') && document.querySelector('.overlay').classList.contains('overlayClass')) {
-      document.querySelector('.overlay').classList.remove('overlayClass');
-      document.body.style.overflow = 'auto';
-      }
+    if(!e.target.closest('.magnify-wrapper') && !e.target.closest('.contenitoreLateraleImg')) {
+      // document.querySelector('.magnify-wrapper').innerHTML = '';
+      document.querySelectorAll('.overlay').forEach(el => el.classList.remove('overlayClass'));
+      // document.querySelector('.sinistra').classList.add('clipsinistra');
+      document.getElementById('zoom').removeEventListener(
+        'mouseenter', zoomImmagine, false);
+        document.getElementById('zoom').removeEventListener(
+        'mousemove', zoomImmagine, false);
+        // document.getElementById('main-img').style.opacity = '';
+        // document.getElementById('large-img').style.opacity = '';
+  menuArticoliEl.scrollIntoView({behavior: 'instant'})
+      document.body.style.overflow = 'auto';  }
+      })
+
+  document.querySelector('.listaImmagini').addEventListener('click', function (e) {
+    if(e.target.closest('.figImmaginiListaLat')) {
+      console.log(e.target);
+      document.getElementById('large-img').style.background = `url(${e.target.src}) no-repeat #fff` 
+    }
   })
 }
 
