@@ -14,7 +14,7 @@
 
 {% for prodotto in vetrina %}
 
-  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{prodotto.id}}" data-descrizione="{{prodotto.descrizione}}" data-inserimento="{{prodotto.creation}}" data-descrizioneBreve = "{{prodotto.descrizione_breve}}">
+  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{prodotto.id}}" data-descrizione="{{prodotto.descrizione}}" data-inserimento="{{prodotto.creation}}" data-descrizionebreve = "{{prodotto.descrizione_breve}}">
 
   <img class="immagineInVetrina" src="{% get_media_prefix %}{{prodotto.url_img}}" alt="{{prodotto.titolo}}">
 
@@ -23,7 +23,7 @@
 {% endfor %}
 {% for prodotto in vetrina %}
 
-  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{prodotto.id}}" data-descrizione="{{prodotto.descrizione}}" data-inserimento="{{prodotto.creation}}" data-descrizioneBreve = "{{prodotto.descrizione_breve}}">
+  <div class="articoloInVetrina transitionclass sfocArtVet" data-id="{{prodotto.id}}" data-descrizione="{{prodotto.descrizione}}" data-inserimento="{{prodotto.creation}}" data-descrizionebreve = "{{prodotto.descrizione_breve}}">
 
   <img class="immagineInVetrina" src="{% get_media_prefix %}{{prodotto.url_img}}" alt="{{prodotto.titolo}}">
 
@@ -144,6 +144,9 @@
     </div>
 
     <button class="btnListaLat buttonGiu"><i class="fa-solid fa-chevron-down"></i></button>
+
+    <div class="container dots">
+    </div>
 
   </div>
   <div id="zoom" class="magnify-wrapper">

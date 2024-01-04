@@ -9,11 +9,19 @@ config.rivelatoreSezioni()
 
 // console.log('{{articoli}}'.json());
 
+const aggiornaAllArr = function () {
+  articoliArr = createArtArr();
+  articoliInVetrinaArr = createVetArr();
+  articoliTotali = createArrTot();
+  console.log('VETRINA', articoliInVetrinaArr);
+  console.log('ARTICOLI', articoliArr);
+  console.log('TOTALI', articoliTotali);
+}
 const createVetArr = function (list = [...document.querySelectorAll('.articoloInVetrina')]) {
   return list.map(function (el, i, arr) {
   return {
     titolo: el.querySelector('.immagineInVetrina').alt,
-    tipo: el.dataset.descrizioneBreve,
+    tipo: el.dataset.descrizionebreve,
     inserimento: el.dataset.inserimento,
     img: el.querySelector('.immagineInVetrina').src,
     id: +el.dataset.id,
@@ -37,22 +45,22 @@ const createArtArr = function (list = [...document.querySelectorAll('.articoli')
 }
 
 const createArrTot = function (a = articoliArr, b = articoliInVetrinaArr) {
- return [...a, ...b ]
+ return [...a, ...b ].reduce((acc,cur) => {
+  const duplicato = acc.some(el => el.id === cur.id);
+  if (!duplicato) {
+    acc.push(cur)
+  }
+  return acc
+ }, [])
 }
+
+
 
 const vetrinaIniziale = createVetArr();
 let articoliArr = createArtArr();
 let articoliInVetrinaArr = createVetArr();
 let articoliTotali = createArrTot();
 
-console.log('INIZIALE',vetrinaIniziale);
-console.log('VETRINA', articoliInVetrinaArr);
-console.log('ARTICOLI', articoliArr);
-
-
-
-
-console.log('TOTALI', articoliTotali);
 
 
 
@@ -276,8 +284,7 @@ const cambiaVetrina = function (e, iniziale = false) {
 
   vetrinaEl.innerHTML = '';
   vetrinaEl.insertAdjacentHTML('afterbegin', markup)
-  articoliInVetrinaArr = createVetArr()
-  articoliTotali = createArrTot()
+  aggiornaAllArr()
   pulsanti = [...document.querySelectorAll('.btn_vet')];
   fnVetrina(articoliInVetrinaArr.length);
   vetrinaEl.classList.remove('hidden-1')
@@ -445,22 +452,22 @@ document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
         'mouseenter', zoomImmagine, false);
         document.getElementById('zoom').removeEventListener(
         'mousemove', zoomImmagine, false);
-  menuArticoliEl.scrollIntoView({behavior: 'instant'})
-
-   
-    document.body.style.overflow = 'auto'; }
- });
+      menuArticoliEl.scrollIntoView({behavior: 'instant'})
+      document.body.style.overflow = 'auto'; 
+  }
+  });
 
   document.querySelector('.overlay').addEventListener('click', function (e) {
     if(!e.target.closest('.magnify-wrapper') && !e.target.closest('.contenitoreLateraleImg')) {
-      document.querySelectorAll('.overlay').forEach(el => el.classList.remove('overlayClass'));
+    document.querySelectorAll('.overlay').forEach(el => el.classList.remove('overlayClass'));
+    document.getElementById('zoom').removeEventListener(
+      'mouseenter', zoomImmagine, false);
       document.getElementById('zoom').removeEventListener(
-        'mouseenter', zoomImmagine, false);
-        document.getElementById('zoom').removeEventListener(
-        'mousemove', zoomImmagine, false);
-  menuArticoliEl.scrollIntoView({behavior: 'instant'})
-      document.body.style.overflow = 'auto';  }
-      })
+      'mousemove', zoomImmagine, false);
+      menuArticoliEl.scrollIntoView({behavior: 'instant'})
+    document.body.style.overflow = 'auto';  
+    }
+  })
 
   document.querySelector('.listaImmagini').addEventListener('click', function (e) {
     if(e.target.closest('.figImmaginiListaLat')) {
@@ -473,5 +480,85 @@ document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
 chiudiOverlay()
 
 
-console.log([...document.querySelectorAll('.articoloInVetrina')]);
-console.log(vetrinaIniziale);
+
+
+const fnImmaginiAlt = function () {
+
+  let listaImgAlt = document.querySelectorAll('.figImmaginiListaLat');
+  console.log(listaImgAlt);
+  let curImg = 0;
+  let maxImg = listaImgAlt.length - 1;
+  const dotContainer = document.querySelector('.dots')
+
+  const createDots = function () {
+    listaImgAlt.forEach(function (_, i) {
+      dotContainer.insertAdjacentHTML(
+        'beforeend',
+        `<button class="dots__dot" data-slide="${i}"></button>`
+      );
+    });
+  };
+  
+  const activateDot = function (img) {
+    document
+      .querySelectorAll('.dots__dot')
+      .forEach(dot => dot.classList.remove('dots__dot--active'));
+
+    document
+      .querySelector(`.dots__dot[data-slide ="${img}"]`)
+      .classList.add('dots__dot--active');
+  };
+
+  createDots();
+
+  const goToImg = function (img) {
+  listaImgAlt.forEach((el,i) => el.style.transform = `translateY(${100 *( i - img )}%)`);
+  activateDot(img)
+  };
+
+  goToImg(0);
+
+  const nextImg = function () {
+    if(curImg === maxImg) {
+      curImg = 0
+    } 
+    else {
+      curImg++
+    }
+    goToImg(curImg)
+  };
+
+  const prevImg = function () {
+    if(curImg === 0) {
+      curImg = maxImg
+    }
+    else {
+      curImg--
+    }
+    goToImg(curImg)
+  };
+
+  dotContainer.addEventListener('click', function (e) {
+    if (e.target.classList.contains('dots__dot')) {
+      curImg = Number(e.target.dataset.slide);
+
+      goToImg(curImg);
+      // [...e.target.parentElement.children].forEach(el =>
+      //   el.classList.remove('dots__dot--active')
+      // );
+      // e.target.classList.add('dots__dot--active');
+    }
+  });
+
+  document.querySelector('.buttonSu').removeEventListener('click', prevImg);
+  document.querySelector('.buttonGiu').removeEventListener('click', nextImg)
+
+  document.querySelector('.buttonSu').addEventListener('click', prevImg);
+  document.querySelector('.buttonGiu').addEventListener('click', nextImg)
+
+}
+
+fnImmaginiAlt();
+
+
+
