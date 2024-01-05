@@ -13,10 +13,9 @@ const aggiornaAllArr = function () {
   articoliArr = createArtArr();
   articoliInVetrinaArr = createVetArr();
   articoliTotali = createArrTot();
-  console.log('VETRINA', articoliInVetrinaArr);
-  console.log('ARTICOLI', articoliArr);
   console.log('TOTALI', articoliTotali);
 }
+
 const createVetArr = function (list = [...document.querySelectorAll('.articoloInVetrina')]) {
   return list.map(function (el, i, arr) {
   return {
@@ -61,6 +60,11 @@ let articoliArr = createArtArr();
 let articoliInVetrinaArr = createVetArr();
 let articoliTotali = createArrTot();
 
+document.querySelector('.btnVetrinaIniziale').addEventListener ('click' , function () {
+  this.classList.add('hidden-3');
+  // this.style.animation = '';
+  cambiaVetrina( undefined, true);
+})
 
 
 
@@ -287,6 +291,9 @@ const cambiaVetrina = function (e, iniziale = false) {
   aggiornaAllArr()
   pulsanti = [...document.querySelectorAll('.btn_vet')];
   fnVetrina(articoliInVetrinaArr.length);
+  if(!iniziale) document.querySelector('.btnVetrinaIniziale').classList.remove('hidden-3');
+  // if(!iniziale) document.querySelector('.btnVetrinaIniziale').style.animation = 'example4 5s ease-in-out forwards';
+
   vetrinaEl.classList.remove('hidden-1')
   }) 
 };
@@ -543,18 +550,23 @@ const fnImmaginiAlt = function () {
       curImg = Number(e.target.dataset.slide);
 
       goToImg(curImg);
-      // [...e.target.parentElement.children].forEach(el =>
-      //   el.classList.remove('dots__dot--active')
-      // );
-      // e.target.classList.add('dots__dot--active');
     }
   });
 
-  document.querySelector('.buttonSu').removeEventListener('click', prevImg);
-  document.querySelector('.buttonGiu').removeEventListener('click', nextImg)
+  const frecceImgAltfn = function (e) {
+    e.key === 'ArrowUp' && nextImg();
+    e.key === 'ArrowDown' && prevImg();
+  };
 
-  document.querySelector('.buttonSu').addEventListener('click', prevImg);
-  document.querySelector('.buttonGiu').addEventListener('click', nextImg)
+  document.removeEventListener('keydown', frecceImgAltfn);
+
+  document.querySelector('.buttonSu').removeEventListener('click', nextImg);
+  document.querySelector('.buttonGiu').removeEventListener('click',prevImg)
+
+  document.querySelector('.buttonSu').addEventListener('click', nextImg);
+  document.querySelector('.buttonGiu').addEventListener('click', prevImg)
+
+  document.addEventListener('keydown', frecceImgAltfn);
 
 }
 
