@@ -97,7 +97,7 @@ def shop(request):
             'pagine_totali': paginator.num_pages
         }
 
-        if data_only:
+        if data_only == 'true':
             return JsonResponse(context, status=200)
 
         # 5 ultimi prodotti per ogni categoria caricati
