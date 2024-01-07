@@ -74,12 +74,12 @@ document.querySelector('.btnVetrinaIniziale').addEventListener ('click' , functi
     pulsante.classList.remove('avantiVel')
     pulsante.style.left = '40px'
     pulsante.classList.add('scuotiMen')
-  }, 2000)
+  }, 1500)
   setTimeout(function () {
     pulsante.classList.remove('scuotiMen')
     pulsante.classList.add('dietroLen')
     pulsante.style.left = '40px'
-  }, 3000)
+  }, 2500)
   setTimeout(function () {
     pulsante.classList.add('hidden-3');
     pulsante.style.left = ''
@@ -91,7 +91,7 @@ document.querySelector('.btnVetrinaIniziale').addEventListener ('click' , functi
 
 document.querySelector('.stikymenu').addEventListener('click', function () {
   console.log('ciao');
-  // document.querySelector('.nav-bar').style.display = 'block'
+  window.location.href = '/'
 })
 
 
@@ -258,15 +258,15 @@ const funzioneSort = function (nonrev = true, nonNum = true) {
       if (a.titolo.trim().toUpperCase() > b.titolo.trim().toUpperCase()) return 1;
       if (a.titolo.trim().toUpperCase() < b.titolo.trim().toUpperCase()) return -1
     }}}).map(el => `    
-      <div class="articoli container">
-        <figure class="figure-img">
-          <img class="img_art" src=${el.img} alt="">
-        </figure>
-        <div class="articoli_label">
-        <h4 class="nomearticolo">${el.titolo}</h4>
-        <p class="categoriaarticolo">${el.tipo}</p>
-        </div>
-      </div>`).join('')
+    <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}">
+    <figure class="figure-img">
+      <img class="img_art" src="${el.img}"alt="${el.titolo}">
+    </figure>
+    <div class="articoli_label">
+      <h4 class="nomearticolo">${el.titolo}</h4>
+      <p class="categoriaarticolo">${el.tipo}</p>
+    </div>
+    </div>`).join('')
 
     document.querySelector('.contenitoreArticoli').innerHTML = '';
     document.querySelector('.contenitoreArticoli').insertAdjacentHTML('afterbegin', markup)
@@ -599,14 +599,30 @@ const fnImmaginiAlt = function () {
 fnImmaginiAlt();
 
 const cambiaPg = async function (pag) {
-  const url = "{% url 'shop' %}" + `?page=${pag}&data_only=false`;
+  const url = "{% url 'shop' %}" + `?page=${2}&data_only=true`;
   console.log('url', url)
   try{
-  const x = await fetch(url)
-  const y = await x.json()
+  const x = await fetch(url);
+  const y = await x.json();
   console.log(y);
-  } catch {
+  const {articoli} = y;
+  markup = articoli.map(el => `    
+  <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizione}" data-inserimento="${el.creation}">
+  <figure class="figure-img">
+    <img class="img_art" src="${el.url_img}"alt="${el.titolo}">
+  </figure>
+  <div class="articoli_label">
+    <h4 class="nomearticolo">${el.titolo}</h4>
+    <p class="categoriaarticolo">${el.descrizione_breve}</p>
+  </div>
+  </div>`).join('');
 
+  document.querySelector('.contenitoreArticoli').innerHTML = '';
+  document.querySelector('.contenitoreArticoli').insertAdjacentHTML('afterbegin', markup);
+  aggiornaAllArr();
+
+  upperLista()
+  } catch {
 
   }
 }

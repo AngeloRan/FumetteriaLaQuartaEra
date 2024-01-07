@@ -71,7 +71,7 @@ header {
 }
 
 .avantiVel {
-  animation: avantiveloce 2s forwards;
+  animation: avantiveloce 1.5s forwards;
 }
 .scuotiMen {
   /* transform: translateX(8px); */
