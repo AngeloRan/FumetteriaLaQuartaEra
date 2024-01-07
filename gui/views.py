@@ -64,7 +64,7 @@ def shop(request):
         for prod in res_objs:
             product =  {
                         'id': prod.id,
-                        'url_img': prod.image,
+                        'url_img': str(prod.image),
                         'titolo' : prod.title,
                         'descrizione_breve' : prod.short_description,
                         'descrizione' : prod.description,
@@ -82,7 +82,7 @@ def shop(request):
 
             showcase_prods =  [{
                 'id': prod.id,
-                'url_img': prod.image,
+                'url_img': str(prod.image),
                 'titolo' : prod.title,
                 'descrizione_breve' : prod.short_description,
                 'descrizione' : prod.description,
