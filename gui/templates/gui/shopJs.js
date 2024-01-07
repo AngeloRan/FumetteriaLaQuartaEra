@@ -598,4 +598,16 @@ const fnImmaginiAlt = function () {
 
 fnImmaginiAlt();
 
+const cambiaPg = async function (pag) {
+  const url = "{% url 'shop' %}" + `?page=${pag}&data_only=true`;
+  console.log('url', url)
+  try{
+  const x = await fetch(url)
+  console.log(x);
 
+
+  } catch {
+
+
+  }
+}
