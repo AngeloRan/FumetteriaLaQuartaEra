@@ -60,14 +60,39 @@ let articoliArr = createArtArr();
 let articoliInVetrinaArr = createVetArr();
 let articoliTotali = createArrTot();
 
+document.querySelector('.btnVetrinaIniziale').addEventListener('mouseenter', function () {
+  document.querySelector('.piccolaSpie').style.width = '300px'
+})
+document.querySelector('.btnVetrinaIniziale').addEventListener('mouseleave', function () {
+  document.querySelector('.piccolaSpie').style.width = '0px'
+})
+
 document.querySelector('.btnVetrinaIniziale').addEventListener ('click' , function () {
-  this.classList.add('hidden-3');
-  // this.style.animation = '';
+  const pulsante = document.querySelector('.btnVetrinaIniziale');
+  pulsante.classList.add('avantiVel');
+  setTimeout(function () {
+    pulsante.classList.remove('avantiVel')
+    pulsante.style.left = '40px'
+    pulsante.classList.add('scuotiMen')
+  }, 2000)
+  setTimeout(function () {
+    pulsante.classList.remove('scuotiMen')
+    pulsante.classList.add('dietroLen')
+    pulsante.style.left = '40px'
+  }, 3000)
+  setTimeout(function () {
+    pulsante.classList.add('hidden-3');
+    pulsante.style.left = ''
+    pulsante.classList.remove('dietroLen')
+  },5000)
   cambiaVetrina( undefined, true);
 })
 
 
-
+document.querySelector('.stikymenu').addEventListener('click', function () {
+  console.log('ciao');
+  // document.querySelector('.nav-bar').style.display = 'block'
+})
 
 
 const upperLista = function () {
@@ -291,6 +316,7 @@ const cambiaVetrina = function (e, iniziale = false) {
   aggiornaAllArr()
   pulsanti = [...document.querySelectorAll('.btn_vet')];
   fnVetrina(articoliInVetrinaArr.length);
+  
   if(!iniziale) document.querySelector('.btnVetrinaIniziale').classList.remove('hidden-3');
   // if(!iniziale) document.querySelector('.btnVetrinaIniziale').style.animation = 'example4 5s ease-in-out forwards';
 
@@ -571,6 +597,5 @@ const fnImmaginiAlt = function () {
 }
 
 fnImmaginiAlt();
-
 
 
