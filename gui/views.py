@@ -10,16 +10,22 @@ from LQEsite.models import *
 
 # Create your views here.
 
-def get_prods(showcase_prods):
+def get_title(i):
+    return i.title.lower().split()
+
+def get_timestamp(i):
+    return i.last_update
+
+def get_prods(prods):
 
     prods = []
 
-    prods += list(Comic.objects.filter(product_ptr_id__in=showcase_prods))
-    prods += list(Manga.objects.filter(product_ptr_id__in=showcase_prods))
-    prods += list(TableGame.objects.filter(product_ptr_id__in=showcase_prods))
-    prods += list(RoleGame.objects.filter(product_ptr_id__in=showcase_prods))
-    prods += list(ActionFigure.objects.filter(product_ptr_id__in=showcase_prods))
-    prods += list(Gadget.objects.filter(product_ptr_id__in=showcase_prods))
+    prods += list(Comic.objects.filter(product_ptr_id__in=prods))
+    prods += list(Manga.objects.filter(product_ptr_id__in=prods))
+    prods += list(TableGame.objects.filter(product_ptr_id__in=prods))
+    prods += list(RoleGame.objects.filter(product_ptr_id__in=prods))
+    prods += list(ActionFigure.objects.filter(product_ptr_id__in=prods))
+    prods += list(Gadget.objects.filter(product_ptr_id__in=prods))
 
     return prods
 
@@ -33,27 +39,70 @@ def shop(request):
     if request.method == 'GET':
 
         #@TODO set it in settings
-        pagination_count = 5
+        pagination_count = 1
 
         data_only = request.GET.get('data_only', False)
         page = request.GET.get('page', 1)
 
+        category = request.GET.get('category', None)
+        sort = request.GET.get('sort', None)
+        keyWord = request.GET.get('keyWord', None)
+
         product_list = []
 
-        if not request.GET.get('quantity'):
+        quantity = request.GET.get('quantity', None)
 
-            comic = list(Comic.objects.all().order_by('-creation')[:5])
-            manga = list(Manga.objects.all().order_by('-creation')[:5])
-            tablegame = list(TableGame.objects.all().order_by('-creation')[:5])
-            rolegame = list(RoleGame.objects.all().order_by('-creation')[:5])
-            actionfigure = list(ActionFigure.objects.all().order_by('-creation')[:5])
-            gadget = list(Gadget.objects.all().order_by('-creation')[:5])
+        if keyWord:
+            product_list = list(Product.objects.filter(title__icontains=keyWord))
+            product_list = get_prods(product_list)
+
+
+        elif category:
+            if category == 'comic':
+                product_list = list(Comic.objects.all().order_by('-creation'))
+
+            
+            elif category == 'manga':
+                product_list = list(Manga.objects.all().order_by('-creation'))
+
+            
+            elif category == 'tablegame':
+                product_list = list(TableGame.objects.all().order_by('-creation'))
+
+            
+            elif category == 'rolegame':
+                product_list = list(RoleGame.objects.all().order_by('-creation'))
+
+            
+            elif category == 'actionfigure':
+                product_list = list(ActionFigure.objects.all().order_by('-creation'))
+
+            
+            elif category == 'gadget':
+                product_list = list(Gadget.objects.all().order_by('-creation'))
+
+        else:
+
+            comic = list(Comic.objects.all().order_by('-creation')[:quantity])
+            manga = list(Manga.objects.all().order_by('-creation')[:quantity])
+            tablegame = list(TableGame.objects.all().order_by('-creation')[:quantity])
+            rolegame = list(RoleGame.objects.all().order_by('-creation')[:quantity])
+            actionfigure = list(ActionFigure.objects.all().order_by('-creation')[:quantity])
+            gadget = list(Gadget.objects.all().order_by('-creation')[:quantity])
         
             product_list = comic + manga + tablegame + rolegame + actionfigure + gadget
 
-        else:
-            #@ TODO: filtro
-            pass
+
+        if sort:
+            if sort == 'a-z':
+                product_list = product_list.sort(reverse=False, key=get_title)
+            elif sort == 'z-a':
+                product_list = product_list.sort(reverse=True, key=get_title)
+            elif sort == 'lastu':
+                product_list = product_list.sort(reverse=True, key=get_timestamp)
+            elif sort == 'firstu':
+                product_list = product_list.sort(reverse=False, key=get_timestamp)
+
 
         paginator = Paginator(product_list, pagination_count)
         page_number = page
@@ -94,15 +143,16 @@ def shop(request):
             'articoli': rendered_product,
             'vetrina': showcase_prods,
             'pagina': page_number,
-            'pagine_totali': paginator.num_pages
+            'pagine_totali': paginator.num_pages,
+            'query': {
+                'category': category,
+                'sort' : sort,
+                "keyWord": keyWord
+            }
         }
 
         if data_only == 'true':
             return JsonResponse(context, status=200)
-
-        # 5 ultimi prodotti per ogni categoria caricati
-        # tutti i prodotti vetrina
-        # paginazione
 
         return render(request, "gui/shop.html", context)
 

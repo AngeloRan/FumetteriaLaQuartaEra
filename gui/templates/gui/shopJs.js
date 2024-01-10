@@ -606,10 +606,14 @@ const cambiaPg = async function (pag) {
   const y = await x.json();
   console.log(y);
   const {articoli} = y;
+
+
+  console.log("GET MEDIA PREFIX" , {% get_media_prefix %})
+
   markup = articoli.map(el => `    
   <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizione}" data-inserimento="${el.creation}">
   <figure class="figure-img">
-    <img class="img_art" src="${el.url_img}"alt="${el.titolo}">
+    <img class="img_art" src="{% get_media_prefix %}${el.url_img}"alt="${el.titolo}">
   </figure>
   <div class="articoli_label">
     <h4 class="nomearticolo">${el.titolo}</h4>
