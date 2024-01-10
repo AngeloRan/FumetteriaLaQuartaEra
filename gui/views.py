@@ -53,7 +53,7 @@ def shop(request):
         quantity = request.GET.get('quantity', None)
 
         if keyWord:
-            product_list = list(Product.objects.filter(title__icontains=keyWord))
+            product_list = [x.id for x in Product.objects.filter(title__icontains=keyWord)]
             product_list = get_prods(product_list)
 
 
@@ -132,6 +132,9 @@ def shop(request):
         if showcase:
             showcase_prods = [x.id for x in showcase.products.all()]
 
+
+            print('vetrina ids ', showcase_prods)
+
             showcase_prods = get_prods(showcase_prods)
 
             showcase_prods =  [{
@@ -144,7 +147,6 @@ def shop(request):
                 'last_update' : prod.last_update,
             } for prod in showcase_prods]
 
-            print('vetrina ids ', showcase_prods)
             print('vetrina prodotti', showcase_prods)
 
         context = {
