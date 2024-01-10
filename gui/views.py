@@ -126,6 +126,7 @@ def shop(request):
         showcase = Showcase.objects.last()
 
         print('vetrina', showcase)
+        print(showcase.products.all())
 
 
         if showcase:
