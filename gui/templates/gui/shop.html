@@ -12,7 +12,7 @@
 {% block header %}
 <!-- <img src="{% static 'images/libro_insegna.png' %}" alt=""> -->
 <div class="btnVetrinaIniziale hidden-3"><i class="fa-solid fa-arrow-left-long"></i></div>
-<div class="piccolaSpie"><p>Ripristina la vetrina scelta del team de <span>La Quarta Era</span></p></div>
+<div class="piccolaSpie"><p>Ripristina la vetrina scelta dal team de <span>La Quarta Era</span></p></div>
 <div class="stikymenu"><img src="{% static 'images/libro_insegna.png' %}" alt=""></div>
 
 
@@ -95,11 +95,13 @@
       </div>
       {% endfor %}
 
-      <button class="ajax" onclick="cambiaPg({{pagina}})">{{pagina}}</button>
 
-      {{pagine_totali}}
+      <!-- {{pagine_totali}} -->
     </div>
-
+    
+    <div class="containerPag"> 1
+    </div>
+   
   </div>
   
 
@@ -153,8 +155,7 @@
 
     <button class="btnListaLat buttonGiu"><i class="fa-solid fa-chevron-down"></i></button>
 
-    <div class="container dots">
-    </div>
+    <div class="container dots"></div>
 
   </div>
   <div id="zoom" class="magnify-wrapper">
