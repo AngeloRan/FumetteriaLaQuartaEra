@@ -124,6 +124,10 @@ def shop(request):
 
         showcase_prods = []
         showcase = Showcase.objects.last()
+
+        print('vetrina', showcase)
+
+
         if showcase:
             showcase_prods = [x.id for x in showcase.products.all()]
 
@@ -138,6 +142,9 @@ def shop(request):
                 'creation' : prod.creation,
                 'last_update' : prod.last_update,
             } for prod in showcase_prods]
+
+            print('vetrina ids ', showcase_prods)
+            print('vetrina prodotti', showcase_prods)
 
         context = {
             'articoli': rendered_product,
