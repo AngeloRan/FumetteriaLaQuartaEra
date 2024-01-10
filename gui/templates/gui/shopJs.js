@@ -7,7 +7,6 @@ config.rivelatoreSezioni()
 // settare Uppercase lista
 
 
-// console.log('{{articoli}}'.json());
 
 const aggiornaAllArr = function () {
   articoliArr = createArtArr();
@@ -54,11 +53,58 @@ const createArrTot = function (a = articoliArr, b = articoliInVetrinaArr) {
 }
 
 
-
 const vetrinaIniziale = createVetArr();
 let articoliArr = createArtArr();
 let articoliInVetrinaArr = createVetArr();
 let articoliTotali = createArrTot();
+let pagineTotali = {{pagine_totali}};
+let arrBtn = Array.from({length: pagineTotali}, (el,i) => i+1)
+.map((el => `<button class="pagina" onclick="cambiaPg(${el})">${el}</button>`)).reduce((acc,cur) => {
+  if (acc.length === 0 || acc[acc.length - 1].length === 5) {
+  acc.push([cur]);
+} else {
+  acc[acc.length - 1].push(cur);
+}
+return acc;
+}, []);
+let sottoArrPagCur = 0;
+let pagCur = 1;
+
+
+
+const aggiornaPaginazione = function (pag) {
+
+  pagCur = pag;
+  arrBtn = Array.from({length: pagineTotali}, (el,i) => i+1)
+  .map((el => `<button class="pagina" onclick="cambiaPg(${el})">${el}</button>`)).reduce((acc,cur) => {
+    if (acc.length === 0 || acc[acc.length - 1].length === 5) {
+    acc.push([cur]);
+  } else {
+    acc[acc.length - 1].push(cur);
+  }
+  return acc;
+  }, []);
+
+  if(arrBtn[0].length <= 1) {
+    document.querySelector('.containerPag').innerHTML = '';
+    return;
+  }
+
+  if(arrBtn.indexOf(arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))]) !== sottoArrPagCur) {
+    sottoArrPagCur = arrBtn.indexOf(arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))]);
+    console.log(sottoArrPagCur);
+    document.querySelector('.containerPag').innerHTML = '';
+    document.querySelector('.containerPag').insertAdjacentHTML('afterbegin', arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))].join(''));
+  }
+
+  [...document.querySelector('.containerPag').children].forEach((el,i) => {
+    return +el.textContent === pagCur ? el.style.color = 'black' : el.style.color = 'darkred'})
+
+}
+
+
+document.querySelector('.containerPag').innerHTML = '';
+if(arrBtn[0].length > 1)document.querySelector('.containerPag').insertAdjacentHTML('afterbegin', arrBtn[sottoArrPagCur].join(''));
 
 document.querySelector('.btnVetrinaIniziale').addEventListener('mouseenter', function () {
   document.querySelector('.piccolaSpie').style.width = '300px'
@@ -144,7 +190,7 @@ window.addEventListener('resize', function () {
 
 const fnVetrina = function (totale) {
   vetrinaEl.classList.remove('hidden-1')
-  let curArt = 3;
+  let curArt = 2;
   let articoliVetrinaArr = [...document.querySelectorAll('.articoloInVetrina')]
   let elCentrale;
   let ultimoClick = 0;
@@ -165,7 +211,7 @@ const fnVetrina = function (totale) {
 // FUNZIONE VETRINA LOOP
     const vetLoop = function () {
       console.log('LOOP');
-      const LIMITE = this === document.querySelector('.next-pg') ? (totale + 3) : 2;
+      const LIMITE = this === document.querySelector('.next-pg') ? (totale + 2) : 1;
       const SELETTORE_NEXT_PREV = this === document.querySelector('.next-pg') ? 1 : -1
       const TOT_ART = this === document.querySelector('.next-pg') ? -totale : totale;
       const ora = Date.now()
@@ -287,6 +333,7 @@ document.getElementById('sortRevNum').addEventListener('click', function () {
 })
 
 const cambiaVetrina = function (e, iniziale = false) {
+  if(articoliArr.length === 1) return;
   document.removeEventListener('keydown', funzioneTasti);
   clearInterval(vetrinaAuto);
   vetrinaEl.classList.add('hidden-1');
@@ -324,6 +371,7 @@ const cambiaVetrina = function (e, iniziale = false) {
   }) 
 };
 
+
 document.getElementById('mettiInVet').addEventListener('click', cambiaVetrina)
 
 
@@ -331,6 +379,8 @@ document.getElementById('mettiInVet').addEventListener('click', cambiaVetrina)
 // RICERCA
 document.getElementById('shopSubmit').addEventListener('click', function (e) {
   document.getElementById('shopRicerca').value = ''
+  const categorie = document.querySelectorAll('.vocimenu')
+  categorie.forEach((el) =>  el.classList.remove('selVociMenu'))
 })
 
 
@@ -524,6 +574,7 @@ const fnImmaginiAlt = function () {
   const dotContainer = document.querySelector('.dots')
 
   const createDots = function () {
+    dotContainer.innerHTML = '';
     listaImgAlt.forEach(function (_, i) {
       dotContainer.insertAdjacentHTML(
         'beforeend',
@@ -598,19 +649,25 @@ const fnImmaginiAlt = function () {
 
 fnImmaginiAlt();
 
+const callArt = async function (pag = 1, categoria = 'gadgets', sort = 'A-z', keyWord = null) {
+  let url = "{% url 'shop' %}" + `?page=${pag}&data_only=true`;
+   url += categoria ? `&categoria=${categoria}`:'';
+   url += sort ? `&sort=${sort}`:'';
+   url += keyWord ? `&keyWord=${keyWord}`:'';
+  
+  console.log('URL', url);
+  const res = await fetch(url);
+  const data = await res.json();
+  ({pagine_totali : pagineTotali} = data);
+  const {articoli} = data;
+  return articoli
+}
+
+
 const cambiaPg = async function (pag) {
-  const url = "{% url 'shop' %}" + `?page=${2}&data_only=true`;
-  console.log('url', url)
   try{
-  const x = await fetch(url);
-  const y = await x.json();
-  console.log(y);
-  const {articoli} = y;
-
-
-  console.log("GET MEDIA PREFIX" , {% get_media_prefix %})
-
-  markup = articoli.map(el => `    
+  const articoli = await callArt(pag);
+  let markup = articoli.map(el => `    
   <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizione}" data-inserimento="${el.creation}">
   <figure class="figure-img">
     <img class="img_art" src="{% get_media_prefix %}${el.url_img}"alt="${el.titolo}">
@@ -620,13 +677,20 @@ const cambiaPg = async function (pag) {
     <p class="categoriaarticolo">${el.descrizione_breve}</p>
   </div>
   </div>`).join('');
-
-  document.querySelector('.contenitoreArticoli').innerHTML = '';
-  document.querySelector('.contenitoreArticoli').insertAdjacentHTML('afterbegin', markup);
-  aggiornaAllArr();
-
-  upperLista()
+  document.querySelector('.contenitoreArticoli').classList.add('hidden-3')
+  setTimeout(function () {
+    document.querySelector('.contenitoreArticoli').innerHTML = '';
+    document.querySelector('.contenitoreArticoli').insertAdjacentHTML('afterbegin', markup);
+    document.querySelector('.contenitoreArticoli').classList.remove('hidden-3')
+    aggiornaAllArr();
+    upperLista();
+    aggiornaPaginazione(pag);
+    document.querySelector('#mettiInVet').style.display = articoliArr.length <=1 ? 'none': ''
+  }, 400)
   } catch {
 
   }
+  
 }
+
+// cambiaPg(11)
