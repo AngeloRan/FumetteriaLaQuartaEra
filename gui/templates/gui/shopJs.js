@@ -651,7 +651,7 @@ fnImmaginiAlt();
 
 
 
-const callArt = async function (pag = 1, categoria = 'gadgets', sort = 'A-z', keyWord = null) {
+const callArt = async function (pag = 1, categoria = 'actionfigures', sort = 'A-z', keyWord = null) {
   let url = "{% url 'shop' %}" + `?page=${pag}&data_only=true`;
    url += categoria ? `&categoria=${categoria}`:'';
    url += sort ? `&sort=${sort}`:'';
