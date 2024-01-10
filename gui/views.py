@@ -16,16 +16,16 @@ def get_title(i):
 def get_timestamp(i):
     return i.last_update
 
-def get_prods(prods):
+def get_prods(prods_ids):
 
     prods = []
 
-    prods += list(Comic.objects.filter(product_ptr_id__in=prods))
-    prods += list(Manga.objects.filter(product_ptr_id__in=prods))
-    prods += list(TableGame.objects.filter(product_ptr_id__in=prods))
-    prods += list(RoleGame.objects.filter(product_ptr_id__in=prods))
-    prods += list(ActionFigure.objects.filter(product_ptr_id__in=prods))
-    prods += list(Gadget.objects.filter(product_ptr_id__in=prods))
+    prods += list(Comic.objects.filter(product_ptr_id__in=prods_ids))
+    prods += list(Manga.objects.filter(product_ptr_id__in=prods_ids))
+    prods += list(TableGame.objects.filter(product_ptr_id__in=prods_ids))
+    prods += list(RoleGame.objects.filter(product_ptr_id__in=prods_ids))
+    prods += list(ActionFigure.objects.filter(product_ptr_id__in=prods_ids))
+    prods += list(Gadget.objects.filter(product_ptr_id__in=prods_ids))
 
     return prods
 
@@ -125,15 +125,8 @@ def shop(request):
         showcase_prods = []
         showcase = Showcase.objects.last()
 
-        print('vetrina', showcase)
-        print(showcase.products.all())
-
-
         if showcase:
             showcase_prods = [x.id for x in showcase.products.all()]
-
-
-            print('vetrina ids ', showcase_prods)
 
             showcase_prods = get_prods(showcase_prods)
 
@@ -146,8 +139,6 @@ def shop(request):
                 'creation' : prod.creation,
                 'last_update' : prod.last_update,
             } for prod in showcase_prods]
-
-            print('vetrina prodotti', showcase_prods)
 
         context = {
             'articoli': rendered_product,
