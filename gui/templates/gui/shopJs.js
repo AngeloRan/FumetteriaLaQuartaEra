@@ -649,15 +649,17 @@ const fnImmaginiAlt = function () {
 
 fnImmaginiAlt();
 
+
+
 const callArt = async function (pag = 1, categoria = 'gadgets', sort = 'A-z', keyWord = null) {
   let url = "{% url 'shop' %}" + `?page=${pag}&data_only=true`;
    url += categoria ? `&categoria=${categoria}`:'';
    url += sort ? `&sort=${sort}`:'';
    url += keyWord ? `&keyWord=${keyWord}`:'';
-  
   console.log('URL', url);
   const res = await fetch(url);
   const data = await res.json();
+  console.log(data);
   ({pagine_totali : pagineTotali} = data);
   const {articoli} = data;
   return articoli
