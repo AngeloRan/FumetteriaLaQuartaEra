@@ -103,8 +103,20 @@ def shop(request):
             elif sort == 'firstu':
                 product_list = product_list.sort(reverse=False, key=get_timestamp)
 
+        if product_list:
+            paginator = Paginator(product_list, pagination_count)
+        else:
 
-        paginator = Paginator(product_list, pagination_count)
+            context = {
+                'message': 'no products found',
+                'query': {
+                    'category': category,
+                    'sort' : sort,
+                    "keyWord": keyWord
+                }
+            }
+
+            return JsonResponse(context, status=200)
         page_number = page
         page_obj = paginator.get_page(page_number)
         res_objs = list(page_obj)
