@@ -48,6 +48,7 @@ def shop(request):
         sort = request.GET.get('sort', None)
         keyWord = request.GET.get('keyWord', None)
 
+        print('categ',category)
         product_list = []
 
         quantity = request.GET.get('quantity', None)
@@ -80,6 +81,7 @@ def shop(request):
             
             elif category == 'gadget':
                 product_list = list(Gadget.objects.all().order_by('-creation'))
+                print('Product',product_list)
 
         else:
 
@@ -95,13 +97,13 @@ def shop(request):
 
         if sort:
             if sort == 'a-z':
-                product_list = product_list.sort(reverse=False, key=get_title)
+                product_list.sort(reverse=False, key=get_title)
             elif sort == 'z-a':
-                product_list = product_list.sort(reverse=True, key=get_title)
+                product_list.sort(reverse=True, key=get_title)
             elif sort == 'lastu':
-                product_list = product_list.sort(reverse=True, key=get_timestamp)
+                product_list.sort(reverse=True, key=get_timestamp)
             elif sort == 'firstu':
-                product_list = product_list.sort(reverse=False, key=get_timestamp)
+                product_list.sort(reverse=False, key=get_timestamp)
 
         if product_list:
             paginator = Paginator(product_list, pagination_count)
