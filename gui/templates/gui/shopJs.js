@@ -83,10 +83,16 @@ if(arrBtn[0].length > 1){
   return +el.textContent === pagCur ? el.style.color = 'black' : el.style.color = 'darkred'})
 
 
-const aggiornaPagineVisibili = function (numero) {
-  if(numero < 0) return;
-  if(numero > arrBtn.length-1) return;
-  if(sottoArrCur === numero && [...document.querySelectorAll('.pagina')].length === arrBtn[numero].length) return;
+const aggiornaPagineVisibili = function (numero, ful) {
+  if(numero < 0) {
+    ful && ful();
+    return};
+  if(numero > arrBtn.length-1) {
+    ful && ful();
+    return};
+  if(sottoArrCur === numero && [...document.querySelectorAll('.pagina')].length === arrBtn[numero].length) {
+    ful && ful();
+    return};
 
   sottoArrCur = numero;
   const numeriPagina = arrBtn[sottoArrCur].join('');
@@ -95,6 +101,10 @@ const aggiornaPagineVisibili = function (numero) {
   setTimeout(function () {
 
   document.querySelector('.containerPag').innerHTML = '';
+
+  if(sottoArrCur === 0 && sottoArrCur === arrBtn.length-1 ) {
+    document.querySelector('.containerPag').insertAdjacentHTML('afterbegin',numeriPagina)
+  }
 
   if(sottoArrCur === 0 && arrBtn.length > 1){
     document.querySelector('.containerPag').insertAdjacentHTML('afterbegin',numeriPagina + 
@@ -116,9 +126,9 @@ const aggiornaPagineVisibili = function (numero) {
     + numeriPagina);
   }
 
-    document.querySelector('.containerPag').classList.remove('scorri-1')
+    document.querySelector('.containerPag').classList.remove('scorri-1');
+    ful && ful();
   },200)
-  
   
 }
 
@@ -143,10 +153,11 @@ const aggiornaPaginazione = function (pag) {
   
   let numero = arrBtn.indexOf(arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))]);
   
-  aggiornaPagineVisibili(numero);
-
-  [...document.querySelectorAll('.pagina')].forEach((el,i) => {
-    return +el.textContent === pagCur ? el.style.color = 'black' : el.style.color = 'darkred'})
+  new Promise (function ( ful, rej) {
+    aggiornaPagineVisibili(numero, ful);}).then(() =>
+    [...document.querySelectorAll('.pagina')].forEach((el,i) => {
+      console.log(el.textContent);
+      return +el.textContent === pagCur ? el.style.color = 'black' : el.style.color = 'darkred'}))
 
 }
 
@@ -202,6 +213,11 @@ const listaEl = document.querySelector('.contenitoreArticoli');
 const headerEl = document.querySelector('header');
 const menuArticoliEl = document.querySelector('.div-menuarticoli');
 let funzioneTasti;
+let query = {
+  category: null,
+  sort: null,
+  keyWord: null,
+};
 
 
 
@@ -692,11 +708,11 @@ fnImmaginiAlt();
 
 
 
-const callArt = async function (pag, categoria, sort, keyWord ) {
+const callArt = async function (pag, category, sort, keyWord ) {
 
   let url = "{% url 'shop' %}" + `?page=${pag}&data_only=true`;
-   url += categoria ? `&category=${categoria}`:'';
-   url += sort ? `&sort=${sort}`:'';
+   url += category ? `&category=${category}`:'';
+   url += sort ? `&sort=${lastu}`:'';
    url += keyWord ? `&keyWord=${keyWord}`:'';
   console.log('URL', url);
   const res = await fetch(url);
@@ -704,12 +720,16 @@ const callArt = async function (pag, categoria, sort, keyWord ) {
   console.log(data);
   ({pagine_totali : pagineTotali} = data);
   const {articoli} = data;
+  query.category = data.query.category;
+  query.sort = data.query.sort;
+  query.keyWord = data.query.keyWord;
+  console.log(query);
   return articoli
 }
 
-const cambiaPg = async function (pag, categoria = null, sort = null, keyWord = null) {
+const cambiaPg = async function (pag, category = query.category, sort = query.sort, keyWord = query.keyWord) {
   try{
-  const articoli = await callArt(pag, categoria, sort, keyWord);
+  const articoli = await callArt(pag, category, sort, keyWord);
   let markup = articoli.map(el => `    
   <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizione}" data-inserimento="${el.creation}">
   <figure class="figure-img">

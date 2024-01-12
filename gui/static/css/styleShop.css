@@ -24,6 +24,12 @@ body {
 header {
   overflow: hidden;
 }
+
+.barracontatti {
+ background: #ffe881;
+ /* background-clip: padding-box; */
+}
+
 .corpo{
   gap:1.5rem
 }
@@ -166,7 +172,7 @@ header {
 /* hsla(0, 0%, 100%, 0.774); */
 .vetrina {
   width: 100%;
-  min-height: 25rem;
+  min-height: 45rem;
   background-color: hsla(0, 0%, 100%, 0.774);
   position: relative;
   transition: all 1s;
@@ -199,7 +205,7 @@ header {
 }
 
 .immagineInVetrina:hover {
-  transform: scale(1.1);
+  transform: scale(1.05);
   /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); */
 }
 
@@ -266,11 +272,11 @@ header {
 
 
 .next-pg{
-  right: 33%;
+  right: 28%;
   top: 40%
 }
 .prev-pg{
-  left: 33%;
+  left: 28%;
   top: 40%;
 }
 
@@ -372,6 +378,7 @@ border-radius: 10px;
 }
 
 .div-menuarticoli {
+  /* background: #ffe881; */
   transition: transform 0.5s, opacity 1s, box-shadow 0.3s, background-color 0.3s;
   position: relative;
   text-align: center;
@@ -1087,6 +1094,9 @@ border-radius: 10px;
 
 .scorri-1 {
   transform: translateX(-150%);
+}
+.scorri-2 {
+  transform: translateX(150%) ;
 }
 
 
