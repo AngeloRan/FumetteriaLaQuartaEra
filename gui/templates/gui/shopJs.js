@@ -12,7 +12,6 @@ const aggiornaAllArr = function () {
   articoliArr = createArtArr();
   articoliInVetrinaArr = createVetArr();
   articoliTotali = createArrTot();
-  console.log('TOTALI', articoliTotali);
 }
 
 const createVetArr = function (list = [...document.querySelectorAll('.articoloInVetrina')]) {
@@ -30,7 +29,7 @@ const createVetArr = function (list = [...document.querySelectorAll('.articoloIn
 
 const createArtArr = function (list = [...document.querySelectorAll('.articoli')]) {
   return list.map(function (el) {
-    // console.log(el.dataset.Id);
+
     return {
       titolo: el.querySelector('.nomearticolo').textContent,
       tipo: el.querySelector('.categoriaarticolo').textContent,
@@ -52,6 +51,9 @@ const createArrTot = function (a = articoliArr, b = articoliInVetrinaArr) {
  }, [])
 }
 
+const init = function ()  {
+
+}
 
 const vetrinaIniziale = createVetArr();
 let articoliArr = createArtArr();
@@ -59,7 +61,7 @@ let articoliInVetrinaArr = createVetArr();
 let articoliTotali = createArrTot();
 let pagineTotali = {{pagine_totali}};
 let arrBtn = Array.from({length: pagineTotali}, (el,i) => i+1)
-.map((el => `<button class="pagina" onclick="cambiaPg(${el})">${el}</button>`)).reduce((acc,cur) => {
+.map((el =>`<button class="pagina" onclick="cambiaPg(${el})">${el}</button>`)).reduce((acc,cur) => {
   if (acc.length === 0 || acc[acc.length - 1].length === 5) {
   acc.push([cur]);
 } else {
@@ -67,16 +69,64 @@ let arrBtn = Array.from({length: pagineTotali}, (el,i) => i+1)
 }
 return acc;
 }, []);
-let sottoArrPagCur = 0;
+let sottoArrCur = 0;
 let pagCur = 1;
 
+document.querySelector('.containerPag').innerHTML = '';
 
+if(arrBtn[0].length > 1){
+  document.querySelector('.containerPag').insertAdjacentHTML('afterbegin', 
+  arrBtn[sottoArrCur].join('') + ((sottoArrCur === 0 && arrBtn.length > 1) ? `<button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>` : ''))
+};
+
+[...document.querySelectorAll('.pagina')].forEach((el,i) => {
+  return +el.textContent === pagCur ? el.style.color = 'black' : el.style.color = 'darkred'})
+
+
+const aggiornaPagineVisibili = function (numero) {
+  if(numero < 0) return;
+  if(numero > arrBtn.length-1) return;
+  if(sottoArrCur === numero && [...document.querySelectorAll('.pagina')].length === arrBtn[numero].length) return;
+
+  sottoArrCur = numero;
+  const numeriPagina = arrBtn[sottoArrCur].join('');
+  document.querySelector('.containerPag').classList.add('scorri-1')
+
+  setTimeout(function () {
+
+  document.querySelector('.containerPag').innerHTML = '';
+
+  if(sottoArrCur === 0 && arrBtn.length > 1){
+    document.querySelector('.containerPag').insertAdjacentHTML('afterbegin',numeriPagina + 
+    `<button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>`
+    );
+  }
+
+  if(sottoArrCur > 0 && sottoArrCur < arrBtn.length-1) {
+    document.querySelector('.containerPag').insertAdjacentHTML('afterbegin',
+    `<button class="freccePaginazione paginazBack" onclick="aggiornaPagineVisibili(sottoArrCur-1)"><i class="fa-solid fa-chevron-left"></i></button>`
+    + numeriPagina + `
+    <button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>`
+    );
+  }
+
+  if(sottoArrCur !== 0 && sottoArrCur === arrBtn.length-1 ) {
+    document.querySelector('.containerPag').insertAdjacentHTML('afterbegin',
+    `<button class="freccePaginazione paginazBack" onclick="aggiornaPagineVisibili(sottoArrCur-1)"><i class="fa-solid fa-chevron-left"></i></button>`
+    + numeriPagina);
+  }
+
+    document.querySelector('.containerPag').classList.remove('scorri-1')
+  },200)
+  
+  
+}
 
 const aggiornaPaginazione = function (pag) {
 
   pagCur = pag;
   arrBtn = Array.from({length: pagineTotali}, (el,i) => i+1)
-  .map((el => `<button class="pagina" onclick="cambiaPg(${el})">${el}</button>`)).reduce((acc,cur) => {
+  .map((el =>`<button class="pagina" onclick="cambiaPg(${el})">${el}</button>`)).reduce((acc,cur) => {
     if (acc.length === 0 || acc[acc.length - 1].length === 5) {
     acc.push([cur]);
   } else {
@@ -85,26 +135,20 @@ const aggiornaPaginazione = function (pag) {
   return acc;
   }, []);
 
+  
   if(arrBtn[0].length <= 1) {
     document.querySelector('.containerPag').innerHTML = '';
     return;
   }
+  
+  let numero = arrBtn.indexOf(arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))]);
+  
+  aggiornaPagineVisibili(numero);
 
-  if(arrBtn.indexOf(arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))]) !== sottoArrPagCur) {
-    sottoArrPagCur = arrBtn.indexOf(arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))]);
-    console.log(sottoArrPagCur);
-    document.querySelector('.containerPag').innerHTML = '';
-    document.querySelector('.containerPag').insertAdjacentHTML('afterbegin', arrBtn[arrBtn.findIndex(el=> el.includes(`<button class="pagina" onclick="cambiaPg(${pag})">${pag}</button>`))].join(''));
-  }
-
-  [...document.querySelector('.containerPag').children].forEach((el,i) => {
+  [...document.querySelectorAll('.pagina')].forEach((el,i) => {
     return +el.textContent === pagCur ? el.style.color = 'black' : el.style.color = 'darkred'})
 
 }
-
-
-document.querySelector('.containerPag').innerHTML = '';
-if(arrBtn[0].length > 1)document.querySelector('.containerPag').insertAdjacentHTML('afterbegin', arrBtn[sottoArrPagCur].join(''));
 
 document.querySelector('.btnVetrinaIniziale').addEventListener('mouseenter', function () {
   document.querySelector('.piccolaSpie').style.width = '300px'
@@ -136,7 +180,7 @@ document.querySelector('.btnVetrinaIniziale').addEventListener ('click' , functi
 
 
 document.querySelector('.stikymenu').addEventListener('click', function () {
-  console.log('ciao');
+  
   window.location.href = '/'
 })
 
@@ -210,7 +254,7 @@ const fnVetrina = function (totale) {
 
 // FUNZIONE VETRINA LOOP
     const vetLoop = function () {
-      console.log('LOOP');
+   
       const LIMITE = this === document.querySelector('.next-pg') ? (totale + 2) : 1;
       const SELETTORE_NEXT_PREV = this === document.querySelector('.next-pg') ? 1 : -1
       const TOT_ART = this === document.querySelector('.next-pg') ? -totale : totale;
@@ -292,45 +336,45 @@ fnVetrina(articoliInVetrinaArr.length)
 // ORDINA PER ORDINE ALFABETICO
 
 
-const funzioneSort = function (nonrev = true, nonNum = true) {
+// const funzioneSort = function (nonrev = true, nonNum = true) {
 
-  const markup = articoliArr.toSorted((a, b) => {
-    if(!nonNum) { return nonrev ? b.inserimento - a.inserimento : a.inserimento - b.inserimento} 
-    else{
-    if(!nonrev) {
-      if (a.titolo.trim().toUpperCase() > b.titolo.trim().toUpperCase()) return -1;
-      if (a.titolo.trim().toUpperCase() < b.titolo.trim().toUpperCase()) return 1
-    } else{
-      if (a.titolo.trim().toUpperCase() > b.titolo.trim().toUpperCase()) return 1;
-      if (a.titolo.trim().toUpperCase() < b.titolo.trim().toUpperCase()) return -1
-    }}}).map(el => `    
-    <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}">
-    <figure class="figure-img">
-      <img class="img_art" src="${el.img}"alt="${el.titolo}">
-    </figure>
-    <div class="articoli_label">
-      <h4 class="nomearticolo">${el.titolo}</h4>
-      <p class="categoriaarticolo">${el.tipo}</p>
-    </div>
-    </div>`).join('')
+//   const markup = articoliArr.toSorted((a, b) => {
+//     if(!nonNum) { return nonrev ? b.inserimento - a.inserimento : a.inserimento - b.inserimento} 
+//     else{
+//     if(!nonrev) {
+//       if (a.titolo.trim().toUpperCase() > b.titolo.trim().toUpperCase()) return -1;
+//       if (a.titolo.trim().toUpperCase() < b.titolo.trim().toUpperCase()) return 1
+//     } else{
+//       if (a.titolo.trim().toUpperCase() > b.titolo.trim().toUpperCase()) return 1;
+//       if (a.titolo.trim().toUpperCase() < b.titolo.trim().toUpperCase()) return -1
+//     }}}).map(el => `    
+//     <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizioneLunga}" data-inserimento="${el.inserimento}">
+//     <figure class="figure-img">
+//       <img class="img_art" src="${el.img}"alt="${el.titolo}">
+//     </figure>
+//     <div class="articoli_label">
+//       <h4 class="nomearticolo">${el.titolo}</h4>
+//       <p class="categoriaarticolo">${el.tipo}</p>
+//     </div>
+//     </div>`).join('')
 
-    document.querySelector('.contenitoreArticoli').innerHTML = '';
-    document.querySelector('.contenitoreArticoli').insertAdjacentHTML('afterbegin', markup)
+//     document.querySelector('.contenitoreArticoli').innerHTML = '';
+//     document.querySelector('.contenitoreArticoli').insertAdjacentHTML('afterbegin', markup)
 
-    upperLista()
-}
+//     upperLista()
+// }
 
 
-document.getElementById('sortAl').addEventListener('click', funzioneSort)
-document.getElementById('sortRevAl').addEventListener('click', function() {
-  funzioneSort(false)
-})
-document.getElementById('sortNum').addEventListener('click', function () {
-  funzioneSort(true, false)
-})
-document.getElementById('sortRevNum').addEventListener('click', function () {
-  funzioneSort(false, false)
-})
+// document.getElementById('sortAl').addEventListener('click', funzioneSort)
+// document.getElementById('sortRevAl').addEventListener('click', function() {
+//   funzioneSort(false)
+// })
+// document.getElementById('sortNum').addEventListener('click', function () {
+//   funzioneSort(true, false)
+// })
+// document.getElementById('sortRevNum').addEventListener('click', function () {
+//   funzioneSort(false, false)
+// })
 
 const cambiaVetrina = function (e, iniziale = false) {
   if(articoliArr.length === 1) return;
@@ -371,10 +415,7 @@ const cambiaVetrina = function (e, iniziale = false) {
   }) 
 };
 
-
 document.getElementById('mettiInVet').addEventListener('click', cambiaVetrina)
-
-
 
 // RICERCA
 document.getElementById('shopSubmit').addEventListener('click', function (e) {
@@ -554,7 +595,7 @@ document.getElementById('zoomDaZoom').addEventListener('click', function (e) {
 
   document.querySelector('.listaImmagini').addEventListener('click', function (e) {
     if(e.target.closest('.figImmaginiListaLat')) {
-      console.log(e.target);
+
       document.getElementById('large-img').style.background = `url(${e.target.src}) no-repeat #fff` 
     }
   })
@@ -568,7 +609,7 @@ chiudiOverlay()
 const fnImmaginiAlt = function () {
 
   let listaImgAlt = document.querySelectorAll('.figImmaginiListaLat');
-  console.log(listaImgAlt);
+ 
   let curImg = 0;
   let maxImg = listaImgAlt.length - 1;
   const dotContainer = document.querySelector('.dots')
@@ -651,7 +692,7 @@ fnImmaginiAlt();
 
 
 
-const callArt = async function (pag = 1, categoria = 'gadget', sort = 'lastu', keyWord = null) {
+const callArt = async function (pag, categoria, sort, keyWord ) {
 
   let url = "{% url 'shop' %}" + `?page=${pag}&data_only=true`;
    url += categoria ? `&category=${categoria}`:'';
@@ -666,10 +707,9 @@ const callArt = async function (pag = 1, categoria = 'gadget', sort = 'lastu', k
   return articoli
 }
 
-
-const cambiaPg = async function (pag) {
+const cambiaPg = async function (pag, categoria = null, sort = null, keyWord = null) {
   try{
-  const articoli = await callArt(pag);
+  const articoli = await callArt(pag, categoria, sort, keyWord);
   let markup = articoli.map(el => `    
   <div class="articoli container" data-id="${el.id}" data-descrizione="${el.descrizione}" data-inserimento="${el.creation}">
   <figure class="figure-img">
@@ -688,12 +728,11 @@ const cambiaPg = async function (pag) {
     aggiornaAllArr();
     upperLista();
     aggiornaPaginazione(pag);
-    document.querySelector('#mettiInVet').style.display = articoliArr.length <=1 ? 'none': ''
+    document.querySelector('#mettiInVet').style.display = articoliArr.length <=1 ? 'none': '';
   }, 400)
   } catch {
 
   }
-  
 }
 
-// cambiaPg(11)
+
