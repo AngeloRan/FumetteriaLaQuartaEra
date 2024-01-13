@@ -52,7 +52,6 @@ const createArrTot = function (a = articoliArr, b = articoliInVetrinaArr) {
 }
 
 const init = function ()  {
-
 }
 
 const vetrinaIniziale = createVetArr();
@@ -60,6 +59,7 @@ let articoliArr = createArtArr();
 let articoliInVetrinaArr = createVetArr();
 let articoliTotali = createArrTot();
 let pagineTotali = {{pagine_totali}};
+let ultimaPag = `...<button class="pagina ultimaPag" onclick="cambiaPg(${pagineTotali})">${pagineTotali}</button>`
 let arrBtn = Array.from({length: pagineTotali}, (el,i) => i+1)
 .map((el =>`<button class="pagina" onclick="cambiaPg(${el})">${el}</button>`)).reduce((acc,cur) => {
   if (acc.length === 0 || acc[acc.length - 1].length === 5) {
@@ -76,7 +76,7 @@ document.querySelector('.containerPag').innerHTML = '';
 
 if(arrBtn[0].length > 1){
   document.querySelector('.containerPag').insertAdjacentHTML('afterbegin', 
-  arrBtn[sottoArrCur].join('') + ((sottoArrCur === 0 && arrBtn.length > 1) ? `<button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>` : ''))
+  arrBtn[sottoArrCur].join('') + ((sottoArrCur === 0 && arrBtn.length > 1) ? `<button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>` + ultimaPag : ''))
 };
 
 [...document.querySelectorAll('.pagina')].forEach((el,i) => {
@@ -84,19 +84,22 @@ if(arrBtn[0].length > 1){
 
 
 const aggiornaPagineVisibili = function (numero, ful) {
+  // console.log([...document.querySelectorAll('.pagina')]);
   if(numero < 0) {
     ful && ful();
     return};
   if(numero > arrBtn.length-1) {
     ful && ful();
     return};
-  if(sottoArrCur === numero && [...document.querySelectorAll('.pagina')].length === arrBtn[numero].length) {
+  if(sottoArrCur === numero && [...document.querySelectorAll('.pagina')].length === arrBtn[numero].length + ([...document.querySelectorAll('.pagina')].some(el => el.classList.contains('ultimaPag'))) ? 1 : 0) {
     ful && ful();
     return};
-
+  
+  let oldArr = sottoArrCur
   sottoArrCur = numero;
   const numeriPagina = arrBtn[sottoArrCur].join('');
-  document.querySelector('.containerPag').classList.add('scorri-1')
+  ultimaPag = `...<button class="pagina ultimaPag" onclick="cambiaPg(${pagineTotali})">${pagineTotali}</button>`
+  document.querySelector('.containerPag').classList.add(`scorri-${oldArr > sottoArrCur ? '1' : '2'}`)
 
   setTimeout(function () {
 
@@ -108,7 +111,7 @@ const aggiornaPagineVisibili = function (numero, ful) {
 
   if(sottoArrCur === 0 && arrBtn.length > 1){
     document.querySelector('.containerPag').insertAdjacentHTML('afterbegin',numeriPagina + 
-    `<button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>`
+    `<button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>`+ultimaPag
     );
   }
 
@@ -116,7 +119,7 @@ const aggiornaPagineVisibili = function (numero, ful) {
     document.querySelector('.containerPag').insertAdjacentHTML('afterbegin',
     `<button class="freccePaginazione paginazBack" onclick="aggiornaPagineVisibili(sottoArrCur-1)"><i class="fa-solid fa-chevron-left"></i></button>`
     + numeriPagina + `
-    <button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>`
+    <button class="freccePaginazione paginazNext" onclick="aggiornaPagineVisibili(sottoArrCur+1)"><i class="fa-solid fa-chevron-right"></i></button>`+ultimaPag
     );
   }
 
@@ -126,7 +129,7 @@ const aggiornaPagineVisibili = function (numero, ful) {
     + numeriPagina);
   }
 
-    document.querySelector('.containerPag').classList.remove('scorri-1');
+    document.querySelector('.containerPag').classList.remove(`scorri-${oldArr > sottoArrCur ? '1' : '2'}`);
     ful && ful();
   },200)
   
@@ -156,7 +159,7 @@ const aggiornaPaginazione = function (pag) {
   new Promise (function ( ful, rej) {
     aggiornaPagineVisibili(numero, ful);}).then(() =>
     [...document.querySelectorAll('.pagina')].forEach((el,i) => {
-      console.log(el.textContent);
+      console.log('CORRENTE' ,pagCur, 'PAGINE', el.textContent);
       return +el.textContent === pagCur ? el.style.color = 'black' : el.style.color = 'darkred'}))
 
 }
@@ -191,7 +194,6 @@ document.querySelector('.btnVetrinaIniziale').addEventListener ('click' , functi
 
 
 document.querySelector('.stikymenu').addEventListener('click', function () {
-  
   window.location.href = '/'
 })
 
@@ -392,6 +394,23 @@ fnVetrina(articoliInVetrinaArr.length)
 //   funzioneSort(false, false)
 // })
 
+document.getElementById('sortAl').addEventListener('click', function () {
+  // cambiaPg(1,undefined,'a-z',undefined)
+  cambiaPg(1,undefined,'a-z',undefined)
+})
+
+document.getElementById('sortRevAl').addEventListener('click', function() {
+  cambiaPg(1,undefined,'z-a',undefined)
+})
+
+document.getElementById('sortNum').addEventListener('click', function () {
+  cambiaPg(1,undefined,'lastu',undefined)
+})
+
+document.getElementById('sortRevNum').addEventListener('click', function () {
+  cambiaPg(1,undefined,'firstu',undefined)
+})
+
 const cambiaVetrina = function (e, iniziale = false) {
   if(articoliArr.length === 1) return;
   document.removeEventListener('keydown', funzioneTasti);
@@ -435,9 +454,11 @@ document.getElementById('mettiInVet').addEventListener('click', cambiaVetrina)
 
 // RICERCA
 document.getElementById('shopSubmit').addEventListener('click', function (e) {
-  document.getElementById('shopRicerca').value = ''
-  const categorie = document.querySelectorAll('.vocimenu')
-  categorie.forEach((el) =>  el.classList.remove('selVociMenu'))
+  const keyword = document.getElementById('shopRicerca').value;
+  document.getElementById('shopRicerca').value = '';
+  const categorie = document.querySelectorAll('.vocimenu');
+  categorie.forEach((el) =>  el.classList.remove('selVociMenu'));
+  cambiaPg(1,undefined,undefined,keyword)
 })
 
 
@@ -502,8 +523,10 @@ const selettoreCategoriaArt = function () {
     e.preventDefault();
     if(!e.target.closest('.vocimenu')) return;
     const selezionato = e.target.closest('.vocimenu');
-    const categorie = menu.querySelectorAll('.vocimenu')
-    categorie.forEach((el) => el === selezionato ? el.classList.add('selVociMenu') : el.classList.remove('selVociMenu'))
+    cambiaPg(1,`${selezionato.dataset.cat}`,null,null);
+    const categorie = menu.querySelectorAll('.vocimenu');
+    categorie.forEach((el) => el === selezionato ? el.classList.add('selVociMenu') : el.classList.remove('selVociMenu'));
+    menu.scrollIntoView({behavior: 'smooth'})
   })
 }
 
@@ -709,22 +732,28 @@ fnImmaginiAlt();
 
 
 const callArt = async function (pag, category, sort, keyWord ) {
-
+  try{
+  console.log('QUERY',query);
   let url = "{% url 'shop' %}" + `?page=${pag}&data_only=true`;
    url += category ? `&category=${category}`:'';
-   url += sort ? `&sort=${lastu}`:'';
+   url += sort ? `&sort=${sort}`:'';
    url += keyWord ? `&keyWord=${keyWord}`:'';
   console.log('URL', url);
   const res = await fetch(url);
+  console.log('RES',res);
   const data = await res.json();
-  console.log(data);
+  if(data.message) throw new Error ("  Ci dispiace 😥, non ci sono prodotti corrispondenti ai tuoi criteri di ricerca. Prova qualcos'altro! 😉 ");
+
   ({pagine_totali : pagineTotali} = data);
   const {articoli} = data;
   query.category = data.query.category;
   query.sort = data.query.sort;
   query.keyWord = data.query.keyWord;
   console.log(query);
-  return articoli
+  return articoli}
+  catch (err){
+    throw err
+  }
 }
 
 const cambiaPg = async function (pag, category = query.category, sort = query.sort, keyWord = query.keyWord) {
@@ -749,9 +778,11 @@ const cambiaPg = async function (pag, category = query.category, sort = query.so
     upperLista();
     aggiornaPaginazione(pag);
     document.querySelector('#mettiInVet').style.display = articoliArr.length <=1 ? 'none': '';
+    document.querySelector('.cnt-vocimenu').scrollIntoView ({behavior: 'smooth'})
   }, 400)
-  } catch {
-
+  } catch (err){
+    document.querySelector('.contenitoreArticoli').innerHTML = '';
+    document.querySelector('.contenitoreArticoli').insertAdjacentText('afterbegin', err.message);
   }
 }
 

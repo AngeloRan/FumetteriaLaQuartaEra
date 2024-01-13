@@ -1,0 +1,18 @@
+{% extends 'gui/base.html' %} 
+{% load static %}
+
+{% block customStyle %}
+
+<link rel="stylesheet" href="{% static 'css/styleEvents.css' %}" />
+
+{% endblock customStyle %}
+
+{% block header %}
+<div class="stikymenu"><img src="{% static 'images/libro_insegna.png' %}" alt=""></div>
+{% endblock header %}
+
+{% block postscript %} 
+
+{% include 'gui/Events.js' %}
+
+{% endblock postscript %}
