@@ -415,7 +415,7 @@ const cambiaVetrina = function (e, iniziale = false) {
   if(articoliArr.length === 1) return;
   document.removeEventListener('keydown', funzioneTasti);
   clearInterval(vetrinaAuto);
-  vetrinaEl.classList.add('hidden-1');
+  vetrinaEl.classList.add('hidden-3');
   document.body.scrollIntoView({ behavior: 'smooth' });
 
   new Promise (function (fulfill, reject) {
@@ -446,7 +446,7 @@ const cambiaVetrina = function (e, iniziale = false) {
   if(!iniziale) document.querySelector('.btnVetrinaIniziale').classList.remove('hidden-3');
   // if(!iniziale) document.querySelector('.btnVetrinaIniziale').style.animation = 'example4 5s ease-in-out forwards';
 
-  vetrinaEl.classList.remove('hidden-1')
+  vetrinaEl.classList.remove('hidden-3')
   }) 
 };
 
@@ -458,7 +458,7 @@ document.getElementById('shopSubmit').addEventListener('click', function (e) {
   document.getElementById('shopRicerca').value = '';
   const categorie = document.querySelectorAll('.vocimenu');
   categorie.forEach((el) =>  el.classList.remove('selVociMenu'));
-  cambiaPg(1,undefined,undefined,keyword)
+  cambiaPg(1,null,null,keyword)
 })
 
 
@@ -742,8 +742,11 @@ const callArt = async function (pag, category, sort, keyWord ) {
   const res = await fetch(url);
   console.log('RES',res);
   const data = await res.json();
-  if(data.message) throw new Error ("  Ci dispiace 😥, non ci sono prodotti corrispondenti ai tuoi criteri di ricerca. Prova qualcos'altro! 😉 ");
-
+  if(data.message) {
+    query.category = null;
+    query.sort = null;
+    query.keyWord = null;
+    throw new Error ("  Ci dispiace 😥, non ci sono prodotti corrispondenti ai tuoi criteri di ricerca. Prova qualcos'altro! 😉 ")};
   ({pagine_totali : pagineTotali} = data);
   const {articoli} = data;
   query.category = data.query.category;

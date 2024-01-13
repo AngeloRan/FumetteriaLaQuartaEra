@@ -25,14 +25,6 @@ header {
   overflow: hidden;
 }
 
-.barracontatti {
- /* background: linear-gradient(135deg, #ffd65e 0%,#febf04 100%); */
-/* background: linear-gradient(120deg, #f6d365 0%, #f5d441 100%); */
- /* background: linear-gradient(120deg,#f5d4416c  0%, #fc854052 100%);  */
- background: linear-gradient(120deg,#f5d44163  0%, #f6d46580 100%);
-box-shadow:  0 0 8px rgb(0, 0, 0);
-}
-
 .corpo{
   gap:1.5rem
 }
@@ -387,6 +379,7 @@ border-radius: 10px;
   height: 5rem;
   border-radius: 1rem;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),  0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background: linear-gradient(120deg,#f5d44163  0%, #f6d46580 100%);
 
 }
 
@@ -395,7 +388,6 @@ border-radius: 10px;
 .cnt-vocimenu {
   color: rgb(0, 0, 0);
   list-style-type: none;
- 
   height: 5rem;
   width: 100%;
   justify-content: space-around;
@@ -577,7 +569,7 @@ border-radius: 10px;
 
 #hamMenuLista {
 
-  background: linear-gradient(120deg,rgb(252, 234, 154)  0%, #f6d46580 100%); 
+  background: linear-gradient(120deg,rgb(252, 234, 154)  0%, rgb(252, 234, 154) 80%, #f6d46580 100%); 
   color: darkred;
   opacity: 1;
   padding-top: 1rem;
