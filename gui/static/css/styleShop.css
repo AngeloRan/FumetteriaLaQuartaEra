@@ -940,6 +940,7 @@ object-fit: contain;
   overflow: hidden;
   opacity: 1;
   transition: height 1.5s ease, transform 1.5s ease;
+  /* transition: all 1.5s ease; */
   transform: translateY(-100%);
   /* align-items: center; */
   gap: 5rem;
