@@ -27,6 +27,8 @@ const createVetArr = function (list = [...document.querySelectorAll('.articoloIn
 }).splice(list.length/2, list.length/2)
 };
 
+
+
 const createArtArr = function (list = [...document.querySelectorAll('.articoli')]) {
   return list.map(function (el) {
 
