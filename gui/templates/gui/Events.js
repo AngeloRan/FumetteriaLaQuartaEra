@@ -1,7 +1,7 @@
 
 {% load static %}
 
-
+const arrEventsDate = [24, 18, 5];
 
 let date = new Date(),
 currYear = date.getFullYear(),
@@ -45,6 +45,16 @@ const renderCalendar = () => {
   daysEl.insertAdjacentHTML('afterbegin', markupLi);
   daysEl.querySelectorAll('li').forEach((el) => setTimeout(function () {
     el.classList.remove('hidden-3')}, 1))
+
+
+  // TODO: Da sistemare il match giorno/mese/anno con l'evento ritornato dal server con el.getMonth() >= date.getMonth() && el.getMonth() === curMonth && el.getFullYear() >= date.getFullYear() && el.getFullYear() === currYear
+
+  arrEventsDate.forEach(el => {
+    if(currMonth === date.getMonth() && currYear === date.getFullYear() && el >= date.getDate()) {
+      daysEl.querySelector(`[data-day="${el}"]`).classList.add('giornoEvento')
+    } else {
+      return
+    }})
   
 }
 
@@ -66,10 +76,15 @@ iconePrevNext.forEach(icon => icon.addEventListener('click', function () {
 }))
 
 
+daysEl.addEventListener('click', function (e) {
+  if (e.target.closest('.giornoEvento')) {
+    // e.target.style.color = "blue";
+  }
+})
+
+
 document.querySelector('.stikymenu').addEventListener('click', function () {
   window.location.href = '/'
 });
 
-const arrEventsDate = [19, 18, 5, 28, 21, 25];
-arrEventsDate.forEach(el => {
-  if(el >= date.getDate()) {daysEl.querySelector(`[data-day="${el}"]`).style.color = 'red'} else {return}})
+
