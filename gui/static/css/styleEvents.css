@@ -1,0 +1,412 @@
+
+.immaginenegozio {
+  background: none;
+}
+
+
+.nav-bar {
+  display: none;
+}
+
+
+.stikymenu {
+  padding: 0.8rem;
+  border-radius: 100%;
+  height: 60px;
+  width: 60px;
+  position: fixed;
+  bottom: 1rem;
+  right: 2rem;
+  background: linear-gradient(120deg, #f6d365 0%, #f5d441 100%);
+  box-shadow: 0px 15px 10px -10px rgba( 0,0,0,0.6);
+  transition: all .3s;
+  z-index: 99;
+  cursor: pointer;
+  animation: example4 2s;
+}
+
+.stikymenu img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.stikymenu:hover {
+  
+  box-shadow: 0px 45px 20px -15px rgba( 0,0,0,0.2);
+  transform: translateY(-10px);
+  cursor: pointer;
+}
+
+.stikymenu:active {
+  transform: scale(0.95) translateY(-10px);
+}
+
+
+ 
+/* LIBRO */
+
+.main {
+  margin-top: -13rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.libro {
+  /* background-color: red; */
+  font-family: 'Urbanist', sans-serif;
+  width: 45rem;
+  height: 60rem;
+  /* cursor: pointer; */
+  position: relative;
+  border-radius: 1rem;
+  box-shadow: 10px 0px 20px rgba( 0,0,0,0.4), inset 450px 0px 50px rgba(0, 0, 0, 0);
+  transform: perspective(2000px) rotateZ(0);
+  transform-style: preserve-3d;
+  transition: all 1s ease;
+  margin-bottom: 3rem;
+}
+
+.copertina {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transform-origin: left;
+  transition: all 1s ease;
+  z-index: 10;
+  transform-style: preserve-3d;
+  gap: 2%;
+ 
+  border-top-left-radius: 1px;
+  border-bottom-left-radius: 1px;
+}
+
+.copertina img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  object-fit: cover;
+  backface-visibility: hidden;
+  border-radius: 10px;
+  border-top-left-radius: 2px;
+  border-bottom-left-radius: 2px;
+}
+
+.copertina img:nth-child(2) {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 2rem;
+  height: auto;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  border-radius: 10px;
+  object-fit: contain;
+}
+
+/* .copertina .nav-bar {
+  width: 100%;
+
+  align-self: center;
+  font-family: 'MyWebFont';
+  transform: rotateY(180deg);
+
+  backface-visibility: hidden;
+} */
+
+
+.libro:hover {
+  transform: perspective(2000px) rotateZ(0deg) translateX(50%);
+  box-shadow: 10px 0px 20px rgba( 0,0,0,0.4), inset 15px 0px 40px rgba( 0,0,0,0.4);
+}
+
+.libro:hover .copertina {
+  transform: rotateY(-180deg);
+  box-shadow: 3px 0px 5px rgba( 0,0,0,0.4), inset  10px 0px 20px rgba( 0,0,0,0.4);
+  border-radius: 10px;
+}
+
+.pagina1 {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  position: absolute;
+  top: 1rem;
+  left: 0;
+  width: 100%;
+  height: 55rem;
+  padding: 1rem;
+  display: flex;
+  /* justify-content: center; */
+  flex-direction: column;
+  align-items: center;
+  overflow: scroll;
+  z-index: 9;
+  padding: 4rem;
+
+}
+
+.pagina1::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+.pagina1::-webkit-scrollbar-track {
+  background: none;
+}
+
+.pagina1::-webkit-scrollbar {
+  width: 0px;
+}
+
+.pagina1 h2 {
+  margin-bottom: 3rem;
+}
+
+.pagina1 a {
+all: revert;
+}
+
+.pagina1 p {
+  text-align: start;
+  white-space: pre-wrap;
+}
+
+.contenitore-cal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  font-size: 1.8rem;
+  overflow: hidden;
+}
+
+.wrapper-calendario {
+  
+  overflow: hidden;
+  width: 90%;
+  border-radius: 10px;
+  
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 30px 10px;
+}
+
+.header .current-date {
+  color: darkred;
+  opacity: 0.9;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.header span {
+  border: double 1px transparent;
+  display: inline-block;
+  margin: 0 5px;
+  height: 38px;
+  width: 38px;
+  line-height: 38px;
+  text-align: center;
+  background-color: white;
+  border-radius: 100%;
+  cursor: pointer;
+}
+
+.header span:hover {
+  border: double 1px transparent;
+  --angle11: 0deg;
+  background-image: linear-gradient(white, white),linear-gradient(var(--angle1), #f5d441 , darkred);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  animation: 3s rotatec2 linear infinite;
+}
+
+@keyframes rotatec2 {
+	to {
+		--angle1: 360deg;
+	}
+}
+
+@property --angle1 {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.calendar {
+  color: black;
+  background: linear-gradient(to bottom,#ffffff27 0%, #f5d44163 100%);
+  padding: 20px;
+  height: 390px;
+  /* padding-bottom: 1px */
+  /* background-color: #f5d441; */
+  /* margin-bottom: 10px; */
+  /* padding-bottom: 0; */
+}
+
+.calendar .days {
+  margin-bottom: 20px;
+}
+
+.calendar .days li {
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.calendar .weeks li {
+  font-weight: 700;
+}
+
+.calendar ul {
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.calendar ul li {
+  z-index: 1;
+  position: relative;
+  width: calc(100% / 7);
+  transition: all 0.5s ease;
+}
+
+.calendar .days li::before {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  height: 40px;
+  width: 40px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: darkred; */
+  /* background: #ffe881; */
+  /* background: white; */
+  border-radius: 50%;
+}
+
+
+.calendar .days li:hover::before {
+  /* background: rgb(233, 232, 232); */
+  /* background: rgb(252, 234, 154); */
+  background: rgb(250, 236, 171);
+}
+
+.days li.inactive {
+  color: rgb(155, 153, 153);
+}
+
+.days li.active {
+  color: darkred;
+  /* font-weight: 700; */
+}
+
+.pagina1 h2 {
+  opacity: 0.9;
+  color: darkred;
+  text-shadow:  1px 1px 2px rgba(139, 0, 0, 0.301);
+  font-size: 3rem;
+ font-family: 'Urbanist', sans-serif;
+ font-weight: 500;
+ text-transform: uppercase;
+ position: relative;
+}
+
+.pagina1 h2::after {
+  content: '';
+  position: absolute;
+  bottom: -0.3rem;
+  width: 100%;
+  height: 3px;
+  right: 50%;
+  transform: translateX(50%);
+  background: linear-gradient(
+    to right,
+    transparent 1%,
+    #f6d365 50%,
+    transparent 99%
+  );
+  opacity: 1;
+  transition: width 0.2s ease-out ;
+}
+
+.immaginEvento img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.giornoEvento::before {
+  border: double 1px transparent;
+  /* border-radius: 100%; */
+  --angle1: 0deg;
+  background-image: linear-gradient(white, white),linear-gradient(var(--angle1), #f5d441 , darkred);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 0.9;
+  animation: 3s rotatec linear infinite;
+  transition: all 0.3s ease;
+}
+
+.calendar .days li.giornoEvento:hover::before {
+  --angle1: 0deg;
+  background-image: linear-gradient(white, white),linear-gradient(var(--angle1), #f5d441 , darkred);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+.calendar .days li.giornoEvento:active::before {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+@keyframes rotatec {
+	to {
+		--angle1: 360deg;
+	}
+}
+
+@property --angle1 {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+#iscrizione {
+  color: black;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.322);
+  border-radius: 30px;
+  padding: 1.3rem;
+  font-family: 'MyWebFont';
+  font-size: 2rem;
+  cursor: pointer;
+  background-image: linear-gradient(to right, rgba(94, 255, 0, 0.767) , #a7f541e3);
+  background-size: 400% 400%;
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  transition: all 0.2s ease;
+}
+
+#iscrizione:hover {
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0px 2px 4px 0px #f5d441 ;
+  cursor: pointer;
+}
+
+#iscrizione:active {
+  transform: scale(0.95);
+}
